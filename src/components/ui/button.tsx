@@ -5,16 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors border border-neutral-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:bg-neutral-100 disabled:from-neutral-100 disabled:to-neutral-100 disabled:text-neutral-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors border border-neutral-200 shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:bg-neutral-100 disabled:from-neutral-100 disabled:to-neutral-100 disabled:text-neutral-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				primary:
-					"bg-gradient-to-b from-blue-600 to-blue-700 text-primary text-primary-foreground hover:from-blue-700 hover:to-blue-800",
+					"bg-linear-to-b from-blue-600 to-blue-700 text-primary text-primary-foreground hover:from-blue-700 hover:to-blue-800",
 				destructive:
-					"bg-gradient-to-b from-amber-600 to-amber-700 text-destructive text-destructive-foreground hover:from-amber-700 hover:to-amber-800",
+					"bg-linear-to-b from-amber-600 to-amber-700 text-destructive text-destructive-foreground hover:from-amber-700 hover:to-amber-800",
 				outline:
-					"border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+					"border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
 				secondary: "bg-white text-black hover:bg-neutral-100",
 				ghost:
 					"border-transparent shadow-none hover:bg-accent hover:text-accent-foreground",
