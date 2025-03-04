@@ -20,26 +20,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
-
-const formSchema = z.object({
-	email: z.string().email(),
-	password: z
-		.string()
-		.min(8, { message: "8文字以上入力してください" })
-		.max(256),
-});
+import { loginSchema } from "../schemas";
+import { useLogin } from "../api/use-login";
 
 export const SignInCard = () => {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const { mutate } = useLogin();
+	const form = useForm<z.infer<typeof loginSchema>>({
+		resolver: zodResolver(loginSchema),
 		defaultValues: {
 			email: "",
 			password: "",
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = (values: z.infer<typeof loginSchema>) => {
+		mutate(values);
 	};
 	return (
 		<Card className="w-full h-full md:w-[487px] border-none shadow-none">
