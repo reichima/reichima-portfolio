@@ -20,19 +20,13 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-
-const formSchema = z.object({
-	name: z.string().trim().min(1),
-	email: z.string().email(),
-	password: z
-		.string()
-		.min(8, { message: "8文字以上入力してください" })
-		.max(256),
-});
+import { registerSchema } from "../schemas";
+import { useRegister } from "../api/use-register";
 
 export const SignUpCard = () => {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const { mutate } = useRegister();
+	const form = useForm<z.infer<typeof registerSchema>>({
+		resolver: zodResolver(registerSchema),
 		defaultValues: {
 			name: "",
 			email: "",
@@ -40,8 +34,8 @@ export const SignUpCard = () => {
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+	const onSubmit = (values: z.infer<typeof registerSchema>) => {
+		mutate({ json: values });
 	};
 	return (
 		<Card className="w-full h-full md:w-[487px] border-none shadow-none">
