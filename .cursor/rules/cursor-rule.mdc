@@ -129,7 +129,7 @@ Component Libraries
 - Apply composition patterns to create modular, reusable components.
 
 Styling Guidelines
-- Use Tailwind CSS for styling
+- Use Tailwind CSS version 4 for styling
 - Use Tailwind CSS for utility-first, maintainable styling.
 - Design with mobile-first, responsive principles for flexibility across devices.
 - Implement dark mode using CSS variables or Tailwind’s dark mode features.

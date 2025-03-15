@@ -1,28 +1,29 @@
+import Scroll from "@/components/scroll";
 import Image from "next/image";
 // import { Footer } from "react-day-picker";
 
 export default async function Page() {
   return (
-    <main className="snap-y snap-mandatory h-screen w-screen overflow-scroll scroll-smooth">
+    <main className="h-screen w-screen snap-y snap-mandatory overflow-scroll scroll-smooth">
       <section
         id="home"
-        className="key-visual w-full h-screen bg-cover bg-center place-items-center relative grid z-0 snap-start"
-        style={{ backgroundImage: "url('/bg.png')" }}
+        className="key-visual relative z-0 grid h-screen w-full snap-start place-items-center bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/landscape.png')" }}
       >
-        <h1 className="text-5xl text-white font-bold opacity-0 animate-text-focus-in z-20">
+        <h1 className="animate-text-focus-in z-20 text-5xl font-bold text-white opacity-0">
           Mym Portfolio
         </h1>
-        {/* <Scroll /> */}
+        <Scroll />
       </section>
-      <section id="about" className="w-full h-screen snap-start bg-primary p-8">
+      <section id="about" className="bg-primary h-screen w-full snap-start p-8">
         <div className="h-16"></div>
-        <h2 className="text-5xl relative py-6 pl-2 italic text-white">
+        <h2 className="relative py-6 pl-2 text-5xl text-white italic">
           -About-
         </h2>
         <div className="flex">
           <div>
             <Image
-              src="/mym.JPG"
+              src="/images/mym.JPG"
               alt="logo"
               width={256}
               height={256}
@@ -40,25 +41,25 @@ export default async function Page() {
       </section>
       <section
         id="works"
-        className="w-full h-screen snap-start p-8 bg-orange-300"
+        className="h-screen w-full snap-start bg-orange-300 p-8"
       >
         <div className="h-16"></div>
-        <h2 className="text-5xl relative py-6 pl-2 italic text-white">
+        <h2 className="relative py-6 pl-2 text-5xl text-white italic">
           -Works-
         </h2>
       </section>
       <section
         id="contact"
-        className="w-full min-h-screen snap-start p-8 bg-gray-500"
+        className="min-h-screen w-full snap-start bg-gray-500 p-8"
       >
         <div className="h-16"></div>
-        <h2 className="text-5xl relative py-6 pl-2 italic text-white">
+        <h2 className="relative py-6 pl-2 text-5xl text-white italic">
           -Contact-
         </h2>
         <div className="max-w-screen-xl px-2 py-16">
           <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
             <div className="lg:col-span-2 lg:py-12">
-              <p className="max-w-xl text-lg text-base-100">
+              <p className="text-base-100 max-w-xl text-lg">
                 案件のご依頼、遊ぶ約束など、 <br />
                 フォームからお気軽にお問い合わせください。
               </p>
@@ -72,10 +73,10 @@ export default async function Page() {
       </section>
       <section
         id="special"
-        className="w-full h-screen snap-start p-8 bg-red-400 relative"
+        className="relative h-screen w-full snap-start bg-red-400 p-8"
       >
         <div className="h-16"></div>
-        <h2 className="text-5xl relative py-6 pl-2 italic text-white">
+        <h2 className="relative py-6 pl-2 text-5xl text-white italic">
           -Special-
         </h2>
         <Image

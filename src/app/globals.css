@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin 'tailwindcss-animate';
 
@@ -89,6 +89,12 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  h1,
+  h2,
+  .font-orbitron {
+    font-family: var(--font-orbitron);
+  }
 }
 
 @layer utilities {
@@ -175,5 +181,57 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@theme {
+  /* フォント設定 */
+  --font-orbitron: var(--font-orbitron);
+
+  /* アニメーション設定 */
+  --animate-keyVisualAnime: keyVisualAnime 1.5s 1s ease-in-out forwards;
+  --animate-arrowmove: arrowmove 1s ease-in-out infinite;
+
+  /* キーフレーム定義 */
+  @keyframes keyVisualAnime {
+    to {
+      filter: brightness(0.5) blur(3px);
+    }
+  }
+
+  @keyframes arrowmove {
+    0% {
+      bottom: 1%;
+    }
+    50% {
+      bottom: 3%;
+    }
+    100% {
+      bottom: 1%;
+    }
+  }
+}
+
+/* コンポーネント固有のスタイル */
+@layer components {
+  .key-visual::before {
+    @apply animate-keyVisualAnime absolute inset-0 -z-10 bg-inherit content-[""];
+  }
+
+  .scrolldown {
+    @apply animate-arrowmove;
+
+    & span {
+      @apply absolute bottom-2.5 -left-5 text-[0.7rem] tracking-[0.05em] text-[#eee];
+      writing-mode: vertical-rl;
+    }
+
+    &::before {
+      @apply absolute -right-1.5 bottom-0 h-5 w-[1px] skew-x-[-31deg] bg-[#eee] content-[""];
+    }
+
+    &::after {
+      @apply absolute right-0 bottom-0 h-[50px] w-[1px] bg-[#eee] content-[""];
+    }
   }
 }
