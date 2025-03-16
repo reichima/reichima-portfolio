@@ -1,18 +1,51 @@
+"use client";
+
+import Footer from "@/app/(portfolio)/footer";
 import Scroll from "@/components/scroll";
 import Image from "next/image";
-// import { Footer } from "react-day-picker";
+import { useEffect, useRef, useState } from "react";
 
-export default async function Page() {
+export default function Page() {
+  const [showFooter, setShowFooter] = useState(false);
+
+  const mainRef = useRef<HTMLElement>(null);
+  const specialRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!specialRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // スペシャルセクションが画面に入ったらフッターを表示
+        const isVisible = entries[0]?.isIntersecting;
+        setShowFooter(isVisible);
+      },
+      {
+        threshold: 0.5, // 50%以上表示されたら検出
+        rootMargin: "0px", // マージンなし
+      },
+    );
+
+    observer.observe(specialRef.current);
+
+    return () => {
+      if (specialRef.current) {
+        observer.unobserve(specialRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <main className="h-screen w-screen snap-y snap-mandatory overflow-scroll scroll-smooth">
+    <main
+      ref={mainRef}
+      className="h-screen w-screen snap-y snap-mandatory overflow-scroll scroll-smooth"
+    >
+      {/* 既存のセクションはそのまま */}
       <section
         id="home"
-        className="key-visual relative z-0 grid h-screen w-full snap-start place-items-center bg-cover bg-center"
+        className="relative z-0 grid h-screen w-full snap-start place-items-center bg-cover bg-center"
         style={{ backgroundImage: "url('/images/landscape.png')" }}
       >
-        <h1 className="animate-text-focus-in z-20 text-5xl font-bold text-white opacity-0">
-          Mym Portfolio
-        </h1>
         <Scroll />
       </section>
       <section id="about" className="bg-primary h-screen w-full snap-start p-8">
@@ -61,7 +94,7 @@ export default async function Page() {
             <div className="lg:col-span-2 lg:py-12">
               <p className="text-base-100 max-w-xl text-lg">
                 案件のご依頼、遊ぶ約束など、 <br />
-                フォームからお気軽にお問い合わせください。
+                フォームからお気軽にお問い合わせください。
               </p>
             </div>
 
@@ -73,6 +106,7 @@ export default async function Page() {
       </section>
       <section
         id="special"
+        ref={specialRef}
         className="relative h-screen w-full snap-start bg-red-400 p-8"
       >
         <div className="h-16"></div>
@@ -85,13 +119,14 @@ export default async function Page() {
           width={600}
           height={600}
         />
-        {/* <h3 className={`${dotFont.className} mb-4 text-xl md:text-2xl`}>
-          価値観ガチャ
-        </h3> */}
-        {/* 一旦即時に結果出力。TODO: ボタンからガチャ結果の出力 */}
-        {/* <GachaResult /> */}
-        {/* <Footer /> */}
       </section>
+      <div
+        className={`fixed right-0 bottom-0 left-0 z-40 transition-all duration-500 ${
+          showFooter ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <Footer />
+      </div>
     </main>
   );
 }

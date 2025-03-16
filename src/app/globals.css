@@ -188,16 +188,7 @@
   /* フォント設定 */
   --font-orbitron: var(--font-orbitron);
 
-  /* アニメーション設定 */
-  --animate-keyVisualAnime: keyVisualAnime 1.5s 1s ease-in-out forwards;
   --animate-arrowmove: arrowmove 1s ease-in-out infinite;
-
-  /* キーフレーム定義 */
-  @keyframes keyVisualAnime {
-    to {
-      filter: brightness(0.5) blur(3px);
-    }
-  }
 
   @keyframes arrowmove {
     0% {
@@ -214,10 +205,6 @@
 
 /* コンポーネント固有のスタイル */
 @layer components {
-  .key-visual::before {
-    @apply animate-keyVisualAnime absolute inset-0 -z-10 bg-inherit content-[""];
-  }
-
   .scrolldown {
     @apply animate-arrowmove;
 
