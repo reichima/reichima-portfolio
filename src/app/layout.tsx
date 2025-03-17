@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { QueryProvider } from "@/components/query-provider";
@@ -9,18 +9,10 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-//portfolio main
-export const orbitron = Orbitron({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-orbitron",
-  preload: false,
-});
-
 export const metadata: Metadata = {
   title: "Reichima Portfolio",
   description: "栃木のゆるふわWebエンジニアのポートフォリオ",
-  manifest: "/site.manifest.json",
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -48,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={cn(orbitron.className, "min-h-screen antialiased")}>
+      <body className={cn(inter.className, "min-h-screen antialiased")}>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
