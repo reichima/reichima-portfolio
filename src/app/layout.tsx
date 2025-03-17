@@ -20,6 +20,7 @@ export const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "Reichima Portfolio",
   description: "栃木のゆるふわWebエンジニアのポートフォリオ",
+  manifest: "/site.manifest.json",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -47,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={cn(orbitron.className, "antialiased min-h-screen")}>
+      <body className={cn(orbitron.className, "min-h-screen antialiased")}>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
