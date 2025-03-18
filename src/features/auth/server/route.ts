@@ -2,7 +2,7 @@ import { AUTH_COOKIE } from "@/features/auth/constants";
 import { createAdminClient } from "@/lib/appwrite";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import { setCookie } from "hono/cookie";
+import { deleteCookie, setCookie } from "hono/cookie";
 import { ID } from "node-appwrite";
 import { loginSchema, registerSchema } from "../schemas";
 
@@ -34,6 +34,12 @@ const app = new Hono()
       sameSite: "strict",
       maxAge: 60 * 60 * 24 * 30,
     });
+    return c.json({
+      success: true,
+    });
+  })
+  .post("/logout", async (c) => {
+    deleteCookie(c, AUTH_COOKIE);
     return c.json({
       success: true,
     });
