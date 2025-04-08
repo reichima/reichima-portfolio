@@ -1,24 +1,90 @@
 "use server";
 
+import db from "@/db";
+import { users } from "@/db/schema";
 import { AUTH_COOKIE } from "@/features/auth/constants";
+import { createServerSupabaseClient } from "@/lib/supabase";
+import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
-import { Account, Client } from "node-appwrite";
 
+// Supabaseから現在のユーザー認証情報を取得
 export const getCurrent = async () => {
   try {
-    const client = new Client()
-      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
-
     const cookiesStore = await cookies();
-    const session = cookiesStore.get(AUTH_COOKIE);
+    const authCookie = cookiesStore.get(AUTH_COOKIE);
 
-    if (!session) return null;
-    const account = new Account(client);
+    if (!authCookie) return null;
 
-    console.log(account.get());
-    return await account.get();
-  } catch {
+    // アクセストークンをSupabaseクライアントに渡す
+    const supabase = createServerSupabaseClient(authCookie.value);
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (error || !user) return null;
+
+    return user;
+  } catch (error) {
+    console.error("認証エラー:", error);
+    return null;
+  }
+};
+
+// Drizzleからユーザーの詳細情報を取得
+export const getUserDetails = async () => {
+  try {
+    // 現在のユーザーを取得
+    const currentUser = await getCurrent();
+    if (!currentUser || !currentUser.email) return null;
+
+    // Drizzleを使ってデータベースからユーザー詳細を取得
+    const userDetails = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, currentUser.email))
+      .limit(1);
+
+    return userDetails[0] || null;
+  } catch (error) {
+    console.error("ユーザー詳細取得エラー:", error);
+    return null;
+  }
+};
+
+// ユーザー情報の同期（Supabaseユーザーがいるけどデータベースにいない場合）
+export const syncUserData = async () => {
+  try {
+    const currentUser = await getCurrent();
+    if (!currentUser || !currentUser.email) return null;
+
+    // Drizzleでユーザーを検索
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, currentUser.email))
+      .limit(1);
+
+    // ユーザーが存在しない場合は新規作成
+    if (!existingUser[0]) {
+      const userData = {
+        name:
+          currentUser.user_metadata?.name || currentUser.email.split("@")[0],
+        email: currentUser.email,
+        // passwordはハッシュ化済みのダミー値を入れておく（Supabaseで認証するため）
+        password: "SUPABASE_AUTH_USER",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      // Drizzleでユーザーを作成
+      const newUser = await db.insert(users).values(userData).returning();
+      return newUser[0];
+    }
+
+    return existingUser[0];
+  } catch (error) {
+    console.error("ユーザー同期エラー:", error);
     return null;
   }
 };

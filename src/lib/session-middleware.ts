@@ -1,57 +1,52 @@
 import "server-only";
 
-import {
-  Account,
-  Account as AccountType,
-  Client,
-  Databases,
-  Databases as DatabasesType,
-  Models,
-  Storage,
-  Storage as StorageType,
-  Users as UsersType,
-} from "node-appwrite";
-
 import { AUTH_COOKIE } from "@/features/auth/constants";
+import { createServerSupabaseClient } from "@/lib/supabase";
 import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
-type AdditionalContext = {
+
+// Supabase認証情報を含む拡張コンテキスト
+type AuthContext = {
   Variables: {
-    account: AccountType;
-    databases: DatabasesType;
-    storage: StorageType;
-    users: UsersType;
-    user: Models.User<Models.Preferences>;
+    user: any; // Supabase User型
+    error?: Error;
   };
 };
 
-export const sessionMiddleware = createMiddleware<AdditionalContext>(
+export const sessionMiddleware = createMiddleware<AuthContext>(
   async (c, next) => {
-    const client = new Client()
-      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+    const authCookie = getCookie(c, AUTH_COOKIE);
 
-    const session = getCookie(c, AUTH_COOKIE);
-    if (!session) {
+    if (!authCookie) {
       return c.json(
         {
           success: false,
-          message: "Unauthorized",
+          message: "認証されていません",
         },
         401,
       );
     }
 
-    client.setSession(session);
+    // Supabaseクライアントを作成（アクセストークンの値を渡す）
+    const supabase = createServerSupabaseClient(authCookie);
 
-    const account = new Account(client);
-    const databases = new Databases(client);
-    const storage = new Storage(client);
-    const user = await account.get();
+    // アクセストークンを使用して現在のユーザーを取得
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
 
-    c.set("account", account);
-    c.set("databases", databases);
-    c.set("storage", storage);
+    if (error || !user) {
+      return c.json(
+        {
+          success: false,
+          message: "認証情報が無効です",
+        },
+        401,
+      );
+    }
+
+    // 認証されたユーザー情報をコンテキストに設定
     c.set("user", user);
 
     await next();
