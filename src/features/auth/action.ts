@@ -3,7 +3,7 @@
 import db from "@/db";
 import { users } from "@/db/schema";
 import { AUTH_COOKIE } from "@/features/auth/constants";
-import { createServerSupabaseClient } from "@/lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
@@ -16,7 +16,7 @@ export const getCurrent = async () => {
     if (!authCookie) return null;
 
     // アクセストークンをSupabaseクライアントに渡す
-    const supabase = createServerSupabaseClient(authCookie.value);
+    const supabase = createSupabaseClient(authCookie.value);
     const {
       data: { user },
       error,

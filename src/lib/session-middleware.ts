@@ -1,7 +1,7 @@
 import "server-only";
 
 import { AUTH_COOKIE } from "@/features/auth/constants";
-import { createServerSupabaseClient } from "@/lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
 
@@ -28,7 +28,7 @@ export const sessionMiddleware = createMiddleware<AuthContext>(
     }
 
     // Supabaseクライアントを作成（アクセストークンの値を渡す）
-    const supabase = createServerSupabaseClient(authCookie);
+    const supabase = createSupabaseClient(authCookie);
 
     // アクセストークンを使用して現在のユーザーを取得
     const {

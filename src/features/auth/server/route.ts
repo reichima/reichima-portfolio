@@ -1,6 +1,6 @@
 import { AUTH_COOKIE } from "@/features/auth/constants";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { createServerSupabaseClient } from "@/lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { deleteCookie, setCookie } from "hono/cookie";
@@ -17,7 +17,7 @@ const app = new Hono()
   })
   .post("/login", zValidator("json", loginSchema), async (c) => {
     const { email, password } = await c.req.valid("json");
-    const supabase = createServerSupabaseClient();
+    const supabase = createSupabaseClient();
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -52,7 +52,7 @@ const app = new Hono()
   })
   .post("/register", zValidator("json", registerSchema), async (c) => {
     const { name, email, password } = await c.req.valid("json");
-    const supabase = createServerSupabaseClient();
+    const supabase = createSupabaseClient();
 
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -91,7 +91,7 @@ const app = new Hono()
     });
   })
   .post("/logout", async (c) => {
-    const supabase = createServerSupabaseClient();
+    const supabase = createSupabaseClient();
     const { error } = await supabase.auth.signOut();
 
     if (error) {
