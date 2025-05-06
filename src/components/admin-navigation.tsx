@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { SettingsIcon, UsersIcon } from "lucide-react";
+import { PiggyBank, SettingsIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 import {
   GoCheckCircle,
@@ -13,6 +13,12 @@ const routes = [
     href: "/home",
     icon: GoHome,
     activeIcon: GoHomeFill,
+  },
+  {
+    label: "家計簿",
+    href: "/money",
+    icon: PiggyBank,
+    activeIcon: PiggyBank,
   },
   {
     label: "My Tasks",

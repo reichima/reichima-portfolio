@@ -1,7 +1,14 @@
 "use client";
 import { AdminSidebar } from "@/components/admin-sidebar";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,7 +26,17 @@ export const MobileAdminSidebar = () => {
           <MenuIcon className="size-4 text-neutral-500" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0">
+      <SheetContent
+        side="left"
+        className="bg-gray-100 p-0"
+        aria-describedby={undefined}
+      >
+        <SheetHeader className="p-0">
+          <SheetTitle className="sr-only">管理メニュー</SheetTitle>
+          <SheetDescription className="sr-only">
+            管理画面のナビゲーション
+          </SheetDescription>
+        </SheetHeader>
         <AdminSidebar />
       </SheetContent>
     </Sheet>

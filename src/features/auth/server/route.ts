@@ -1,3 +1,5 @@
+import db from "@/db";
+import { profiles } from "@/db/schema";
 import { AUTH_COOKIE } from "@/features/auth/constants";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { createSupabaseClient } from "@/lib/supabase";
@@ -62,6 +64,22 @@ const app = new Hono()
           name,
         },
       },
+    });
+
+    if (!data.user) {
+      return c.json(
+        {
+          success: false,
+          message: "ユーザーが作成されませんでした",
+        },
+        400,
+      );
+    }
+
+    //プロフィール作成
+    await db.insert(profiles).values({
+      userId: data.user.id,
+      name,
     });
 
     if (error) {

@@ -35,6 +35,26 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+# ローカル環境 Supabase (Docker必要)
+
+データベースを起動
+
+```
+npx supabase start
+```
+
+データベースを停止
+
+```
+npx supabase stop
+```
+
+データベースをリセット
+
+```
+npx supabase db reset
+```
+
 # データベースへの変更の適用
 
 pnpm drizzle-kit push
