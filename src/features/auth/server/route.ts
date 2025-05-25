@@ -1,9 +1,10 @@
 import db from "@/db";
-import { profiles } from "@/db/schema";
+import { users } from "@/db/schema"; // profilesからusersに変更
 import { AUTH_COOKIE } from "@/features/auth/constants";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { createSupabaseClient } from "@/lib/supabase";
 import { zValidator } from "@hono/zod-validator";
+import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { deleteCookie, setCookie } from "hono/cookie";
 import { loginSchema, registerSchema } from "../schemas";
@@ -19,109 +20,102 @@ const app = new Hono()
   })
   .post("/login", zValidator("json", loginSchema), async (c) => {
     const { email, password } = await c.req.valid("json");
-    const supabase = createSupabaseClient();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    // データベースからユーザーを検索
+    const userResult = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
 
-    if (error) {
+    if (userResult.length === 0) {
       return c.json(
         {
           success: false,
-          message: error.message,
+          message: "ユーザーが見つかりません",
         },
         400,
       );
     }
 
-    // Cookieにセッショントークンを保存
-    if (data.session) {
-      setCookie(c, AUTH_COOKIE, data.session.access_token, {
-        path: "/",
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 30, // 30日
-      });
+    const user = userResult[0];
+
+    // パスワード検証
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return c.json(
+        {
+          success: false,
+          message: "パスワードが正しくありません",
+        },
+        400,
+      );
     }
+
+    // CookieにユーザーIDを保存（実際にはセッショントークンを使用することを推奨）
+    setCookie(c, AUTH_COOKIE, user.id, {
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30, // 30日
+    });
 
     return c.json({
       success: true,
-      data: data.user,
+      data: { id: user.id, email: user.email, name: user.name },
     });
   })
   .post("/register", zValidator("json", registerSchema), async (c) => {
     const { name, email, password } = await c.req.valid("json");
-    const supabase = createSupabaseClient();
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          name,
-        },
-      },
-    });
+    // メールアドレスの重複チェック
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
 
-    if (!data.user) {
+    if (existingUser.length > 0) {
       return c.json(
         {
           success: false,
-          message: "ユーザーが作成されませんでした",
+          message: "このメールアドレスは既に使用されています",
         },
         400,
       );
     }
 
-    //プロフィール作成
-    await db.insert(profiles).values({
-      userId: data.user.id,
-      name,
+    // パスワードをハッシュ化
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // ユーザー作成
+    const newUserResult = await db
+      .insert(users)
+      .values({
+        name,
+        email,
+        password: hashedPassword,
+      })
+      .returning();
+
+    const newUser = newUserResult[0];
+
+    // CookieにユーザーIDを保存
+    setCookie(c, AUTH_COOKIE, newUser.id, {
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30, // 30日
     });
-
-    if (error) {
-      return c.json(
-        {
-          success: false,
-          message: error.message,
-        },
-        400,
-      );
-    }
-
-    // Cookieにセッショントークンを保存
-    if (data.session) {
-      setCookie(c, AUTH_COOKIE, data.session.access_token, {
-        path: "/",
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 30, // 30日
-      });
-    }
 
     return c.json({
       success: true,
-      data: data.user,
+      data: { id: newUser.id, email: newUser.email, name: newUser.name },
     });
   })
   .post("/logout", async (c) => {
-    const supabase = createSupabaseClient();
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      return c.json(
-        {
-          success: false,
-          message: error.message,
-        },
-        400,
-      );
-    }
-
     deleteCookie(c, AUTH_COOKIE);
 
     return c.json({

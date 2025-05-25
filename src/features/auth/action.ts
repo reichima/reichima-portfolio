@@ -1,13 +1,13 @@
 "use server";
 
 import db from "@/db";
-import { profiles } from "@/db/schema";
+import { users } from "@/db/schema"; // profilesからusersに変更
 import { AUTH_COOKIE } from "@/features/auth/constants";
-import { createSupabaseClient } from "@/lib/supabase";
+// import { createSupabaseClient } from "@/lib/supabase"; // Supabase関連を削除
 import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
-// Supabaseから現在のユーザー認証情報を取得
+// 独自認証システムから現在のユーザー情報を取得
 export const getCurrent = async () => {
   try {
     const cookiesStore = await cookies();
@@ -15,39 +15,24 @@ export const getCurrent = async () => {
 
     if (!authCookie) return null;
 
-    // アクセストークンをSupabaseクライアントに渡す
-    const supabase = createSupabaseClient(authCookie.value);
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
-
-    if (error || !user) return null;
-
-    return user;
-  } catch (error) {
-    console.error("認証エラー:", error);
-    return null;
-  }
-};
-
-// Drizzleからユーザーの詳細情報を取得
-export const getUserDetails = async () => {
-  try {
-    // 現在のユーザーを取得
-    const currentUser = await getCurrent();
-    if (!currentUser || !currentUser.email) return null;
-
-    // Drizzleを使ってデータベースからユーザー詳細を取得
-    const userDetails = await db
-      .select()
-      .from(profiles)
-      .where(eq(profiles.userId, currentUser.id))
+    // CookieからユーザーIDを取得し、データベースからユーザー情報を取得
+    const userResult = await db
+      .select({
+        id: users.id,
+        name: users.name,
+        email: users.email,
+        createdAt: users.createdAt,
+        updatedAt: users.updatedAt,
+      })
+      .from(users)
+      .where(eq(users.id, authCookie.value))
       .limit(1);
 
-    return userDetails[0] || null;
+    if (userResult.length === 0) return null;
+
+    return userResult[0];
   } catch (error) {
-    console.error("ユーザー詳細取得エラー:", error);
+    console.error("認証エラー:", error);
     return null;
   }
 };

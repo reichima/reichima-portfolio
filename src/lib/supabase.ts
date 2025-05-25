@@ -1,3 +1,4 @@
+// NOTE: 移行して使っていない
 import { createClient } from "@supabase/supabase-js";
 import "server-only";
 
