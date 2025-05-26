@@ -1,24 +1,26 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="fixed z-50 flex h-28 w-full flex-wrap items-center justify-between bg-transparent p-6">
+    <header className="fixed z-50 flex h-28 w-full flex-wrap items-center justify-between bg-gradient-to-r from-slate-900/80 via-purple-900/80 to-slate-900/80 p-6 shadow backdrop-blur-md">
       <div className="flex flex-shrink-0 items-center text-white">
         <Link href="/" className="text-xl font-semibold tracking-tight">
-          <Image
-            className="relative hidden md:block dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-            src="/m-logo.png"
-            alt="start Logo"
-            width={64}
-            height={64}
-            priority
-          />
+          <div className="relative">
+            <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-md"></div>
+            <Image
+              className="relative drop-shadow-[0_0_1rem_#a855f7] transition-all duration-300 hover:scale-110"
+              src="/m-logo.png"
+              alt="start Logo"
+              width={64}
+              height={64}
+              priority
+            />
+          </div>
         </Link>
       </div>
       <div className="block lg:hidden">
-        <button className="flex items-center rounded border border-white px-3 py-2 text-white hover:border-white hover:text-white">
+        <button className="flex items-center rounded-lg border border-purple-400/50 bg-white/10 px-3 py-2 text-white backdrop-blur-md transition-all duration-300 hover:border-purple-400 hover:bg-white/20">
           <svg
             className="h-3 w-3 fill-current"
             viewBox="0 0 20 20"
@@ -33,40 +35,40 @@ export default function Header() {
         <div className="flex justify-around text-sm lg:flex-grow">
           <Link
             href="#home"
-            className="font-orbitron mt-4 mr-4 block text-white hover:text-white lg:mt-0 lg:inline-block"
+            className="font-orbitron group relative mt-4 mr-4 block text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
           >
-            Home
+            <span className="relative z-10">Home</span>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
             href="#about"
-            className="font-orbitron mt-4 mr-4 block text-white hover:text-white lg:mt-0 lg:inline-block"
+            className="font-orbitron group relative mt-4 mr-4 block text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
           >
-            About
+            <span className="relative z-10">About</span>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
             href="#works"
-            className="font-orbitron mt-4 mr-4 block text-white hover:text-white lg:mt-0 lg:inline-block"
+            className="font-orbitron group relative mt-4 mr-4 block text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
           >
-            Works
+            <span className="relative z-10">Works</span>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
             href="#contact"
-            className="font-orbitron mt-4 mr-4 block text-white hover:text-white lg:mt-0 lg:inline-block"
+            className="font-orbitron group relative mt-4 mr-4 block text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
           >
-            Contact
+            <span className="relative z-10">Contact</span>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
             href="#special"
-            className="font-orbitron mt-4 block text-white hover:text-white lg:mt-0 lg:inline-block"
+            className="font-orbitron group relative mt-4 block text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
           >
-            Special
+            <span className="relative z-10">Special</span>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           </Link>
         </div>
-      </div>
-      <div className="text-center text-sm lg:flex-grow">
-        <Button disabled={false} variant="primary">
-          なんかに使うボタン
-        </Button>
       </div>
     </header>
   );

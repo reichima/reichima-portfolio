@@ -1,0 +1,85 @@
+import Image from "next/image";
+import { RefObject } from "react";
+
+interface SpecialSectionProps {
+  specialRef: RefObject<HTMLElement>;
+  specialTitleRef: RefObject<HTMLHeadingElement>;
+  specialContentRef: RefObject<HTMLDivElement>;
+}
+
+export default function SpecialSection({
+  specialRef,
+  specialTitleRef,
+  specialContentRef,
+}: SpecialSectionProps) {
+  return (
+    <section
+      id="special"
+      ref={specialRef}
+      className="relative min-h-screen w-full snap-start overflow-hidden p-8"
+    >
+      <div className="h-16"></div>
+      <h2
+        ref={specialTitleRef}
+        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
+        style={{
+          background: "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
+      >
+        Special
+      </h2>
+
+      <div
+        ref={specialContentRef}
+        className="mt-12 flex flex-col items-center justify-center"
+      >
+        <div className="relative mb-8 opacity-0">
+          <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-lg"></div>
+          <Image
+            src="/images/wait-image.png"
+            alt="special content"
+            width={600}
+            height={600}
+            className="relative rounded-2xl border-4 border-white/20 shadow-2xl"
+          />
+        </div>
+
+        <div className="max-w-3xl space-y-6 opacity-0">
+          <div className="rounded-xl border border-white/20 bg-white/10 p-8 text-center shadow-xl backdrop-blur-md">
+            <h3 className="mb-4 text-2xl font-bold text-white">
+              ✨ Something Special Coming Soon
+            </h3>
+            <p className="text-lg leading-relaxed text-white/90">
+              新しいプロジェクトやエキサイティングなコンテンツを準備中です。お楽しみに！
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+              <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+                <div className="h-full w-full rounded bg-white"></div>
+              </div>
+              <h4 className="mb-3 text-xl font-bold text-white">Innovation</h4>
+              <p className="text-white/80">
+                最新技術を活用した革新的なソリューション
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+              <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 p-3">
+                <div className="h-full w-full rounded bg-white"></div>
+              </div>
+              <h4 className="mb-3 text-xl font-bold text-white">Creativity</h4>
+              <p className="text-white/80">
+                クリエイティブなアイデアとデザイン思考
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,80 +1,125 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-black/80 px-6 py-8 text-white">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* ナビゲーション */}
-          <div>
-            <h3 className="font-orbitron mb-4 text-lg">Navigation</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="#home"
-                  className="hover:text-primary transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#about"
-                  className="hover:text-primary transition-colors"
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#works"
-                  className="hover:text-primary transition-colors"
-                >
-                  Works
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#contact"
-                  className="hover:text-primary transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
+    <footer className="relative border-t border-white/5 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-1/4 h-32 w-32 animate-pulse rounded-full bg-purple-500 mix-blend-multiply blur-xl filter"></div>
+        <div className="absolute right-1/4 bottom-0 h-32 w-32 animate-pulse rounded-full bg-pink-500 mix-blend-multiply blur-xl filter delay-700"></div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* Logo & Description */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-sm"></div>
+                <Image
+                  src="/m-logo.png"
+                  alt="Logo"
+                  width={48}
+                  height={48}
+                  className="relative drop-shadow-[0_0_0.5rem_#a855f7]"
+                />
+              </div>
+              <h3
+                className="text-xl font-bold text-white"
+                style={{
+                  background:
+                    "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Portfolio
+              </h3>
+            </div>
+            <p className="leading-relaxed text-white/80">
+              Modern web development with creative solutions. Creating beautiful
+              and functional digital experiences.
+            </p>
           </div>
 
-          {/* SNSリンク */}
-          <div>
-            <h3 className="font-orbitron mb-4 text-lg">Social</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="https://github.com"
-                  target="_blank"
-                  className="hover:text-primary transition-colors"
-                >
-                  GitHub
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="https://twitter.com"
-                  target="_blank"
-                  className="hover:text-primary transition-colors"
-                >
-                  Twitter
-                </Link>
-              </li>
-            </ul>
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
+            <nav className="flex flex-col space-y-2">
+              <Link
+                href="#home"
+                className="text-white/70 transition-colors hover:text-purple-400"
+              >
+                Home
+              </Link>
+              <Link
+                href="#about"
+                className="text-white/70 transition-colors hover:text-purple-400"
+              >
+                About
+              </Link>
+              <Link
+                href="#works"
+                className="text-white/70 transition-colors hover:text-purple-400"
+              >
+                Works
+              </Link>
+              <Link
+                href="#contact"
+                className="text-white/70 transition-colors hover:text-purple-400"
+              >
+                Contact
+              </Link>
+            </nav>
+          </div>
+
+          {/* Social & Contact */}
+          <div className="space-y-4">
+            <h4 className="text-lg font-semibold text-white">Connect</h4>
+            <div className="flex space-x-4">
+              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
+              </div>
+              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
+              </div>
+              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
+              </div>
+            </div>
+            <div className="space-y-2 text-sm text-white/70">
+              <p>📧 hello@example.com</p>
+              <p>📱 +81 90-1234-5678</p>
+            </div>
           </div>
         </div>
 
-        {/* コピーライト */}
-        <div className="mt-8 border-t border-white/10 pt-8 text-center">
-          <p className="font-orbitron text-sm">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
-          </p>
+        {/* Bottom Bar */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+            <p className="text-sm text-white/60">
+              © 2024 Portfolio. All rights reserved.
+            </p>
+            <div className="flex space-x-6 text-sm">
+              <Link
+                href="#"
+                className="text-white/60 transition-colors hover:text-purple-400"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="#"
+                className="text-white/60 transition-colors hover:text-purple-400"
+              >
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
