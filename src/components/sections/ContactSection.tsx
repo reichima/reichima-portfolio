@@ -20,7 +20,7 @@ export default function ContactSection({
       <div className="h-16"></div>
       <h2
         ref={contactTitleRef}
-        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
+        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white"
         style={{
           background: "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
           WebkitBackgroundClip: "text",
@@ -33,7 +33,7 @@ export default function ContactSection({
 
       <div ref={contactContentRef} className="mx-auto mt-12 max-w-6xl">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-          <div className="opacity-0 lg:col-span-2 lg:py-12">
+          <div className="lg:col-span-2 lg:py-12">
             <div className="rounded-xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
               <h3 className="mb-6 text-2xl font-bold text-white">
                 Get in Touch
@@ -43,10 +43,7 @@ export default function ContactSection({
                   💼 案件のご依頼、お仕事のご相談
                 </p>
                 <p className="text-lg leading-relaxed text-white/90">
-                  🤝 技術的なディスカッション
-                </p>
-                <p className="text-lg leading-relaxed text-white/90">
-                  ☕ カジュアルな面談やお茶会
+                  🤝 遊ぶ約束
                 </p>
               </div>
               <div className="mt-8 space-y-3">
@@ -56,13 +53,15 @@ export default function ContactSection({
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="h-3 w-3 rounded-full bg-pink-400"></div>
-                  <span className="text-white/80">日本語・英語対応</span>
+                  <span className="text-white/80">
+                    お気軽にお問い合わせください😎
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="opacity-0 lg:col-span-3">
+          <div className="lg:col-span-3">
             <div className="rounded-xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md lg:p-12">
               <form className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -112,7 +111,7 @@ export default function ContactSection({
                   className="group relative w-full overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-purple-600 hover:to-pink-600"
                 >
                   <span className="relative z-10">送信する</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </button>
               </form>
             </div>
