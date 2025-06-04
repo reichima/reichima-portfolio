@@ -1,11 +1,11 @@
 "use client";
 
 import Footer from "@/app/(portfolio)/footer";
-import AboutSection from "@/components/sections/AboutSection";
-import ContactSection from "@/components/sections/ContactSection";
-import HomeSection from "@/components/sections/HomeSection";
-import SpecialSection from "@/components/sections/SpecialSection";
-import WorksSection from "@/components/sections/WorksSection";
+import AboutSection from "@/components/sections/about-section";
+import ContactSection from "@/components/sections/contact-section";
+import HomeSection from "@/components/sections/home-section";
+import SpecialSection from "@/components/sections/special-section";
+import WorksSection from "@/components/sections/works-section";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";

@@ -35,13 +35,10 @@ export default function Footer() {
                   backgroundClip: "text",
                 }}
               >
-                Portfolio
+                Reichima Portfolio
               </h3>
             </div>
-            <p className="leading-relaxed text-white/80">
-              Modern web development with creative solutions. Creating beautiful
-              and functional digital experiences.
-            </p>
+            <p className="leading-relaxed text-white/80"></p>
           </div>
 
           {/* Quick Links */}
@@ -93,8 +90,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="space-y-2 text-sm text-white/70">
-              <p>📧 hello@example.com</p>
-              <p>📱 +81 90-1234-5678</p>
+              <p>📧 rei1gggg@gmail.com</p>
             </div>
           </div>
         </div>
@@ -103,10 +99,10 @@ export default function Footer() {
         <div className="mt-8 border-t border-white/10 pt-6">
           <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
             <p className="text-sm text-white/60">
-              © 2024 Portfolio. All rights reserved.
+              © 2025 Reichima. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <Link
+              {/* <Link
                 href="#"
                 className="text-white/60 transition-colors hover:text-purple-400"
               >
@@ -117,7 +113,7 @@ export default function Footer() {
                 className="text-white/60 transition-colors hover:text-purple-400"
               >
                 Terms of Service
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

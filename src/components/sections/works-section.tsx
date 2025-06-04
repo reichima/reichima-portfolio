@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { RefObject } from "react";
 
 interface WorksSectionProps {
@@ -32,31 +33,42 @@ export default function WorksSection({
       </h2>
 
       <div ref={worksContentRef} className="mt-12 grid gap-8 lg:grid-cols-3">
-        <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
+        <a
+          href="https://moraibosi.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
-              <div className="h-full w-full rounded bg-white"></div>
+            <div className="mb-4 overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+              <Image
+                src="/images/portfolio/moraiboshi.webp"
+                alt="moraiboshi logo"
+                width={128}
+                height={128}
+                className="h-full w-full rounded bg-white transition-transform duration-300 group-hover:scale-120"
+              />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">
-              Modern Web App
+              moraiboshi Ltd.
             </h3>
             <p className="mb-4 text-white/80">
-              React & Next.jsを使用したモダンなWebアプリケーション
+              有限会社もらいぼしSE部 Webサイト構築
             </p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
-                React
+                Next.js
               </span>
               <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
-                Next.js
+                Laravel
               </span>
               <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
                 TypeScript
               </span>
             </div>
           </div>
-        </div>
+        </a>
 
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
@@ -64,18 +76,14 @@ export default function WorksSection({
             <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 p-3">
               <div className="h-full w-full rounded bg-white"></div>
             </div>
-            <h3 className="mb-3 text-xl font-bold text-white">
-              Ruby on Rails API
-            </h3>
-            <p className="mb-4 text-white/80">
-              スケーラブルなREST APIとマイクロサービス設計
-            </p>
+            <h3 className="mb-3 text-xl font-bold text-white">Coming Soon</h3>
+            <p className="mb-4 text-white/80">準備中</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                Ruby
+                Next.js
               </span>
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                Rails
+                Go
               </span>
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
                 PostgreSQL
@@ -90,21 +98,17 @@ export default function WorksSection({
             <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 p-3">
               <div className="h-full w-full rounded bg-white"></div>
             </div>
-            <h3 className="mb-3 text-xl font-bold text-white">
-              Infrastructure & DevOps
-            </h3>
-            <p className="mb-4 text-white/80">
-              AWS/GCPを活用したクラウドインフラ構築と運用
-            </p>
+            <h3 className="mb-3 text-xl font-bold text-white">Coming Soon</h3>
+            <p className="mb-4 text-white/80">準備中</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                AWS
+                ReactNative
               </span>
               <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                Docker
+                Go
               </span>
               <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                Kubernetes
+                PostgreSQL
               </span>
             </div>
           </div>

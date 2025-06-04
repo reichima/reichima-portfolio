@@ -191,9 +191,6 @@
 }
 
 @theme {
-  /* フォント設定 */
-  --font-orbitron: var(--font-orbitron);
-
   --animate-arrowmove: arrowmove 1s ease-in-out infinite;
 
   @keyframes arrowmove {

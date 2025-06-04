@@ -50,10 +50,11 @@ export default function SpecialSection({
         <div className="max-w-3xl space-y-6 opacity-0">
           <div className="rounded-xl border border-white/20 bg-white/10 p-8 text-center shadow-xl backdrop-blur-md">
             <h3 className="mb-4 text-2xl font-bold text-white">
-              ✨ Something Special Coming Soon
+              ✨ Coming Soon
             </h3>
             <p className="text-lg leading-relaxed text-white/90">
-              新しいプロジェクトやエキサイティングなコンテンツを準備中です。お楽しみに！
+              とりあえず空きスペースにComing
+              Soonって入れておけばいいと思ってる(?)
             </p>
           </div>
 
@@ -62,19 +63,17 @@ export default function SpecialSection({
               <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
                 <div className="h-full w-full rounded bg-white"></div>
               </div>
-              <h4 className="mb-3 text-xl font-bold text-white">Innovation</h4>
-              <p className="text-white/80">
-                最新技術を活用した革新的なソリューション
-              </p>
+              <h4 className="mb-3 text-xl font-bold text-white">個人開発</h4>
+              <p className="text-white/80">頑張ってます</p>
             </div>
 
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
               <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 p-3">
                 <div className="h-full w-full rounded bg-white"></div>
               </div>
-              <h4 className="mb-3 text-xl font-bold text-white">Creativity</h4>
+              <h4 className="mb-3 text-xl font-bold text-white">副業</h4>
               <p className="text-white/80">
-                クリエイティブなアイデアとデザイン思考
+                土日、平日夜稼働での副業案件を募集中
               </p>
             </div>
           </div>

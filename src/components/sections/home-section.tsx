@@ -195,7 +195,7 @@ export default function HomeSection({
 
         <p
           ref={homeSubtitleRef}
-          className={`mb-16 text-xl text-slate-400 transition-all delay-1400 duration-3000 ease-out lg:text-2xl ${
+          className={`font-orbitron mb-16 text-xl text-slate-400 transition-all delay-1400 duration-3000 ease-out lg:text-2xl ${
             showPortfolioText
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
