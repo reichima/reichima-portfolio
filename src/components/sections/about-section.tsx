@@ -1,5 +1,7 @@
+import { PcCase, Rocket } from "lucide-react";
 import Image from "next/image";
 import { RefObject } from "react";
+import { GiTalk } from "react-icons/gi";
 
 interface AboutSectionProps {
   aboutRef: RefObject<HTMLElement>;
@@ -50,21 +52,24 @@ export default function AboutSection({
         <div ref={aboutTextRef} className="max-w-lg space-y-6">
           <div className="rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md">
             <p className="text-lg leading-relaxed text-white/90">
-              🚀
-              Webエンジニアとして、最新技術を駆使したモダンな開発を行っています
+              <Rocket className="mr-1 inline h-6 w-6 text-purple-400" />
+              栃木でWebエンジニアをしているReichimaです
             </p>
           </div>
 
           <div className="rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md">
             <p className="text-lg leading-relaxed text-white/90">
-              💎 得意言語はRubyで、エレガントなコードを書くことを心がけています
+              <PcCase className="mr-1 inline h-6 w-6 text-yellow-400" />
+              バックエンドが主ですが、フロントエンドやサーバー構築も可能です
             </p>
           </div>
 
           <div className="rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md">
             <p className="text-lg leading-relaxed text-white/90">
-              ⚡
-              サーバー構築からPHPシステム開発まで、フルスタックな技術で課題を解決します
+              <GiTalk className="mr-1 inline h-6 w-6 text-blue-400" />
+              土日、平日夜稼働での副業案件を募集しています。
+              <br />
+              お気軽にご相談ください
             </p>
           </div>
         </div>

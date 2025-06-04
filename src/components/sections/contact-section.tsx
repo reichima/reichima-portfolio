@@ -1,3 +1,4 @@
+import { CheckCircleIcon, Smile } from "lucide-react";
 import { RefObject } from "react";
 
 interface ContactSectionProps {
@@ -40,7 +41,8 @@ export default function ContactSection({
               </h3>
               <div className="space-y-4">
                 <p className="text-lg leading-relaxed text-white/90">
-                  💼 副業案件のご依頼、お仕事のご相談
+                  <CheckCircleIcon className="mr-1 inline text-green-400" />
+                  お仕事のご相談
                 </p>
               </div>
               <div className="mt-8 space-y-3">
@@ -51,7 +53,8 @@ export default function ContactSection({
                 <div className="flex items-center gap-3">
                   <div className="h-3 w-3 rounded-full bg-pink-400"></div>
                   <span className="text-white/80">
-                    お気軽にお問い合わせください😎
+                    お気軽にお問い合わせください
+                    <Smile className="ml-1 inline size-4" />
                   </span>
                 </div>
               </div>

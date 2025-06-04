@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { RefObject } from "react";
+import { FaFireAlt } from "react-icons/fa";
 
 interface SpecialSectionProps {
   specialRef: RefObject<HTMLElement>;
@@ -50,7 +51,9 @@ export default function SpecialSection({
         <div className="max-w-3xl space-y-6 opacity-0">
           <div className="rounded-xl border border-white/20 bg-white/10 p-8 text-center shadow-xl backdrop-blur-md">
             <h3 className="mb-4 text-2xl font-bold text-white">
-              ✨ Coming Soon
+              <FaFireAlt className="mr-1 inline size-6 text-red-400" />
+              Coming Soon
+              <FaFireAlt className="ml-1 inline size-6 text-red-400" />
             </h3>
             <p className="text-lg leading-relaxed text-white/90">
               とりあえず空きスペースにComing

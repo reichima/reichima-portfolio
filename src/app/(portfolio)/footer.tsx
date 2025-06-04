@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CiMail } from "react-icons/ci";
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -76,21 +79,25 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Connect</h4>
             <div className="flex space-x-4">
-              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
-              </div>
-              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
-              </div>
-              <div className="group relative overflow-hidden rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                <div className="relative h-5 w-5 rounded bg-gradient-to-r from-purple-400 to-pink-400"></div>
-              </div>
+              <Link href="https://github.com/reichima" target="_blank">
+                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+                  <FaGithub className="size-6" />
+                </div>
+              </Link>
+              <Link href="https://x.com/reichimacom" target="_blank">
+                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+                  <FaXTwitter className="size-6" />
+                </div>
+              </Link>
             </div>
             <div className="space-y-2 text-sm text-white/70">
-              <p>📧 rei1gggg@gmail.com</p>
+              <Link
+                href="mailto:rei1gggg@gmail.com"
+                className="flex items-center gap-2 space-x-2 text-white/70 transition-colors hover:text-purple-400"
+              >
+                <CiMail className="size-6" />
+                rei1gggg@gmail.com
+              </Link>
             </div>
           </div>
         </div>

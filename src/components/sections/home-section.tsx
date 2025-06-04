@@ -20,25 +20,25 @@ export default function HomeSection({
   const [showPortfolioText, setShowPortfolioText] = useState(false);
 
   useEffect(() => {
-    // パネル1: 2秒後にCLEARに変更
+    // パネル1: 1秒後にCLEARに変更
     const timer1 = setTimeout(() => {
       setPanelStates((prev) => ["CLEAR", prev[1], prev[2]]);
-    }, 1500);
+    }, 1000);
 
-    // パネル2: 3秒後にCLEARに変更
+    // パネル2: 2秒後にCLEARに変更
     const timer2 = setTimeout(() => {
       setPanelStates((prev) => [prev[0], "CLEAR", prev[2]]);
-    }, 2500);
+    }, 2000);
 
-    // パネル3: 4秒後にCLEARに変更
+    // パネル3: 3秒後にCLEARに変更
     const timer3 = setTimeout(() => {
       setPanelStates((prev) => [prev[0], prev[1], "CLEAR"]);
-    }, 3500);
+    }, 3000);
 
-    // ロケット表示: 4.5秒後
+    // ロケット表示: 4秒後
     const rocketTimer = setTimeout(() => {
       setShowRocket(true);
-    }, 4500);
+    }, 4000);
 
     // ロケット発射: 5秒後 & パネルフェードアウト開始
     const launchTimer = setTimeout(() => {
