@@ -11,7 +11,18 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Reichima Portfolio",
-  description: "栃木のゆるふわWebエンジニアのポートフォリオ",
+  description: "栃木のとあるWebエンジニアのポートフォリオ",
+  openGraph: {
+    title: "Reichima Portfolio",
+    description: "栃木のとあるWebエンジニアのポートフォリオ",
+    images: [
+      {
+        url: "/images/portfolio/ogp.png",
+        width: 1024,
+        height: 630,
+      },
+    ],
+  },
   manifest: "/site.webmanifest",
   icons: {
     icon: [
