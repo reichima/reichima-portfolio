@@ -215,7 +215,6 @@ export default function HomeSection({
         </div>
       </div>
 
-      {/* 浮遊要素 - よりモダンに */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/4 left-1/4 h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-purple-400 to-pink-400 blur-sm"></div>
         <div className="absolute top-3/4 right-1/4 h-4 w-4 animate-pulse rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 blur-sm delay-1000"></div>

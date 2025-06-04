@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { QueryProvider } from "@/components/query-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
@@ -10,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://reichima.com"),
   title: "Reichima Portfolio",
   description: "栃木のとあるWebエンジニアのポートフォリオ",
   openGraph: {
@@ -53,6 +55,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={cn(inter.className, "min-h-screen antialiased")}>
         <QueryProvider>{children}</QueryProvider>
+        <Toaster />
       </body>
     </html>
   );

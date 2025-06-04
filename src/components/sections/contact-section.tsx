@@ -1,5 +1,12 @@
+"use client";
+
+import {
+  sendContactAction,
+  type ContactActionState,
+} from "@/features/contact/actions/send-contact";
 import { CheckCircleIcon, Smile } from "lucide-react";
-import { RefObject } from "react";
+import { RefObject, useActionState, useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 interface ContactSectionProps {
   contactRef: RefObject<HTMLElement>;
@@ -7,11 +14,35 @@ interface ContactSectionProps {
   contactContentRef: RefObject<HTMLDivElement>;
 }
 
+const initialState: ContactActionState = {
+  success: false,
+  message: "",
+};
+
 export default function ContactSection({
   contactRef,
   contactTitleRef,
   contactContentRef,
 }: ContactSectionProps) {
+  const [state, formAction, isPending] = useActionState(
+    sendContactAction,
+    initialState,
+  );
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // 送信結果の処理
+  useEffect(() => {
+    if (state.message) {
+      if (state.success) {
+        toast.success(state.message);
+        // フォームをリセット
+        formRef.current?.reset();
+      } else {
+        toast.error(state.message);
+      }
+    }
+  }, [state]);
+
   return (
     <section
       id="contact"
@@ -63,7 +94,7 @@ export default function ContactSection({
 
           <div className="lg:col-span-3">
             <div className="rounded-xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md lg:p-12">
-              <form className="space-y-6">
+              <form ref={formRef} action={formAction} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div>
                     <label className="mb-2 block text-sm font-medium text-white/90">
@@ -71,9 +102,21 @@ export default function ContactSection({
                     </label>
                     <input
                       type="text"
-                      className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none"
-                      placeholder="山田太郎"
+                      name="name"
+                      className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
+                        state.errors?.name
+                          ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
+                          : "border-white/20 bg-white/10 focus:border-purple-400 focus:ring-purple-400/20"
+                      }`}
+                      placeholder="梅沢 うめお"
+                      disabled={isPending}
+                      required
                     />
+                    {state.errors?.name && (
+                      <p className="mt-1 text-sm text-red-400">
+                        {state.errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="mb-2 block text-sm font-medium text-white/90">
@@ -81,9 +124,21 @@ export default function ContactSection({
                     </label>
                     <input
                       type="email"
-                      className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none"
-                      placeholder="example@email.com"
+                      name="email"
+                      className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
+                        state.errors?.email
+                          ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
+                          : "border-white/20 bg-white/10 focus:border-purple-400 focus:ring-purple-400/20"
+                      }`}
+                      placeholder="reichima@example.com"
+                      disabled={isPending}
+                      required
                     />
+                    {state.errors?.email && (
+                      <p className="mt-1 text-sm text-red-400">
+                        {state.errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -92,9 +147,21 @@ export default function ContactSection({
                   </label>
                   <input
                     type="text"
-                    className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none"
-                    placeholder="お仕事のご相談"
+                    name="subject"
+                    className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
+                      state.errors?.subject
+                        ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
+                        : "border-white/20 bg-white/10 focus:border-purple-400 focus:ring-purple-400/20"
+                    }`}
+                    placeholder="お問い合わせの件名"
+                    disabled={isPending}
+                    required
                   />
+                  {state.errors?.subject && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {state.errors.subject}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-white/90">
@@ -102,16 +169,33 @@ export default function ContactSection({
                   </label>
                   <textarea
                     rows={6}
-                    className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none"
-                    placeholder="詳細をお聞かせください..."
+                    name="message"
+                    className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
+                      state.errors?.message
+                        ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
+                        : "border-white/20 bg-white/10 focus:border-purple-400 focus:ring-purple-400/20"
+                    }`}
+                    placeholder="2000文字以内でご記入ください"
+                    disabled={isPending}
+                    required
                   />
+                  {state.errors?.message && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {state.errors.message}
+                    </p>
+                  )}
                 </div>
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-8 py-3 font-semibold text-white transition-all duration-300 hover:from-purple-600 hover:to-pink-600 hover:shadow-lg hover:shadow-purple-500/25 focus:ring-2 focus:ring-purple-400/50 focus:outline-none"
+                    disabled={isPending}
+                    className={`rounded-lg px-8 py-3 font-semibold text-white transition-all duration-300 focus:ring-2 focus:ring-purple-400/50 focus:outline-none ${
+                      isPending
+                        ? "cursor-not-allowed bg-gray-500 opacity-50"
+                        : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-lg hover:shadow-purple-500/25"
+                    }`}
                   >
-                    送信する
+                    {isPending ? "送信中..." : "送信する"}
                   </button>
                 </div>
               </form>
