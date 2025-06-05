@@ -3,7 +3,7 @@ import { users } from "@/db/schema"; // profilesからusersに変更
 import { AUTH_COOKIE } from "@/features/auth/constants";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { zValidator } from "@hono/zod-validator";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { deleteCookie, setCookie } from "hono/cookie";
