@@ -307,30 +307,32 @@ export default function Page() {
       className="w-screen snap-y snap-mandatory overflow-scroll scroll-smooth bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
     >
       <HomeSection
-        homeRef={homeRef}
-        homeTitleRef={homeTitleRef}
-        homeSubtitleRef={homeSubtitleRef}
+        homeRef={homeRef as React.RefObject<HTMLElement>}
+        homeTitleRef={homeTitleRef as React.RefObject<HTMLHeadingElement>}
+        homeSubtitleRef={
+          homeSubtitleRef as React.RefObject<HTMLParagraphElement>
+        }
       />
       <AboutSection
-        aboutRef={aboutRef}
-        profileImageRef={profileImageRef}
-        aboutTitleRef={aboutTitleRef}
-        aboutTextRef={aboutTextRef}
+        aboutRef={aboutRef as React.RefObject<HTMLElement>}
+        profileImageRef={profileImageRef as React.RefObject<HTMLImageElement>}
+        aboutTitleRef={aboutTitleRef as React.RefObject<HTMLHeadingElement>}
+        aboutTextRef={aboutTextRef as React.RefObject<HTMLDivElement>}
       />
       <WorksSection
-        worksRef={worksRef}
-        worksTitleRef={worksTitleRef}
-        worksContentRef={worksContentRef}
+        worksRef={worksRef as React.RefObject<HTMLElement>}
+        worksTitleRef={worksTitleRef as React.RefObject<HTMLHeadingElement>}
+        worksContentRef={worksContentRef as React.RefObject<HTMLDivElement>}
       />
       <ContactSection
-        contactRef={contactRef}
-        contactTitleRef={contactTitleRef}
-        contactContentRef={contactContentRef}
+        contactRef={contactRef as React.RefObject<HTMLElement>}
+        contactTitleRef={contactTitleRef as React.RefObject<HTMLHeadingElement>}
+        contactContentRef={contactContentRef as React.RefObject<HTMLDivElement>}
       />
       <SpecialSection
-        specialRef={specialRef}
-        specialTitleRef={specialTitleRef}
-        specialContentRef={specialContentRef}
+        specialRef={specialRef as React.RefObject<HTMLElement>}
+        specialTitleRef={specialTitleRef as React.RefObject<HTMLHeadingElement>}
+        specialContentRef={specialContentRef as React.RefObject<HTMLDivElement>}
       />
       <Footer />
     </main>

@@ -12,7 +12,7 @@ import { createMiddleware } from "hono/factory";
 interface AppUser {
   id: string;
   email: string;
-  // 他のユーザープロパティ
+  name: string;
 }
 
 // 拡張コンテキスト
@@ -64,7 +64,7 @@ export const sessionMiddleware = createMiddleware<AuthContext>(
 
       // 認証されたユーザー情報をコンテキストに設定
       c.set("user", user);
-    } catch (e) {
+    } catch {
       // エラー処理
       return c.json(
         {

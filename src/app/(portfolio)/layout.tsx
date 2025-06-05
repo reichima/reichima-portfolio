@@ -4,7 +4,7 @@ import Header from "@/app/(portfolio)/header";
 import { cn } from "@/lib/utils";
 import { Orbitron } from "next/font/google";
 
-export const orbitron = Orbitron({
+const orbitron = Orbitron({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-orbitron",
