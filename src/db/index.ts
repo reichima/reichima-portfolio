@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/postgres-js";
+import { drizzle } from "drizzle-orm/vercel-postgres";
 
-const db = drizzle(process.env.DATABASE_URL!);
+const db = drizzle();
 
 export default db;
