@@ -1,7 +1,7 @@
 import { PcCase, Rocket } from "lucide-react";
 import Image from "next/image";
 import { RefObject } from "react";
-import { GiTalk } from "react-icons/gi";
+import { GiSkills, GiTalk } from "react-icons/gi";
 
 interface AboutSectionProps {
   aboutRef: RefObject<HTMLElement>;
@@ -60,7 +60,14 @@ export default function AboutSection({
           <div className="rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md">
             <p className="text-lg leading-relaxed text-white/90">
               <PcCase className="mr-1 inline h-6 w-6 text-yellow-400" />
-              バックエンドが主ですが、フロントエンドやサーバー構築も可能です
+              バックエンドが主ですが、フロントエンドやサーバー構築も可能です。
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md">
+            <p className="text-lg leading-relaxed text-white/90">
+              <GiSkills className="mr-1 inline h-6 w-6 text-yellow-400" />
+              PHP(Laravel)、TypeScript(Next.js、Hono)、Rubyをよく使用します。
             </p>
           </div>
 

@@ -72,12 +72,12 @@ export default function HomeSection({
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
       <div className="relative z-10 text-center">
-        {/* パネルアニメーション - より大きく */}
-        <div className="mb-16 flex justify-center gap-10">
+        {/* パネルアニメーション - レスポンシブ対応 */}
+        <div className="mb-8 flex justify-center gap-2 md:mb-16 md:gap-6 lg:gap-10">
           {panelStates.map((state, index) => (
             <div
               key={index}
-              className={`relative h-32 w-48 rounded-2xl border-4 shadow-2xl backdrop-blur-sm transition-all duration-1000 ${
+              className={`relative h-16 w-24 rounded-lg border-2 shadow-lg backdrop-blur-sm transition-all duration-1000 md:h-24 md:w-36 md:rounded-xl md:border-3 md:shadow-xl lg:h-32 lg:w-48 lg:rounded-2xl lg:border-4 lg:shadow-2xl ${
                 state === "ABORT"
                   ? "border-red-400 bg-red-500/20 shadow-red-500/30"
                   : state === "CLEAR"
@@ -87,7 +87,7 @@ export default function HomeSection({
               style={{
                 transform:
                   state === "CLEAR"
-                    ? "rotateY(360deg) scale(1.1)"
+                    ? "rotateY(360deg)"
                     : state === "FADEOUT"
                       ? "rotateY(360deg) scale(1.1) translateY(-100px)"
                       : "rotateY(0deg) scale(1)",
@@ -101,7 +101,7 @@ export default function HomeSection({
             >
               {/* パネルの光る効果 */}
               <div
-                className={`absolute inset-0 rounded-2xl transition-opacity duration-700 ${
+                className={`absolute inset-0 rounded-lg transition-opacity duration-700 md:rounded-xl lg:rounded-2xl ${
                   state === "CLEAR" || state === "FADEOUT"
                     ? "opacity-100"
                     : "opacity-0"
@@ -110,10 +110,10 @@ export default function HomeSection({
 
               <div className="absolute inset-0 flex items-center justify-center">
                 <span
-                  className={`font-mono text-2xl font-bold tracking-wider transition-all duration-700 ${
+                  className={`font-mono text-xs font-bold tracking-wider transition-all duration-700 md:text-lg lg:text-2xl ${
                     state === "ABORT"
-                      ? "text-red-200 drop-shadow-[0_0_12px_rgba(248,113,113,0.9)]"
-                      : "text-emerald-200 drop-shadow-[0_0_12px_rgba(52,211,153,0.9)]"
+                      ? "text-red-200 drop-shadow-[0_0_8px_rgba(248,113,113,0.9)] md:drop-shadow-[0_0_10px_rgba(248,113,113,0.9)] lg:drop-shadow-[0_0_12px_rgba(248,113,113,0.9)]"
+                      : "text-emerald-200 drop-shadow-[0_0_8px_rgba(52,211,153,0.9)] md:drop-shadow-[0_0_10px_rgba(52,211,153,0.9)] lg:drop-shadow-[0_0_12px_rgba(52,211,153,0.9)]"
                   } `}
                 >
                   {state === "FADEOUT" ? "CLEAR" : state}
@@ -123,11 +123,11 @@ export default function HomeSection({
           ))}
         </div>
 
-        {/* ロケットアニメーション - 左から右へ */}
+        {/* ロケットアニメーション - レスポンシブ対応 */}
         {showRocket && (
           <div
-            className={`text-9xl transition-all duration-4000 ease-out ${
-              rocketLaunched ? "absolute mb-0" : "mb-16"
+            className={`text-4xl transition-all duration-4000 ease-out md:text-6xl lg:text-9xl ${
+              rocketLaunched ? "absolute mb-0" : "mb-8 md:mb-12 lg:mb-16"
             }`}
             style={{
               transform: rocketLaunched
@@ -135,29 +135,30 @@ export default function HomeSection({
                 : "translateX(-50vw) scale(1) rotate(0deg)",
               opacity: rocketLaunched ? 0 : 1,
               filter: rocketLaunched ? "blur(3px)" : "blur(0px)",
-              textShadow: "0 0 25px rgba(255,255,255,0.7)",
+              textShadow:
+                "0 0 15px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.7)",
             }}
           >
             🚀
           </div>
         )}
 
-        {/* Portfolio テキストアニメーション - 雲のような形でフェードイン */}
+        {/* Portfolio テキストアニメーション - レスポンシブ対応 */}
         {showPortfolioText && (
           <div className="relative">
             {/* 雲のようなバックグラウンド効果 */}
             <div
-              className={`absolute inset-0 -m-8 rounded-[50px] bg-gradient-to-r from-white/5 via-white/10 to-white/5 blur-xl transition-all duration-3000 ease-out ${
+              className={`absolute inset-0 -m-4 rounded-[30px] bg-gradient-to-r from-white/5 via-white/10 to-white/5 blur-lg transition-all duration-3000 ease-out md:-m-6 md:rounded-[40px] md:blur-xl lg:-m-8 lg:rounded-[50px] ${
                 showPortfolioText
                   ? "scale-100 opacity-100"
                   : "scale-75 opacity-0"
               }`}
             ></div>
 
-            <div className="relative z-10 mb-12 space-y-6">
+            <div className="relative z-10 mb-8 space-y-3 md:mb-10 md:space-y-4 lg:mb-12 lg:space-y-6">
               <h1
                 ref={homeTitleRef}
-                className={`text-7xl font-bold tracking-wider text-white transition-all duration-3000 ease-out lg:text-8xl ${
+                className={`text-3xl font-bold tracking-wider text-white transition-all duration-3000 ease-out md:text-5xl lg:text-7xl xl:text-8xl ${
                   showPortfolioText
                     ? "translate-y-0 scale-100 opacity-100"
                     : "translate-y-12 scale-95 opacity-0"
@@ -172,20 +173,21 @@ export default function HomeSection({
                   animation: showPortfolioText
                     ? "gradientShift 4s ease-in-out infinite, cloudFloat 6s ease-in-out infinite"
                     : "none",
-                  filter: "drop-shadow(0 0 20px rgba(255,255,255,0.3))",
+                  filter:
+                    "drop-shadow(0 0 15px rgba(255,255,255,0.3)) md:drop-shadow(0 0 20px rgba(255,255,255,0.3))",
                 }}
               >
                 Reichima Portfolio
               </h1>
 
               <div
-                className={`text-2xl text-slate-300 transition-all delay-700 duration-3000 ease-out ${
+                className={`text-lg text-slate-300 transition-all delay-700 duration-3000 ease-out md:text-xl lg:text-2xl ${
                   showPortfolioText
                     ? "translate-y-0 scale-100 opacity-100"
                     : "translate-y-8 scale-95 opacity-0"
                 }`}
               >
-                <div className="mb-3 font-mono text-xl text-emerald-400">
+                <div className="mb-2 font-mono text-sm text-emerald-400 md:mb-3 md:text-base lg:text-xl">
                   [ SYSTEM INITIALIZED ]
                 </div>
               </div>
@@ -195,7 +197,7 @@ export default function HomeSection({
 
         <p
           ref={homeSubtitleRef}
-          className={`font-orbitron mb-16 text-xl text-slate-400 transition-all delay-1400 duration-3000 ease-out lg:text-2xl ${
+          className={`font-orbitron mb-12 text-base text-slate-400 transition-all delay-1400 duration-3000 ease-out md:mb-12 md:text-lg lg:mb-16 lg:text-xl xl:text-2xl ${
             showPortfolioText
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
@@ -205,7 +207,7 @@ export default function HomeSection({
         </p>
 
         <div
-          className={`transition-all delay-2100 duration-3000 ease-out ${
+          className={`mt-16 transition-all delay-2100 duration-3000 ease-out md:mt-0 ${
             showPortfolioText
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
@@ -215,11 +217,12 @@ export default function HomeSection({
         </div>
       </div>
 
+      {/* レスポンシブな装飾要素 */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-purple-400 to-pink-400 blur-sm"></div>
-        <div className="absolute top-3/4 right-1/4 h-4 w-4 animate-pulse rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 blur-sm delay-1000"></div>
-        <div className="absolute top-1/3 right-1/3 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 blur-sm delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 blur-sm delay-500"></div>
+        <div className="absolute top-1/4 left-1/4 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-purple-400 to-pink-400 blur-sm md:h-3 md:w-3"></div>
+        <div className="absolute top-3/4 right-1/4 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 blur-sm delay-1000 md:h-4 md:w-4"></div>
+        <div className="absolute top-1/3 right-1/3 h-1 w-1 animate-pulse rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 blur-sm delay-2000 md:h-2 md:w-2"></div>
+        <div className="absolute bottom-1/4 left-1/3 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 blur-sm delay-500 md:h-3 md:w-3"></div>
       </div>
 
       {/* CSS Keyframes */}

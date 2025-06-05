@@ -47,7 +47,7 @@ export default function WorksSection({
                 alt="moraiboshi logo"
                 width={128}
                 height={128}
-                className="h-full w-full rounded bg-white transition-transform duration-300 group-hover:scale-120"
+                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
               />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">
@@ -73,20 +73,28 @@ export default function WorksSection({
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 p-3">
-              <div className="h-full w-full rounded bg-white"></div>
+            <div className="mb-4 overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+              <Image
+                src="/images/portfolio/ogp.png"
+                alt="portfolio logo"
+                width={128}
+                height={128}
+                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
+              />
             </div>
-            <h3 className="mb-3 text-xl font-bold text-white">Coming Soon</h3>
-            <p className="mb-4 text-white/80">準備中</p>
+            <h3 className="mb-3 text-xl font-bold text-white">
+              ポートフォリオサイト
+            </h3>
+            <p className="mb-4 text-white/80">こちらのサイト</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
                 Next.js
               </span>
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                Go
+                GSAP
               </span>
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                PostgreSQL
+                Hono
               </span>
             </div>
           </div>

@@ -190,26 +190,10 @@
   }
 }
 
-@theme {
-  --animate-arrowmove: arrowmove 1s ease-in-out infinite;
-
-  @keyframes arrowmove {
-    0% {
-      bottom: 1%;
-    }
-    50% {
-      bottom: 3%;
-    }
-    100% {
-      bottom: 1%;
-    }
-  }
-}
-
 /* コンポーネント固有のスタイル */
 @layer components {
   .scrolldown {
-    @apply animate-arrowmove;
+    animation: float 2s ease-in-out infinite;
 
     & span {
       @apply absolute bottom-2.5 -left-5 text-[0.7rem] tracking-[0.05em] text-[#eee];
@@ -222,6 +206,16 @@
 
     &::after {
       @apply absolute right-0 bottom-0 h-[50px] w-[1px] bg-[#eee] content-[""];
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
     }
   }
 }
