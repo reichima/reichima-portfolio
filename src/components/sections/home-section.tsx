@@ -47,10 +47,10 @@ export default function HomeSection({
       setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
     }, 5000);
 
-    // Portfolioテキスト表示: 7.5秒後
+    // Portfolioテキスト表示: 7秒後
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
-    }, 7500);
+    }, 7000);
 
     return () => {
       clearTimeout(timer1);
