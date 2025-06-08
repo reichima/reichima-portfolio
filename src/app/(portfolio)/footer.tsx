@@ -6,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/5 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <footer className="relative w-full border-t border-white/5 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 h-32 w-32 animate-pulse rounded-full bg-purple-500 mix-blend-multiply blur-xl filter"></div>
