@@ -34,7 +34,7 @@ const app = new Hono()
       }
 
       if (category && category !== "all") {
-        conditions.push(eq(expenses.category, category as any));
+        conditions.push(eq(expenses.category, category as "rent" | "utilities" | "entertainment" | "food" | "eating_out" | "daily_necessities" | "other"));
       }
 
       const data = await db

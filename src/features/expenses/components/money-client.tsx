@@ -29,10 +29,19 @@ import { CreateExpenseInput } from "../schemas";
 import { ExpenseForm } from "./expense-form";
 import { ExpenseList } from "./expense-list";
 
+interface Expense {
+  id: number;
+  amount: string;
+  date: string;
+  purpose: string;
+  category: string;
+  note: string;
+}
+
 export function MoneyClient() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingExpense, setEditingExpense] = useState<any>(null);
+  const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   const startDate = format(startOfMonth(currentDate), "yyyy-MM-dd");
@@ -76,7 +85,7 @@ export function MoneyClient() {
     }
   };
 
-  const handleEdit = (expense: any) => {
+  const handleEdit = (expense: Expense) => {
     setEditingExpense(expense);
     setIsDialogOpen(true);
   };
