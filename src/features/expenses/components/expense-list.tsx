@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { ja } from "date-fns/locale";
 import { Pencil, Trash2 } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -13,14 +14,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 
 interface Expense {
   id: number;
   amount: string;
   date: string;
   purpose: string;
-  category: string;
+  category:
+    | "rent"
+    | "utilities"
+    | "entertainment"
+    | "food"
+    | "eating_out"
+    | "daily_necessities"
+    | "other";
   note: string;
 }
 
@@ -52,22 +59,25 @@ interface ExpenseListProps {
 
 export function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
   const formatCurrency = (amount: string) => {
+    const numAmount = parseFloat(amount);
     return new Intl.NumberFormat("ja-JP", {
       style: "currency",
       currency: "JPY",
-    }).format(parseFloat(amount));
+    }).format(numAmount);
   };
 
   const totalAmount = expenses.reduce(
     (sum, expense) => sum + parseFloat(expense.amount),
-    0
+    0,
   );
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border bg-card p-4">
-        <p className="text-sm text-muted-foreground">合計金額</p>
-        <p className="text-2xl font-bold">{formatCurrency(totalAmount.toString())}</p>
+      <div className="bg-card rounded-lg border p-4">
+        <p className="text-muted-foreground text-sm">合計金額</p>
+        <p className="text-2xl font-bold">
+          {formatCurrency(totalAmount.toString())}
+        </p>
       </div>
 
       <div className="rounded-lg border">
@@ -84,7 +94,10 @@ export function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
           <TableBody>
             {expenses.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground">
+                <TableCell
+                  colSpan={5}
+                  className="text-muted-foreground text-center"
+                >
                   データがありません
                 </TableCell>
               </TableRow>
@@ -98,14 +111,18 @@ export function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
                     <div>
                       <p>{expense.purpose}</p>
                       {expense.note && (
-                        <p className="text-sm text-muted-foreground">{expense.note}</p>
+                        <p className="text-muted-foreground text-sm">
+                          {expense.note}
+                        </p>
                       )}
                     </div>
                   </TableCell>
                   <TableCell>
                     <Badge
                       variant="secondary"
-                      className={categoryColors[expense.category] || categoryColors.other}
+                      className={
+                        categoryColors[expense.category] || categoryColors.other
+                      }
                     >
                       {categoryLabels[expense.category] || "その他"}
                     </Badge>

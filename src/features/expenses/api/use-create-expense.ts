@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { client } from "@/lib/rpc";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { CreateExpenseInput } from "../schemas";
 
@@ -11,7 +11,7 @@ export const useCreateExpense = () => {
       const response = await client.api.expenses.$post({
         json: {
           ...data,
-          amount: data.amount.toString(),
+          amount: data.amount,
         },
       });
 

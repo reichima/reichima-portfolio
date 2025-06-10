@@ -34,7 +34,14 @@ interface Expense {
   amount: string;
   date: string;
   purpose: string;
-  category: string;
+  category:
+    | "rent"
+    | "utilities"
+    | "entertainment"
+    | "food"
+    | "eating_out"
+    | "daily_necessities"
+    | "other";
   note: string;
 }
 
@@ -42,7 +49,16 @@ export function MoneyClient() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
-  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = useState<
+    | "all"
+    | "rent"
+    | "utilities"
+    | "entertainment"
+    | "food"
+    | "eating_out"
+    | "daily_necessities"
+    | "other"
+  >("all");
 
   const startDate = format(startOfMonth(currentDate), "yyyy-MM-dd");
   const endDate = format(endOfMonth(currentDate), "yyyy-MM-dd");
@@ -101,6 +117,10 @@ export function MoneyClient() {
     setEditingExpense(null);
   };
 
+  const handleCategoryChange = (value: string) => {
+    setCategoryFilter(value as typeof categoryFilter);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -117,7 +137,7 @@ export function MoneyClient() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+          <Select value={categoryFilter} onValueChange={handleCategoryChange}>
             <SelectTrigger className="w-[150px]">
               <SelectValue />
             </SelectTrigger>
@@ -164,7 +184,17 @@ export function MoneyClient() {
             onSubmit={handleSubmit}
             onCancel={handleCancel}
             isPending={createMutation.isPending || updateMutation.isPending}
-            defaultValues={editingExpense}
+            defaultValues={
+              editingExpense
+                ? {
+                    amount: parseFloat(editingExpense.amount),
+                    date: editingExpense.date,
+                    purpose: editingExpense.purpose,
+                    category: editingExpense.category,
+                    note: editingExpense.note,
+                  }
+                : undefined
+            }
           />
         </DialogContent>
       </Dialog>

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createExpenseSchema = z.object({
-  amount: z.string().transform((val) => parseFloat(val)),
+  amount: z.number().min(1, "金額は1以上で入力してください"),
   date: z.string(),
   purpose: z.string().min(1, "目的を入力してください"),
   category: z.enum([

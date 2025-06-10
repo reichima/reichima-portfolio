@@ -1,10 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import { client } from "@/lib/rpc";
+import { useQuery } from "@tanstack/react-query";
 
 interface UseGetExpensesOptions {
   from?: string;
   to?: string;
-  category?: string;
+  category?:
+    | "rent"
+    | "utilities"
+    | "entertainment"
+    | "food"
+    | "eating_out"
+    | "daily_necessities"
+    | "other";
 }
 
 export const useGetExpenses = ({

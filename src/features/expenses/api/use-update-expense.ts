@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { client } from "@/lib/rpc";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UpdateExpenseInput } from "../schemas";
 
@@ -18,7 +18,7 @@ export const useUpdateExpense = () => {
         param: { id: id.toString() },
         json: {
           ...data,
-          amount: data.amount ? data.amount.toString() : undefined,
+          amount: data.amount ?? undefined,
         },
       });
 
