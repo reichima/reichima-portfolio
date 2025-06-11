@@ -62,3 +62,7 @@ pnpm drizzle-kit push
 # drizzle-kit studio
 
 pnpm drizzle-kit studio
+
+# 本番用にsqlを作成
+
+pnpm drizzle-kit generate
