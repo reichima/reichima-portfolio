@@ -9,7 +9,7 @@ export const AdminSidebar = () => {
       <Link href="/home">
         <Image src="/images/logo.png" alt="logo" width={164} height={48} />
       </Link>
-      <DottedSeparator />
+      <DottedSeparator className="my-2" />
       <AdminNavigation />
     </aside>
   );

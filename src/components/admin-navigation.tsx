@@ -1,12 +1,10 @@
+"use client";
+
 import { cn } from "@/lib/utils";
-import { PiggyBank, SettingsIcon, UsersIcon } from "lucide-react";
+import { PiggyBank } from "lucide-react";
 import Link from "next/link";
-import {
-  GoCheckCircle,
-  GoCheckCircleFill,
-  GoHome,
-  GoHomeFill,
-} from "react-icons/go";
+import { usePathname } from "next/navigation";
+import { GoHome, GoHomeFill } from "react-icons/go";
 const routes = [
   {
     label: "Home",
@@ -20,43 +18,29 @@ const routes = [
     icon: PiggyBank,
     activeIcon: PiggyBank,
   },
-  {
-    label: "My Tasks",
-    href: "/tasks",
-    icon: GoCheckCircle,
-    activeIcon: GoCheckCircleFill,
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: SettingsIcon,
-    activeIcon: SettingsIcon,
-  },
-  {
-    label: "Members",
-    href: "/members",
-    icon: UsersIcon,
-    activeIcon: UsersIcon,
-  },
 ];
 
 export const AdminNavigation = () => {
+  const pathname = usePathname();
+
   return (
     <nav className="flex flex-col">
       {routes.map((route) => {
-        const isActive = false;
+        const isActive = pathname === route.href;
         const Icon = isActive ? route.activeIcon : route.icon;
 
         return (
           <Link
             key={route.label}
             href={route.href}
-            className="flex items-center space-x-2 text-gray-500 hover:text-gray-900"
+            className="mb-2"
           >
             <div
               className={cn(
-                "hover:text-primary flex items-center gap-2.5 rounded-md p-2.5 font-medium text-neutral-500 transition",
-                isActive && "text-primary bg-white shadow-sm hover:opacity-100",
+                "flex items-center gap-2.5 rounded-xl p-3 font-medium transition-all duration-200",
+                isActive 
+                  ? "bg-white text-neutral-700 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]" 
+                  : "text-neutral-600 hover:bg-white/50 hover:shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.8)]"
               )}
             >
               <Icon className="size-5" />

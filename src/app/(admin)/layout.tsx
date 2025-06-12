@@ -1,3 +1,5 @@
+"use client";
+
 import { AdminSidebar } from "@/components/admin-sidebar";
 import { MobileAdminSidebar } from "@/components/mobile-admin-sidebar";
 import {
@@ -10,6 +12,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { UserButton } from "@/components/user-button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -39,25 +42,53 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 export default AdminLayout;
 
 function DashboardBreadcrumb() {
-  return (
-    <Breadcrumb className="hidden md:flex">
+  const pathname = usePathname();
+
+  const getBreadcrumbs = () => {
+    const segments = pathname.split("/").filter(Boolean);
+
+    if (segments.length === 0) return null;
+
+    const breadcrumbs = [{ label: "ホーム", href: "/home" }];
+
+    // パスに基づいてパンくずを生成
+    if (pathname === "/home") {
+      return (
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbPage>ホーム</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      );
+    }
+
+    if (pathname === "/money") {
+      return (
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/home">ホーム</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>家計簿</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      );
+    }
+
+    // デフォルト
+    return (
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="#">Dashboard</Link>
+            <Link href="/home">ホーム</Link>
           </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="#">Products</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>All Products</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
-    </Breadcrumb>
-  );
+    );
+  };
+
+  return <Breadcrumb className="hidden md:flex">{getBreadcrumbs()}</Breadcrumb>;
 }
