@@ -82,7 +82,12 @@ export function ExpenseForm({
                 <Input
                   type="number"
                   placeholder="1000"
-                  {...field}
+                  value={field.value || ""}
+                  onChange={(e) => {
+                    const value = e.target.valueAsNumber;
+                    field.onChange(isNaN(value) ? 0 : value);
+                  }}
+                  onBlur={field.onBlur}
                   disabled={isPending}
                 />
               </FormControl>
