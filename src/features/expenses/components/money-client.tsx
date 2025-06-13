@@ -122,13 +122,15 @@ export function MoneyClient() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+    <div className="space-y-4 md:space-y-6">
+      {/* ヘッダー部分 - モバイルでは縦積み、デスクトップでは横並び */}
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        {/* 月ナビゲーション */}
+        <div className="flex items-center justify-center gap-2 lg:justify-start">
           <Button variant="outline" size="icon" onClick={handlePreviousMonth}>
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-xl font-bold sm:text-2xl">
             {format(currentDate, "yyyy年M月", { locale: ja })}
           </h1>
           <Button variant="outline" size="icon" onClick={handleNextMonth}>
@@ -136,9 +138,10 @@ export function MoneyClient() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* フィルター・追加ボタン */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
           <Select value={categoryFilter} onValueChange={handleCategoryChange}>
-            <SelectTrigger className="w-[150px]">
+            <SelectTrigger className="w-full sm:w-[150px]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -153,9 +156,10 @@ export function MoneyClient() {
             </SelectContent>
           </Select>
 
-          <Button onClick={() => setIsDialogOpen(true)}>
+          <Button onClick={() => setIsDialogOpen(true)} className="w-full sm:w-auto">
             <Plus className="mr-2 h-4 w-4" />
-            支出を追加
+            <span className="hidden sm:inline">支出を追加</span>
+            <span className="sm:hidden">追加</span>
           </Button>
         </div>
       </div>
@@ -174,9 +178,9 @@ export function MoneyClient() {
       )}
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
+        <DialogContent className="w-[95vw] max-w-lg mx-4 sm:mx-auto">
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="text-lg sm:text-xl">
               {editingExpense ? "支出を編集" : "支出を追加"}
             </DialogTitle>
           </DialogHeader>

@@ -55,7 +55,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={cn(inter.className, "min-h-screen antialiased")}>
         <QueryProvider>{children}</QueryProvider>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );

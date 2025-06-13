@@ -73,14 +73,16 @@ export function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
 
   return (
     <div className="space-y-4">
-      <div className="bg-card rounded-lg border p-4">
+      {/* 合計金額カード */}
+      <div className="bg-card rounded-lg border p-4 text-center sm:text-left">
         <p className="text-muted-foreground text-sm">合計金額</p>
-        <p className="text-2xl font-bold">
+        <p className="text-xl font-bold sm:text-2xl">
           {formatCurrency(totalAmount.toString())}
         </p>
       </div>
 
-      <div className="rounded-lg border">
+      {/* デスクトップ表示 - テーブル */}
+      <div className="hidden md:block rounded-lg border">
         <Table>
           <TableHeader>
             <TableRow>
@@ -153,6 +155,66 @@ export function ExpenseList({ expenses, onEdit, onDelete }: ExpenseListProps) {
             )}
           </TableBody>
         </Table>
+      </div>
+
+      {/* モバイル表示 - カードレイアウト */}
+      <div className="md:hidden space-y-3">
+        {expenses.length === 0 ? (
+          <div className="rounded-lg border p-6 text-center">
+            <p className="text-muted-foreground">データがありません</p>
+          </div>
+        ) : (
+          expenses.map((expense) => (
+            <div key={expense.id} className="rounded-lg border bg-card p-4">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Badge
+                      variant="secondary"
+                      className={`${
+                        categoryColors[expense.category] || categoryColors.other
+                      } text-xs`}
+                    >
+                      {categoryLabels[expense.category] || "その他"}
+                    </Badge>
+                    <span className="text-sm text-muted-foreground">
+                      {format(new Date(expense.date), "M/d", { locale: ja })}
+                    </span>
+                  </div>
+                  <p className="font-medium text-sm truncate">{expense.purpose}</p>
+                  {expense.note && (
+                    <p className="text-muted-foreground text-xs mt-1 overflow-hidden text-ellipsis whitespace-nowrap">
+                      {expense.note}
+                    </p>
+                  )}
+                </div>
+                <div className="text-right ml-2">
+                  <p className="font-bold text-sm">
+                    {formatCurrency(expense.amount)}
+                  </p>
+                  <div className="flex gap-1 mt-1">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => onEdit(expense)}
+                      className="h-7 w-7 p-0"
+                    >
+                      <Pencil className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => onDelete(expense.id)}
+                      className="h-7 w-7 p-0"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
