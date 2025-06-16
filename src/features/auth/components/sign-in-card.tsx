@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { z } from "zod";
@@ -33,7 +34,14 @@ export const SignInCard = () => {
   return (
     <Card className="h-full w-full border-none shadow-none md:w-[487px]">
       <CardHeader className="flex items-center justify-center p-7 text-center">
-        <CardTitle className="text-2xl font-bold">ログイン</CardTitle>
+        <CardTitle className="text-2xl font-bold">
+          <Image
+            src="/images/wakemeup.png"
+            alt="logo"
+            width={240}
+            height={240}
+          />
+        </CardTitle>
       </CardHeader>
       <div className="mb-2 px-7">
         <DottedSeparator />
