@@ -1,5 +1,6 @@
 import { getCurrent } from "@/features/auth/action";
 import { redirect } from "next/navigation";
+import { HomeClient } from "@/features/expenses/components/home-client";
 
 export default async function Home() {
   const user = await getCurrent();
@@ -7,5 +8,5 @@ export default async function Home() {
     redirect("/sign-in");
   }
 
-  return <div>this is admin page</div>;
+  return <HomeClient />;
 }
