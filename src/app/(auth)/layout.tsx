@@ -1,14 +1,11 @@
 "use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
-  const pathname = usePathname();
-
   return (
     <main className="min-h-screen bg-neutral-100">
       <div className="mx-auto max-w-(--breakpoint-2xl) p-4">
