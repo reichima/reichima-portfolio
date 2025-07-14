@@ -1,4 +1,5 @@
 import Scroll from "@/components/scroll";
+import Image from "next/image";
 import { RefObject, useEffect, useState } from "react";
 
 interface HomeSectionProps {
@@ -139,7 +140,13 @@ export default function HomeSection({
                 "0 0 15px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.7)",
             }}
           >
-            🚀
+            <Image
+              src={"/images/rockets.png"}
+              alt="Rocket"
+              width={100}
+              height={100}
+              className="rotate-45"
+            />
           </div>
         )}
 
