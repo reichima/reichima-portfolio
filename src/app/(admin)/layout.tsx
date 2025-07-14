@@ -44,51 +44,39 @@ export default AdminLayout;
 function DashboardBreadcrumb() {
   const pathname = usePathname();
 
-  const getBreadcrumbs = () => {
-    const segments = pathname.split("/").filter(Boolean);
+  const pageNames: Record<string, string> = {
+    "/home": "ホーム",
+    "/money": "家計簿",
+  };
 
-    if (segments.length === 0) return null;
+  const currentPageName = pageNames[pathname];
+  const isHomePage = pathname === "/home";
 
-    const breadcrumbs = [{ label: "ホーム", href: "/home" }];
-
-    // パスに基づいてパンくずを生成
-    if (pathname === "/home") {
-      return (
-        <BreadcrumbList>
+  return (
+    <Breadcrumb className="hidden md:flex">
+      <BreadcrumbList>
+        {isHomePage ? (
           <BreadcrumbItem>
             <BreadcrumbPage>ホーム</BreadcrumbPage>
           </BreadcrumbItem>
-        </BreadcrumbList>
-      );
-    }
-
-    if (pathname === "/money") {
-      return (
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/home">ホーム</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>家計簿</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      );
-    }
-
-    // デフォルト
-    return (
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/home">ホーム</Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
+        ) : (
+          <>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/home">ホーム</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            {currentPageName && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{currentPageName}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </>
+            )}
+          </>
+        )}
       </BreadcrumbList>
-    );
-  };
-
-  return <Breadcrumb className="hidden md:flex">{getBreadcrumbs()}</Breadcrumb>;
+    </Breadcrumb>
+  );
 }

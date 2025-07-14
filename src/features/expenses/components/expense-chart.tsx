@@ -1,24 +1,29 @@
 "use client";
 
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
 import {
   Area,
   AreaChart,
   CartesianGrid,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { format } from "date-fns";
-import { ja } from "date-fns/locale";
 
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartConfig,
 } from "@/components/ui/chart";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ExpenseChartData {
   date: string;
@@ -39,20 +44,23 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ExpenseChart({ 
-  data, 
+export function ExpenseChart({
+  data,
   title = "月別支出推移",
-  description = "過去6ヶ月間の支出額の推移"
+  description = "過去6ヶ月間の支出額の推移",
 }: ExpenseChartProps) {
   // データを日付でグループ化して集計
-  const aggregatedData = data.reduce((acc, item) => {
-    const month = format(new Date(item.date), "yyyy-MM");
-    if (!acc[month]) {
-      acc[month] = 0;
-    }
-    acc[month] += item.amount;
-    return acc;
-  }, {} as Record<string, number>);
+  const aggregatedData = data.reduce(
+    (acc, item) => {
+      const month = format(new Date(item.date), "yyyy-MM");
+      if (!acc[month]) {
+        acc[month] = 0;
+      }
+      acc[month] += item.amount;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
   // チャート用データに変換
   const chartData = Object.entries(aggregatedData)
@@ -70,8 +78,12 @@ export function ExpenseChart({
   return (
     <Card className="shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-neutral-700">{title}</CardTitle>
-        <CardDescription className="text-neutral-600">{description}</CardDescription>
+        <CardTitle className="text-xl font-bold text-neutral-700">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-neutral-600">
+          {description}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[300px] w-full">
@@ -91,7 +103,10 @@ export function ExpenseChart({
                   <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-neutral-200" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                className="stroke-neutral-200"
+              />
               <XAxis
                 dataKey="month"
                 className="text-xs"
