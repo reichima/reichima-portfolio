@@ -1,9 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,20 +46,25 @@ export default function Header() {
         <div className="block lg:hidden">
           <button
             onClick={toggleMenu}
-            className="flex items-center rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20"
+            className="group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20"
           >
-            <svg
-              className={`h-5 w-5 fill-current transition-transform duration-300 ${isMenuOpen ? "rotate-45" : ""}`}
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Menu</title>
-              {isMenuOpen ? (
-                <path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z" />
-              ) : (
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              )}
-            </svg>
+            <div className="relative h-6 w-6">
+              <GiHamburgerMenu
+                className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                  isMenuOpen
+                    ? "scale-0 rotate-180 opacity-0"
+                    : "scale-100 rotate-0 opacity-100"
+                }`}
+              />
+              <X
+                className={`absolute inset-0 h-6 w-6 transition-all duration-300 ${
+                  isMenuOpen
+                    ? "scale-100 rotate-0 opacity-100"
+                    : "scale-0 -rotate-180 opacity-0"
+                }`}
+              />
+            </div>
+            <span className="sr-only">Toggle menu</span>
           </button>
         </div>
 
@@ -105,8 +112,10 @@ export default function Header() {
 
       {/* モバイル用メニュー */}
       <div
-        className={`fixed top-28 left-0 z-40 w-full border-b border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-300 lg:hidden ${
-          isMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+        className={`fixed top-28 left-0 z-40 w-full border-b border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-500 ease-in-out lg:hidden ${
+          isMenuOpen
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-4 opacity-0"
         }`}
       >
         <div className="flex flex-col space-y-2 p-6">
