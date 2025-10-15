@@ -34,28 +34,26 @@ export default function WorksSection({
 
       <div ref={worksContentRef} className="mt-12 grid gap-8 lg:grid-cols-3">
         <a
-          href="https://moraibosi.com/"
+          href="https://denzirou.jp/"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
               <Image
-                src="/images/portfolio/moraiboshi.webp"
-                alt="moraiboshi logo"
+                src="/images/portfolio/denzirou.png"
+                alt="denzirou logo"
                 width={128}
                 height={128}
                 className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
               />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">
-              moraiboshi Ltd.
+              株式会社藤原伝次郎商店様
             </h3>
-            <p className="mb-4 text-white/80">
-              有限会社もらいぼしSE部 Webサイト構築
-            </p>
+            <p className="mb-4 text-white/80">Webサイト構築</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
                 Next.js
@@ -73,7 +71,7 @@ export default function WorksSection({
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
               <Image
                 src="/images/portfolio/ogp.png"
                 alt="portfolio logo"
