@@ -29,7 +29,7 @@ export default function Header() {
         <div className="flex flex-shrink-0 items-center text-white">
           <Link href="/" className="text-xl font-semibold tracking-tight">
             <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-md"></div>
+              <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-md"></div>
               <Image
                 className="relative drop-shadow-[0_0_1rem_#a855f7] transition-all duration-300 hover:scale-110"
                 src="/m-logo.png"

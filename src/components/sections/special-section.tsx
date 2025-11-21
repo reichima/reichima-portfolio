@@ -24,10 +24,6 @@ export default function SpecialSection({
         ref={specialTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
         style={{
-          background: "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
         }}
       >
         Special
@@ -38,7 +34,7 @@ export default function SpecialSection({
         className="mt-12 flex flex-col items-center justify-center"
       >
         <div className="relative mb-8 opacity-0">
-          <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-lg"></div>
+          <div className="absolute inset-0 animate-pulse rounded-2xl bg-purple-500 opacity-75 blur-lg"></div>
           <Image
             src="/images/wait-image.png"
             alt="special content"
@@ -63,7 +59,7 @@ export default function SpecialSection({
 
           <div className="grid gap-6 md:grid-cols-2">
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
-              <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-3">
+              <div className="mb-4 h-12 w-12 rounded-lg bg-purple-500 p-3">
                 <div className="h-full w-full rounded bg-white"></div>
               </div>
               <h4 className="mb-3 text-xl font-bold text-white">個人開発</h4>
@@ -71,7 +67,7 @@ export default function SpecialSection({
             </div>
 
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
-              <div className="mb-4 h-12 w-12 rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 p-3">
+              <div className="mb-4 h-12 w-12 rounded-lg bg-pink-500 p-3">
                 <div className="h-full w-full rounded bg-white"></div>
               </div>
               <h4 className="mb-3 text-xl font-bold text-white">副業</h4>

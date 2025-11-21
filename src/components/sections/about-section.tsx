@@ -26,19 +26,13 @@ export default function AboutSection({
       <h2
         ref={aboutTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
-        style={{
-          background: "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}
       >
         About Me
       </h2>
 
       <div className="mt-12 flex flex-col items-center justify-center gap-12 lg:flex-row">
         <div className="relative">
-          <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-lg"></div>
+          <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-lg"></div>
           <Image
             ref={profileImageRef}
             src="/images/portfolio/reichima.png"

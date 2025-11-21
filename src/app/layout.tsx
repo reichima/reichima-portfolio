@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
 import { QueryProvider } from "@/components/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
 
@@ -50,10 +50,10 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+  }>) {
   return (
     <html lang="ja">
-      <body className={cn(inter.className, "min-h-screen antialiased")}>
+      <body className={cn(notoSansJP.className, "min-h-screen antialiased")}>
         <QueryProvider>{children}</QueryProvider>
         <Toaster richColors />
       </body>

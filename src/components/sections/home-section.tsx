@@ -70,7 +70,8 @@ export default function HomeSection({
       className="relative z-10 grid min-h-screen w-full snap-start place-items-center overflow-hidden"
     >
       {/* 背景のグリッドパターン */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      {/* 背景のグリッドパターン - 削除または単色に変更 */}
+      <div className="absolute inset-0 bg-[size:24px_24px] opacity-10"></div>
 
       <div className="relative z-10 text-center">
         {/* パネルアニメーション - レスポンシブ対応 */}
@@ -106,7 +107,7 @@ export default function HomeSection({
                   state === "CLEAR" || state === "FADEOUT"
                     ? "opacity-100"
                     : "opacity-0"
-                } bg-gradient-to-r from-emerald-400/30 to-green-400/30 blur-md`}
+                } bg-emerald-500/20 blur-md`}
               ></div>
 
               <div className="absolute inset-0 flex items-center justify-center">
@@ -155,7 +156,7 @@ export default function HomeSection({
           <div className="relative">
             {/* 雲のようなバックグラウンド効果 */}
             <div
-              className={`absolute inset-0 -m-4 rounded-[30px] bg-gradient-to-r from-white/5 via-white/10 to-white/5 blur-lg transition-all duration-3000 ease-out md:-m-6 md:rounded-[40px] md:blur-xl lg:-m-8 lg:rounded-[50px] ${
+              className={`absolute inset-0 -m-4 rounded-[30px] bg-white/5 blur-lg transition-all duration-3000 ease-out md:-m-6 md:rounded-[40px] md:blur-xl lg:-m-8 lg:rounded-[50px] ${
                 showPortfolioText
                   ? "scale-100 opacity-100"
                   : "scale-75 opacity-0"
@@ -171,14 +172,8 @@ export default function HomeSection({
                     : "translate-y-12 scale-95 opacity-0"
                 }`}
                 style={{
-                  background:
-                    "linear-gradient(45deg, #ffffff, #a855f7, #ec4899, #3b82f6, #10b981)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  backgroundSize: "400% 400%",
                   animation: showPortfolioText
-                    ? "gradientShift 4s ease-in-out infinite, cloudFloat 6s ease-in-out infinite"
+                    ? "cloudFloat 6s ease-in-out infinite"
                     : "none",
                   filter:
                     "drop-shadow(0 0 15px rgba(255,255,255,0.3)) md:drop-shadow(0 0 20px rgba(255,255,255,0.3))",
@@ -226,23 +221,14 @@ export default function HomeSection({
 
       {/* レスポンシブな装飾要素 */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-purple-400 to-pink-400 blur-sm md:h-3 md:w-3"></div>
-        <div className="absolute top-3/4 right-1/4 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 blur-sm delay-1000 md:h-4 md:w-4"></div>
-        <div className="absolute top-1/3 right-1/3 h-1 w-1 animate-pulse rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 blur-sm delay-2000 md:h-2 md:w-2"></div>
-        <div className="absolute bottom-1/4 left-1/3 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 blur-sm delay-500 md:h-3 md:w-3"></div>
+        <div className="absolute top-1/4 left-1/4 h-2 w-2 animate-pulse rounded-full bg-purple-400 blur-sm md:h-3 md:w-3"></div>
+        <div className="absolute top-3/4 right-1/4 h-2 w-2 animate-pulse rounded-full bg-blue-400 blur-sm delay-1000 md:h-4 md:w-4"></div>
+        <div className="absolute top-1/3 right-1/3 h-1 w-1 animate-pulse rounded-full bg-emerald-400 blur-sm delay-2000 md:h-2 md:w-2"></div>
+        <div className="absolute bottom-1/4 left-1/3 h-2 w-2 animate-pulse rounded-full bg-yellow-400 blur-sm delay-500 md:h-3 md:w-3"></div>
       </div>
 
       {/* CSS Keyframes */}
       <style jsx>{`
-        @keyframes gradientShift {
-          0%,
-          100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
 
         @keyframes cloudFloat {
           0%,

@@ -54,10 +54,6 @@ export default function ContactSection({
         ref={contactTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white"
         style={{
-          background: "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
         }}
       >
         Contact
@@ -192,7 +188,7 @@ export default function ContactSection({
                     className={`rounded-lg px-8 py-3 font-semibold text-white transition-all duration-300 focus:ring-2 focus:ring-purple-400/50 focus:outline-none ${
                       isPending
                         ? "cursor-not-allowed bg-gray-500 opacity-50"
-                        : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-lg hover:shadow-purple-500/25"
+                        : "bg-purple-600 hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-500/25"
                     }`}
                   >
                     {isPending ? "送信中..." : "送信する"}

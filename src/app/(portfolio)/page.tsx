@@ -304,7 +304,7 @@ export default function Page() {
   return (
     <main
       ref={mainRef}
-      className="w-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      className="w-screen bg-slate-900"
     >
       <HomeSection
         homeRef={homeRef as React.RefObject<HTMLElement>}

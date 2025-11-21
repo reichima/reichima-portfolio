@@ -6,7 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="relative w-full border-t border-white/5 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
+    <footer className="relative w-full border-t border-white/5 bg-slate-900 p-8">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 h-32 w-32 animate-pulse rounded-full bg-purple-500 mix-blend-multiply blur-xl filter"></div>
@@ -19,7 +19,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-75 blur-sm"></div>
+                <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-sm"></div>
                 <Image
                   src="/m-logo.png"
                   alt="Logo"
@@ -30,13 +30,6 @@ export default function Footer() {
               </div>
               <h3
                 className="text-xl font-bold text-white"
-                style={{
-                  background:
-                    "linear-gradient(45deg, #ffffff, #a855f7, #ec4899)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
               >
                 Reichima Portfolio
               </h3>
