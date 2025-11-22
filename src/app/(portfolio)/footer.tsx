@@ -21,7 +21,7 @@ export default function Footer() {
               <div className="relative">
                 <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-sm"></div>
                 <Image
-                  src="/m-logo.png"
+                  src="/logo.png"
                   alt="Logo"
                   width={48}
                   height={48}

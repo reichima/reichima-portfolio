@@ -36,7 +36,7 @@ export default function SpecialSection({
         <div className="relative mb-8 opacity-0">
           <div className="absolute inset-0 animate-pulse rounded-2xl bg-purple-500 opacity-75 blur-lg"></div>
           <Image
-            src="/images/wait-image.png"
+            src="/images/portfolio/wait-image.png"
             alt="special content"
             width={600}
             height={600}

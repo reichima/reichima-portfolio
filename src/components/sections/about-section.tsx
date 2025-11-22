@@ -35,7 +35,7 @@ export default function AboutSection({
           <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-lg"></div>
           <Image
             ref={profileImageRef}
-            src="/images/portfolio/reichima.png"
+            src="/images/portfolio/profile.png"
             alt="profile"
             width={280}
             height={280}
