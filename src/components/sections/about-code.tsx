@@ -20,17 +20,17 @@ export default function AboutCode() {
           <br />
           <span className="pl-4">
             <code className="text-sky-300">name: </code>
-            <code className="text-green-300">"Reichima"</code>,
+            <code className="text-green-300">&quot;Reichima&quot;</code>,
           </span>
           <br />
           <span className="pl-4">
             <code className="text-sky-300">role: </code>
-            <code className="text-green-300">"Web Engineer"</code>,
+            <code className="text-green-300">&quot;Web Engineer&quot;</code>,
           </span>
           <br />
           <span className="pl-4">
             <code className="text-sky-300">location: </code>
-            <code className="text-green-300">"Tochigi, Japan"</code>,
+            <code className="text-green-300">&quot;Tochigi, Japan&quot;</code>,
           </span>
           <br />
           <span className="pl-4">
@@ -41,17 +41,17 @@ export default function AboutCode() {
           <span className="pl-8">
             <code className="text-sky-300">backend: </code>
             <code className="text-white">[</code>
-            <code className="text-green-300">"PHP(Laravel)"</code>,{" "}
-            <code className="text-green-300">"Ruby"</code>,{" "}
-            <code className="text-green-300">"Go"</code>
+            <code className="text-green-300">&quot;PHP(Laravel)&quot;</code>,{" "}
+            <code className="text-green-300">&quot;Ruby&quot;</code>,{" "}
+            <code className="text-green-300">&quot;Go&quot;</code>
             <code className="text-white">]</code>,
           </span>
           <br />
           <span className="pl-8">
             <code className="text-sky-300">frontend: </code>
             <code className="text-white">[</code>
-            <code className="text-green-300">"Next.js"</code>,{" "}
-            <code className="text-green-300">"Hono"</code>
+            <code className="text-green-300">&quot;Next.js&quot;</code>,{" "}
+            <code className="text-green-300">&quot;Hono&quot;</code>
             <code className="text-white">]</code>,
           </span>
           <br />
@@ -61,20 +61,20 @@ export default function AboutCode() {
           <br />
           <span className="pl-4">
             <code className="text-sky-300">status: </code>
-            <code className="text-green-300">"副業募集中"</code>,
+            <code className="text-green-300">&quot;副業募集中&quot;</code>,
           </span>
           <br />
           <span className="pl-4">
             <code className="text-sky-300">contact: </code>
-            <code className="text-green-300">"お気軽にご相談ください"</code>,
+            <code className="text-green-300">&quot;お気軽にご相談ください&quot;</code>,
           </span>
           <br />
           <span className="pl-4">
-            <code className="text-gray-500">// TODO: イナズマイレブンのクリア</code>
+            <code className="text-gray-500">{"// TODO: イナズマイレブンのクリア"}</code>
           </span>
           <br />
           <span className="pl-4">
-            <code className="text-gray-500">// FIXME: 健康的な食事をする</code>
+            <code className="text-gray-500">{"// FIXME: 健康的な食事をする"}</code>
           </span>
           <br />
           <code className="text-purple-300">{`}`}</code>;
