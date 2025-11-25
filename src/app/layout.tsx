@@ -53,7 +53,7 @@ export default function RootLayout({
   }>) {
   return (
     <html lang="ja">
-      <body className={cn(notoSansJP.className, "min-h-screen antialiased")}>
+      <body className={cn(notoSansJP.className, "min-h-screen antialiased bg-slate-900")}>
         <QueryProvider>{children}</QueryProvider>
         <Toaster richColors />
       </body>
