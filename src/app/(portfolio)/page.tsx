@@ -302,10 +302,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main
-      ref={mainRef}
-      className="w-screen"
-    >
+    <main ref={mainRef} className="w-full">
       <HomeSection
         homeRef={homeRef as React.RefObject<HTMLElement>}
         homeTitleRef={homeTitleRef as React.RefObject<HTMLHeadingElement>}
