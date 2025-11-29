@@ -23,8 +23,7 @@ export default function SpecialSection({
       <h2
         ref={specialTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
-        style={{
-        }}
+        style={{}}
       >
         Special
       </h2>
@@ -51,10 +50,7 @@ export default function SpecialSection({
               Coming Soon
               <FaFireAlt className="ml-1 inline size-6 text-red-400" />
             </h3>
-            <p className="text-lg leading-relaxed text-white/90">
-              とりあえず空きスペースにComing
-              Soonって入れておけばいいと思ってる(?)
-            </p>
+            <p className="text-lg leading-relaxed text-white/90"></p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
