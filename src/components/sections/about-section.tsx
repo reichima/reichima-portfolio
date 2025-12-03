@@ -1,8 +1,8 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PcCase, Rocket } from "lucide-react";
 import Image from "next/image";
-import { RefObject } from "react";
+import { RefObject, useState } from "react";
 import { GiSkills, GiTalk } from "react-icons/gi";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AboutCode from "./about-code";
 
 interface AboutSectionProps {
@@ -18,6 +18,7 @@ export default function AboutSection({
   aboutTitleRef,
   aboutTextRef,
 }: AboutSectionProps) {
+  const [activeTab, setActiveTab] = useState("view");
   return (
     <section
       id="about"
@@ -32,15 +33,23 @@ export default function AboutSection({
         About Me
       </h2>
 
-      <Tabs defaultValue="view" className="mt-8 w-full">
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="mt-8 w-full"
+      >
         <div className="mb-8 flex justify-center">
           <TabsList className="grid w-[400px] grid-cols-2 bg-white/10 text-white">
-            <TabsTrigger value="view">View</TabsTrigger>
-            <TabsTrigger value="code">Code</TabsTrigger>
+            <TabsTrigger value="view" tabIndex={activeTab === "view" ? -1 : 0}>
+              View
+            </TabsTrigger>
+            <TabsTrigger value="code" tabIndex={activeTab === "code" ? -1 : 0}>
+              Code
+            </TabsTrigger>
           </TabsList>
         </div>
 
-        <TabsContent value="view">
+        <TabsContent value="view" tabIndex={-1}>
           <div className="mt-4 flex flex-col items-center justify-center gap-12 lg:flex-row">
             <div className="relative">
               <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-lg"></div>
@@ -88,7 +97,7 @@ export default function AboutSection({
           </div>
         </TabsContent>
 
-        <TabsContent value="code" className="flex justify-center">
+        <TabsContent value="code" className="flex justify-center" tabIndex={-1}>
           <AboutCode />
         </TabsContent>
       </Tabs>
