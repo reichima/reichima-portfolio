@@ -188,6 +188,19 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* タブ操作時のデフォルトアウトラインを削除 */
+  *:focus-visible {
+    outline: none;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px var(--portfolio-primary),
+      0 0 12px 3px var(--portfolio-primary);
+  }
 }
 
 /* コンポーネント固有のスタイル */

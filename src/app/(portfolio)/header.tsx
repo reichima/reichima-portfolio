@@ -27,7 +27,10 @@ export default function Header() {
         )}
       >
         <div className="flex flex-shrink-0 items-center text-white">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
+          <Link
+            href="/"
+            className="rounded-lg text-xl font-semibold tracking-tight"
+          >
             <div className="relative">
               <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-md"></div>
               <Image
