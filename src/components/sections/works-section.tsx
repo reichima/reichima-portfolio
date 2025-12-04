@@ -22,8 +22,6 @@ export default function WorksSection({
       <h2
         ref={worksTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
-        style={{
-        }}
       >
         Works
       </h2>
@@ -33,7 +31,7 @@ export default function WorksSection({
           href="https://denzirou.jp/"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+          className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
