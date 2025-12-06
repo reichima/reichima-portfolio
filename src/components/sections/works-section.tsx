@@ -42,6 +42,7 @@ export default function WorksSection({
                 width={128}
                 height={128}
                 className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
+                loading="lazy"
               />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">
@@ -72,6 +73,7 @@ export default function WorksSection({
                 width={128}
                 height={128}
                 className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
+                loading="lazy"
               />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">

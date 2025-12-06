@@ -40,6 +40,7 @@ export default function SpecialSection({
             width={600}
             height={600}
             className="relative rounded-2xl border-4 border-white/20 shadow-2xl"
+            loading="lazy"
           />
         </div>
 

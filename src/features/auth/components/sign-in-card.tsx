@@ -40,6 +40,7 @@ export const SignInCard = () => {
             alt="logo"
             width={240}
             height={240}
+            priority
           />
         </CardTitle>
       </CardHeader>

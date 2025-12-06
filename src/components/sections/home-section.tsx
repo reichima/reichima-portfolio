@@ -147,6 +147,7 @@ export default function HomeSection({
               width={100}
               height={100}
               className="rotate-45"
+              loading="lazy"
             />
           </div>
         )}
@@ -229,7 +230,6 @@ export default function HomeSection({
 
       {/* CSS Keyframes */}
       <style jsx>{`
-
         @keyframes cloudFloat {
           0%,
           100% {

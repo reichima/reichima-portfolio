@@ -7,7 +7,13 @@ export const AdminSidebar = () => {
   return (
     <aside className="h-full w-full bg-neutral-100 p-4">
       <Link href="/home">
-        <Image src="/images/wakemeup.png" alt="logo" width={240} height={240} />
+        <Image
+          src="/images/wakemeup.png"
+          alt="logo"
+          width={240}
+          height={240}
+          priority
+        />
       </Link>
       <DottedSeparator className="my-2" />
       <AdminNavigation />

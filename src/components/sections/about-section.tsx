@@ -60,6 +60,7 @@ export default function AboutSection({
                 width={280}
                 height={280}
                 className="relative rounded-full border-4 border-white/20 shadow-2xl"
+                loading="lazy"
               />
             </div>
 

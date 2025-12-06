@@ -26,11 +26,10 @@ export default function Footer() {
                   width={48}
                   height={48}
                   className="relative drop-shadow-[0_0_0.5rem_#a855f7]"
+                  loading="lazy"
                 />
               </div>
-              <h3
-                className="text-xl font-bold text-white"
-              >
+              <h3 className="text-xl font-bold text-white">
                 Reichima Portfolio
               </h3>
             </div>
