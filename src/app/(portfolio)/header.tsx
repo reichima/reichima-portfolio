@@ -22,7 +22,7 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed z-50 flex h-28 w-full flex-wrap items-center justify-between bg-white/5 p-6 backdrop-blur-md",
+          "fixed z-50 flex h-24 w-full flex-wrap items-center justify-between bg-white/5 p-4 backdrop-blur-md",
           isMenuOpen ? "border-none" : "border-b border-white/10 shadow-xl",
         )}
       >
@@ -37,8 +37,8 @@ export default function Header() {
                 className="relative drop-shadow-[0_0_1rem_#a855f7] transition-all duration-300 hover:scale-110"
                 src="/logo.png"
                 alt="start Logo"
-                width={64}
-                height={64}
+                width={56}
+                height={56}
                 priority
               />
             </div>
@@ -115,7 +115,7 @@ export default function Header() {
 
       {/* モバイル用メニュー */}
       <div
-        className={`fixed top-28 left-0 z-40 w-full border-b border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-500 ease-in-out lg:hidden ${
+        className={`fixed top-24 left-0 z-40 w-full border-b border-white/10 bg-white/5 shadow-xl backdrop-blur-md transition-all duration-500 ease-in-out lg:hidden ${
           isMenuOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-4 opacity-0"

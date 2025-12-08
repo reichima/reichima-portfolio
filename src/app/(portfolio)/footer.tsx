@@ -71,13 +71,21 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Connect</h4>
             <div className="flex space-x-4">
-              <Link href="https://github.com/reichima" target="_blank">
-                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+              <Link
+                href="https://github.com/reichima"
+                target="_blank"
+                className="rounded-lg"
+              >
+                <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
                   <FaGithub className="size-6" />
                 </div>
               </Link>
-              <Link href="https://x.com/reichimacom" target="_blank">
-                <div className="rounded-lg bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/20">
+              <Link
+                href="https://x.com/reichimacom"
+                target="_blank"
+                className="rounded-lg"
+              >
+                <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
                   <FaXTwitter className="size-6" />
                 </div>
               </Link>
