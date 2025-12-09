@@ -53,8 +53,6 @@ export default function ContactSection({
       <h2
         ref={contactTitleRef}
         className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white"
-        style={{
-        }}
       >
         Contact
       </h2>
@@ -106,7 +104,6 @@ export default function ContactSection({
                       }`}
                       placeholder="梅沢 うめお"
                       disabled={isPending}
-                      required
                     />
                     {state.errors?.name && (
                       <p className="mt-1 text-sm text-red-400">
@@ -128,7 +125,6 @@ export default function ContactSection({
                       }`}
                       placeholder="reichima@example.com"
                       disabled={isPending}
-                      required
                     />
                     {state.errors?.email && (
                       <p className="mt-1 text-sm text-red-400">
@@ -151,7 +147,6 @@ export default function ContactSection({
                     }`}
                     placeholder="お問い合わせの件名"
                     disabled={isPending}
-                    required
                   />
                   {state.errors?.subject && (
                     <p className="mt-1 text-sm text-red-400">
@@ -173,7 +168,6 @@ export default function ContactSection({
                     }`}
                     placeholder="2000文字以内でご記入ください"
                     disabled={isPending}
-                    required
                   />
                   {state.errors?.message && (
                     <p className="mt-1 text-sm text-red-400">
@@ -183,7 +177,8 @@ export default function ContactSection({
                 </div>
                 <div className="flex justify-end">
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={() => formRef.current?.requestSubmit()}
                     disabled={isPending}
                     className={`rounded-lg px-8 py-3 font-semibold text-white transition-all duration-300 focus:ring-2 focus:ring-purple-400/50 focus:outline-none ${
                       isPending
