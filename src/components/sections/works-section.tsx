@@ -1,17 +1,68 @@
+"use client";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { RefObject } from "react";
+import { useEffect, useRef } from "react";
 
-interface WorksSectionProps {
-  worksRef: RefObject<HTMLElement>;
-  worksTitleRef: RefObject<HTMLHeadingElement>;
-  worksContentRef: RefObject<HTMLDivElement>;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export default function WorksSection({
-  worksRef,
-  worksTitleRef,
-  worksContentRef,
-}: WorksSectionProps) {
+export default function WorksSection() {
+  const worksRef = useRef<HTMLElement>(null);
+  const worksTitleRef = useRef<HTMLHeadingElement>(null);
+  const worksContentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // GSAP ScrollTrigger animations
+    if (worksRef.current && worksTitleRef.current && worksContentRef.current) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: worksRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Title animation
+      tl.fromTo(
+        worksTitleRef.current,
+        {
+          opacity: 0,
+          y: -50,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power2.out",
+        },
+      );
+
+      // Works cards animation
+      const workCards = worksContentRef.current.children;
+      tl.fromTo(
+        workCards,
+        {
+          opacity: 0,
+          y: 100,
+          rotationX: 45,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 1,
+          stagger: 0.3,
+          ease: "power2.out",
+        },
+        "-=0.5",
+      );
+    }
+  }, []);
+
   return (
     <section
       id="works"

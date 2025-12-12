@@ -1,18 +1,18 @@
+"use client";
+
 import Scroll from "@/components/scroll";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { RefObject, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface HomeSectionProps {
-  homeRef: RefObject<HTMLElement>;
-  homeTitleRef: RefObject<HTMLHeadingElement>;
-  homeSubtitleRef: RefObject<HTMLParagraphElement>;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export default function HomeSection({
-  homeRef,
-  homeTitleRef,
-  homeSubtitleRef,
-}: HomeSectionProps) {
+export default function HomeSection() {
+  const homeRef = useRef<HTMLElement>(null);
+  const homeTitleRef = useRef<HTMLHeadingElement>(null);
+  const homeSubtitleRef = useRef<HTMLParagraphElement>(null);
+
   const [panelStates, setPanelStates] = useState<
     ("ABORT" | "CLEAR" | "FADEOUT")[]
   >(["ABORT", "ABORT", "ABORT"]);
@@ -21,6 +21,49 @@ export default function HomeSection({
   const [showPortfolioText, setShowPortfolioText] = useState(false);
 
   useEffect(() => {
+    // GSAP ScrollTrigger animations
+    if (homeRef.current && homeTitleRef.current && homeSubtitleRef.current) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: homeRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        homeTitleRef.current,
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.5,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: "power2.out",
+        },
+      );
+
+      tl.fromTo(
+        homeSubtitleRef.current,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.8",
+      );
+    }
+
     // パネル1: 1秒後にCLEARに変更
     const timer1 = setTimeout(() => {
       setPanelStates((prev) => ["CLEAR", prev[1], prev[2]]);

@@ -4,31 +4,82 @@ import {
   sendContactAction,
   type ContactActionState,
 } from "@/features/contact/actions/send-contact";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CheckCircleIcon, Smile } from "lucide-react";
-import { RefObject, useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
-interface ContactSectionProps {
-  contactRef: RefObject<HTMLElement>;
-  contactTitleRef: RefObject<HTMLHeadingElement>;
-  contactContentRef: RefObject<HTMLDivElement>;
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const initialState: ContactActionState = {
   success: false,
   message: "",
 };
 
-export default function ContactSection({
-  contactRef,
-  contactTitleRef,
-  contactContentRef,
-}: ContactSectionProps) {
+export default function ContactSection() {
+  const contactRef = useRef<HTMLElement>(null);
+  const contactTitleRef = useRef<HTMLHeadingElement>(null);
+  const contactContentRef = useRef<HTMLDivElement>(null);
+
   const [state, formAction, isPending] = useActionState(
     sendContactAction,
     initialState,
   );
   const formRef = useRef<HTMLFormElement>(null);
+
+  // GSAP ScrollTrigger animations
+  useEffect(() => {
+    if (
+      contactRef.current &&
+      contactTitleRef.current &&
+      contactContentRef.current
+    ) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: contactRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        contactTitleRef.current,
+        {
+          opacity: 0,
+          x: 100,
+          rotationY: 90,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          rotationY: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+      );
+
+      const contactElements = contactContentRef.current.children;
+      tl.fromTo(
+        contactElements,
+        {
+          opacity: 0,
+          y: 80,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          stagger: 0.3,
+          ease: "power2.out",
+        },
+        "-=0.5",
+      );
+    }
+  }, []);
 
   // 送信結果の処理
   useEffect(() => {

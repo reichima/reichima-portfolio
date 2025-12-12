@@ -1,18 +1,71 @@
+"use client";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { RefObject } from "react";
+import { useEffect, useRef } from "react";
 import { FaFireAlt } from "react-icons/fa";
 
-interface SpecialSectionProps {
-  specialRef: RefObject<HTMLElement>;
-  specialTitleRef: RefObject<HTMLHeadingElement>;
-  specialContentRef: RefObject<HTMLDivElement>;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export default function SpecialSection({
-  specialRef,
-  specialTitleRef,
-  specialContentRef,
-}: SpecialSectionProps) {
+export default function SpecialSection() {
+  const specialRef = useRef<HTMLElement>(null);
+  const specialTitleRef = useRef<HTMLHeadingElement>(null);
+  const specialContentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // GSAP ScrollTrigger animations
+    if (
+      specialRef.current &&
+      specialTitleRef.current &&
+      specialContentRef.current
+    ) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: specialRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        specialTitleRef.current,
+        {
+          opacity: 0,
+          scale: 0.5,
+          rotation: -45,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.2,
+          ease: "back.out(1.7)",
+        },
+      );
+
+      const specialElements = specialContentRef.current.children;
+      tl.fromTo(
+        specialElements,
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power2.out",
+        },
+        "-=0.8",
+      );
+    }
+  }, []);
+
   return (
     <section
       id="special"

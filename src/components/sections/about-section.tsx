@@ -1,24 +1,98 @@
+"use client";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PcCase, Rocket } from "lucide-react";
 import Image from "next/image";
-import { RefObject, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GiSkills, GiTalk } from "react-icons/gi";
 import AboutCode from "./about-code";
 
-interface AboutSectionProps {
-  aboutRef: RefObject<HTMLElement>;
-  profileImageRef: RefObject<HTMLImageElement>;
-  aboutTitleRef: RefObject<HTMLHeadingElement>;
-  aboutTextRef: RefObject<HTMLDivElement>;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export default function AboutSection({
-  aboutRef,
-  profileImageRef,
-  aboutTitleRef,
-  aboutTextRef,
-}: AboutSectionProps) {
+export default function AboutSection() {
+  const aboutRef = useRef<HTMLElement>(null);
+  const profileImageRef = useRef<HTMLImageElement>(null);
+  const aboutTitleRef = useRef<HTMLHeadingElement>(null);
+  const aboutTextRef = useRef<HTMLDivElement>(null);
+
   const [activeTab, setActiveTab] = useState("view");
+
+  useEffect(() => {
+    // GSAP ScrollTrigger animations
+    if (
+      aboutRef.current &&
+      profileImageRef.current &&
+      aboutTitleRef.current &&
+      aboutTextRef.current
+    ) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: aboutRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Title animation
+      tl.fromTo(
+        aboutTitleRef.current,
+        {
+          opacity: 0,
+          x: -100,
+          rotationY: -90,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          rotationY: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+      );
+
+      // Profile image animation
+      tl.fromTo(
+        profileImageRef.current,
+        {
+          opacity: 0,
+          scale: 0.5,
+          rotation: -180,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.2,
+          ease: "back.out(1.7)",
+        },
+        "-=0.5",
+      );
+
+      // Text content animation
+      const textElements = aboutTextRef.current.children;
+      tl.fromTo(
+        textElements,
+        {
+          opacity: 0,
+          y: 50,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out",
+        },
+        "-=0.8",
+      );
+    }
+  }, []);
+
   return (
     <section
       id="about"
