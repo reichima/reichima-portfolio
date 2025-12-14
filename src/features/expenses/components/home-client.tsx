@@ -3,6 +3,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetExpenses } from "@/features/expenses/api/use-get-expenses";
 import { endOfMonth, format, startOfMonth, subMonths } from "date-fns";
+import { Activity } from "react";
 import { ExpenseCategoryChart } from "./expense-category-chart";
 import { ExpenseChart } from "./expense-chart";
 
@@ -31,22 +32,6 @@ export function HomeClient() {
     from: format(startOfMonth(sixMonthsAgo), "yyyy-MM-dd"),
     to: format(endOfMonth(currentDate), "yyyy-MM-dd"),
   });
-
-  if (isLoading) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h1 className="mb-6 text-2xl font-bold text-neutral-700">
-            ダッシュボード
-          </h1>
-          <div className="grid gap-6 md:grid-cols-2">
-            <Skeleton className="h-[400px] w-full rounded-xl" />
-            <Skeleton className="h-[400px] w-full rounded-xl" />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   // エリアチャート用データ
   const chartData = (expenses || []).map((expense: Expense) => ({
@@ -89,46 +74,66 @@ export function HomeClient() {
   );
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-neutral-700">ダッシュボード</h1>
-
-      {/* サマリーカード */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
-          <p className="text-sm text-neutral-600">今月の支出合計</p>
-          <p className="mt-2 text-2xl font-bold text-neutral-800">
-            {new Intl.NumberFormat("ja-JP", {
-              style: "currency",
-              currency: "JPY",
-            }).format(totalAmount)}
-          </p>
+    <>
+      <Activity mode={isLoading ? "visible" : "hidden"}>
+        <div className="space-y-6">
+          <div>
+            <h1 className="mb-6 text-2xl font-bold text-neutral-700">
+              ダッシュボード
+            </h1>
+            <div className="grid gap-6 md:grid-cols-2">
+              <Skeleton className="h-[400px] w-full rounded-xl" />
+              <Skeleton className="h-[400px] w-full rounded-xl" />
+            </div>
+          </div>
         </div>
+      </Activity>
 
-        <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
-          <p className="text-sm text-neutral-600">今月の取引数</p>
-          <p className="mt-2 text-2xl font-bold text-neutral-800">
-            {currentMonthExpenses.length}件
-          </p>
-        </div>
+      <Activity mode={!isLoading ? "visible" : "hidden"}>
+        <div className="space-y-6">
+          <h1 className="text-2xl font-bold text-neutral-700">
+            ダッシュボード
+          </h1>
 
-        <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
-          <p className="text-sm text-neutral-600">平均支出額</p>
-          <p className="mt-2 text-2xl font-bold text-neutral-800">
-            {currentMonthExpenses.length > 0
-              ? new Intl.NumberFormat("ja-JP", {
+          {/* サマリーカード */}
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+              <p className="text-sm text-neutral-600">今月の支出合計</p>
+              <p className="mt-2 text-2xl font-bold text-neutral-800">
+                {new Intl.NumberFormat("ja-JP", {
                   style: "currency",
                   currency: "JPY",
-                }).format(totalAmount / currentMonthExpenses.length)
-              : "¥0"}
-          </p>
-        </div>
-      </div>
+                }).format(totalAmount)}
+              </p>
+            </div>
 
-      {/* チャート */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <ExpenseChart data={chartData} />
-        <ExpenseCategoryChart data={categoryData} />
-      </div>
-    </div>
+            <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+              <p className="text-sm text-neutral-600">今月の取引数</p>
+              <p className="mt-2 text-2xl font-bold text-neutral-800">
+                {currentMonthExpenses.length}件
+              </p>
+            </div>
+
+            <div className="rounded-xl bg-white p-6 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)]">
+              <p className="text-sm text-neutral-600">平均支出額</p>
+              <p className="mt-2 text-2xl font-bold text-neutral-800">
+                {currentMonthExpenses.length > 0
+                  ? new Intl.NumberFormat("ja-JP", {
+                      style: "currency",
+                      currency: "JPY",
+                    }).format(totalAmount / currentMonthExpenses.length)
+                  : "¥0"}
+              </p>
+            </div>
+          </div>
+
+          {/* チャート */}
+          <div className="grid gap-6 md:grid-cols-2">
+            <ExpenseChart data={chartData} />
+            <ExpenseCategoryChart data={categoryData} />
+          </div>
+        </div>
+      </Activity>
+    </>
   );
 }

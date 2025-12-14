@@ -3,7 +3,7 @@
 import { endOfMonth, format, startOfMonth } from "date-fns";
 import { ja } from "date-fns/locale";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import { useState } from "react";
+import { Activity, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -156,7 +156,10 @@ export function MoneyClient() {
             </SelectContent>
           </Select>
 
-          <Button onClick={() => setIsDialogOpen(true)} className="w-full sm:w-auto">
+          <Button
+            onClick={() => setIsDialogOpen(true)}
+            className="w-full sm:w-auto"
+          >
             <Plus className="mr-2 h-4 w-4" />
             <span className="hidden sm:inline">支出を追加</span>
             <span className="sm:hidden">追加</span>
@@ -164,21 +167,23 @@ export function MoneyClient() {
         </div>
       </div>
 
-      {isLoading ? (
+      <Activity mode={isLoading ? "visible" : "hidden"}>
         <div className="space-y-4">
           <Skeleton className="h-24 w-full" />
           <Skeleton className="h-[400px] w-full" />
         </div>
-      ) : (
+      </Activity>
+
+      <Activity mode={!isLoading ? "visible" : "hidden"}>
         <ExpenseList
           expenses={expenses || []}
           onEdit={handleEdit}
           onDelete={handleDelete}
         />
-      )}
+      </Activity>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[95vw] max-w-lg mx-4 sm:mx-auto">
+        <DialogContent className="mx-4 w-[95vw] max-w-lg sm:mx-auto">
           <DialogHeader>
             <DialogTitle className="text-lg sm:text-xl">
               {editingExpense ? "支出を編集" : "支出を追加"}
