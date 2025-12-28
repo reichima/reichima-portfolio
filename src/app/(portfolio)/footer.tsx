@@ -75,6 +75,7 @@ export default function Footer() {
                 href="https://github.com/reichima"
                 target="_blank"
                 className="rounded-lg"
+                aria-label="GitHubプロフィールを開く"
               >
                 <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
                   <FaGithub className="size-6" />
@@ -84,6 +85,7 @@ export default function Footer() {
                 href="https://x.com/reichimacom"
                 target="_blank"
                 className="rounded-lg"
+                aria-label="X(Twitter)プロフィールを開く"
               >
                 <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
                   <FaXTwitter className="size-6" />
