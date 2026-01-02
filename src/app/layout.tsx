@@ -5,6 +5,7 @@ import "./globals.css";
 import { QueryProvider } from "@/components/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -50,12 +51,18 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  }>) {
+}>) {
   return (
     <html lang="ja">
-      <body className={cn(notoSansJP.className, "min-h-screen antialiased bg-slate-900")}>
+      <body
+        className={cn(
+          notoSansJP.className,
+          "min-h-screen bg-slate-900 antialiased",
+        )}
+      >
         <QueryProvider>{children}</QueryProvider>
         <Toaster richColors />
+        <Analytics />
       </body>
     </html>
   );
