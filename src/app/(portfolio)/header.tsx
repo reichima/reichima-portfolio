@@ -75,35 +75,42 @@ export default function Header() {
         <div className="hidden w-full flex-grow lg:flex lg:w-auto lg:items-center">
           <div className="flex justify-around text-sm lg:flex-grow">
             <Link
-              href="#home"
+              href="/#home"
               className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
             >
               <span className="relative z-10">Home</span>
               <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
             </Link>
             <Link
-              href="#about"
+              href="/#about"
               className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
             >
               <span className="relative z-10">About</span>
               <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
             </Link>
             <Link
-              href="#works"
+              href="/#works"
               className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
             >
               <span className="relative z-10">Works</span>
               <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
             </Link>
             <Link
-              href="#contact"
+              href="/#blog"
+              className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
+            >
+              <span className="relative z-10">Blog</span>
+              <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
+            </Link>
+            <Link
+              href="/#contact"
               className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
             >
               <span className="relative z-10">Contact</span>
               <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
             </Link>
             <Link
-              href="#special"
+              href="/#special"
               className="font-orbitron group relative mt-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"
             >
               <span className="relative z-10">Special</span>
@@ -123,7 +130,7 @@ export default function Header() {
       >
         <div className="flex flex-col space-y-2 p-6">
           <Link
-            href="#home"
+            href="/#home"
             onClick={closeMenu}
             className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
           >
@@ -131,7 +138,7 @@ export default function Header() {
             <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
-            href="#about"
+            href="/#about"
             onClick={closeMenu}
             className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
           >
@@ -139,7 +146,7 @@ export default function Header() {
             <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
-            href="#works"
+            href="/#works"
             onClick={closeMenu}
             className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
           >
@@ -147,7 +154,15 @@ export default function Header() {
             <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
-            href="#contact"
+            href="/#blog"
+            onClick={closeMenu}
+            className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
+          >
+            <span className="relative z-10">Blog</span>
+            <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
+          </Link>
+          <Link
+            href="/#contact"
             onClick={closeMenu}
             className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
           >
@@ -155,7 +170,7 @@ export default function Header() {
             <div className="absolute inset-0 rounded-lg border border-white/20 bg-white/10 opacity-0 shadow-lg backdrop-blur-md transition-all duration-300 group-hover:opacity-100"></div>
           </Link>
           <Link
-            href="#special"
+            href="/#special"
             onClick={closeMenu}
             className="font-orbitron group relative block rounded-lg px-4 py-3 text-white/90 transition-all duration-300 hover:text-white"
           >
