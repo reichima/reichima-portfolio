@@ -35,7 +35,7 @@ export default function NotFound() {
 
             <div className="relative z-10 mb-12 space-y-6">
               <h1
-                className={`text-8xl font-bold tracking-wider text-white transition-all duration-3000 ease-out lg:text-9xl ${
+                className={`font-orbitron text-8xl font-bold tracking-wider text-white transition-all duration-3000 ease-out lg:text-9xl ${
                   showErrorText
                     ? "translate-y-0 scale-100 opacity-100"
                     : "translate-y-12 scale-95 opacity-0"
@@ -86,7 +86,7 @@ export default function NotFound() {
               href="/"
               className="group relative inline-flex items-center gap-3 rounded-2xl border-2 border-amber-400/30 bg-amber-500/20 px-8 py-4 text-lg font-medium text-amber-200 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-amber-300/50 hover:bg-amber-400/30 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
             >
-              <span className="relative z-10">🏠 Go Home!!</span>
+              <span className="relative z-10">トップへ戻る</span>
               <div className="absolute inset-0 rounded-2xl bg-amber-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
             </Link>
           </div>
@@ -103,7 +103,6 @@ export default function NotFound() {
 
       {/* CSS Keyframes */}
       <style jsx>{`
-
         @keyframes cloudFloat {
           0%,
           100% {

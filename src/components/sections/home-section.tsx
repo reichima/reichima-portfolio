@@ -210,7 +210,7 @@ export default function HomeSection() {
             <div className="relative z-10 mb-8 space-y-3 md:mb-10 md:space-y-4 lg:mb-12 lg:space-y-6">
               <h1
                 ref={homeTitleRef}
-                className={`text-3xl font-bold tracking-wider text-white transition-all duration-3000 ease-out md:text-5xl lg:text-7xl xl:text-8xl ${
+                className={`font-orbitron text-3xl font-bold tracking-wider text-white transition-all duration-3000 ease-out md:text-5xl lg:text-7xl xl:text-8xl ${
                   showPortfolioText
                     ? "translate-y-0 scale-100 opacity-100"
                     : "translate-y-12 scale-95 opacity-0"

@@ -1,4 +1,5 @@
 import BackToTop from "@/components/back-to-top";
+import BlogContent from "@/components/blog-content";
 import ProfileCard from "@/components/profile-card";
 import ShareButtons from "@/components/share-buttons";
 import {
@@ -138,10 +139,7 @@ export default async function BlogDetailPage({ params }: Props) {
               {blog.title}
             </h1>
 
-            <div
-              className="blog-content prose prose-p:text-white/90 prose-a:text-purple-300 prose-a:underline hover:prose-a:text-purple-200 prose-strong:text-white prose-em:text-white/90 prose-code:rounded prose-code:bg-white/20 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-purple-200 prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-800 prose-pre:border prose-pre:border-white/10 prose-ol:text-white/90 prose-ul:text-white/90 prose-li:text-white/90 prose-li:marker:text-purple-400 prose-blockquote:border-l-purple-500 prose-blockquote:bg-white/5 prose-blockquote:py-1 prose-blockquote:text-white/80 prose-hr:border-white/20 prose-img:rounded-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
+            <BlogContent content={blog.content} />
 
             {/* シェアボタン */}
             <div className="mt-12 border-t border-white/10 pt-8">

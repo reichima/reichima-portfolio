@@ -75,7 +75,7 @@ export default function SpecialSection() {
       <div className="h-16"></div>
       <h2
         ref={specialTitleRef}
-        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
+        className="font-orbitron relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
         style={{}}
       >
         Special

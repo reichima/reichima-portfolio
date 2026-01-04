@@ -102,7 +102,7 @@ export default function AboutSection() {
       <div className="h-16"></div>
       <h2
         ref={aboutTitleRef}
-        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
+        className="font-orbitron py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
       >
         About Me
       </h2>

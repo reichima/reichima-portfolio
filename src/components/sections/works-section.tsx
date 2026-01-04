@@ -72,7 +72,7 @@ export default function WorksSection() {
       <div className="h-16"></div>
       <h2
         ref={worksTitleRef}
-        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
+        className="font-orbitron relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
       >
         Works
       </h2>

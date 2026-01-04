@@ -103,7 +103,7 @@ export default function ContactSection() {
       <div className="h-16"></div>
       <h2
         ref={contactTitleRef}
-        className="relative py-6 pl-2 text-6xl font-bold tracking-wider text-white"
+        className="font-orbitron relative py-6 pl-2 text-6xl font-bold tracking-wider text-white"
       >
         Contact
       </h2>
