@@ -110,7 +110,7 @@ export default function HomeSection() {
     <section
       id="home"
       ref={homeRef}
-      className="relative z-10 grid min-h-screen w-full snap-start place-items-center overflow-hidden"
+      className="relative z-10 grid min-h-screen w-full snap-start place-items-center"
     >
       {/* 背景のグリッドパターン */}
       {/* 背景のグリッドパターン - 削除または単色に変更 */}
@@ -118,51 +118,136 @@ export default function HomeSection() {
 
       <div className="relative z-10 text-center">
         {/* パネルアニメーション - レスポンシブ対応 */}
-        <div className="mb-8 flex justify-center gap-2 md:mb-16 md:gap-6 lg:gap-10">
+        <div className="mb-8 flex flex-col items-center justify-center gap-4 md:mb-16 md:flex-row md:gap-6 lg:gap-10">
           {panelStates.map((state, index) => (
             <div
               key={index}
-              className={`relative h-16 w-24 rounded-lg border-2 shadow-lg backdrop-blur-sm transition-all duration-1000 md:h-24 md:w-36 md:rounded-xl md:border-3 md:shadow-xl lg:h-32 lg:w-48 lg:rounded-2xl lg:border-4 lg:shadow-2xl ${
-                state === "ABORT"
-                  ? "border-red-400 bg-red-500/20 shadow-red-500/30"
-                  : state === "CLEAR"
-                    ? "border-emerald-400 bg-emerald-500/20 shadow-emerald-500/30"
-                    : "border-emerald-400 bg-emerald-500/20 shadow-emerald-500/30"
-              } `}
-              style={{
-                transform:
-                  state === "CLEAR"
-                    ? "rotateY(360deg)"
-                    : state === "FADEOUT"
-                      ? "rotateY(360deg) scale(1.1) translateY(-100px)"
-                      : "rotateY(0deg) scale(1)",
-                opacity: state === "FADEOUT" ? 0 : 1,
-                transition:
-                  state === "FADEOUT"
-                    ? "transform 1.5s ease-in-out, opacity 1.5s ease-in-out"
-                    : "transform 1.2s ease-in-out, background-color 0.6s, border-color 0.6s, box-shadow 0.6s",
-                transformStyle: "preserve-3d",
-              }}
+              className={`relative duration-1000 ${
+                state === "FADEOUT" ? "pointer-events-none" : ""
+              }`}
+              style={
+                {
+                  width: "var(--panel-width)",
+                  height: "var(--panel-height)",
+                  "--panel-width": "160px",
+                  "--panel-height": "120px",
+                  transform:
+                    state === "FADEOUT"
+                      ? "scale(1.1) translateY(-100px)"
+                      : "scale(1)",
+                  opacity: state === "FADEOUT" ? 0 : 1,
+                  transition:
+                    state === "FADEOUT"
+                      ? "transform 1.5s ease-in-out, opacity 1.5s ease-in-out"
+                      : "transform 0.3s ease-out",
+                } as any
+              }
             >
-              {/* パネルの光る効果 */}
+              {/* Responsive Size Injection via inline styles or media queries in parent. 
+                  We used vars above but need detailed media queries to override variables is hard in inline style. 
+                  Let's just use Tailwind classes for width/height. 
+              */}
               <div
-                className={`absolute inset-0 rounded-lg transition-opacity duration-700 md:rounded-xl lg:rounded-2xl ${
-                  state === "CLEAR" || state === "FADEOUT"
-                    ? "opacity-100"
-                    : "opacity-0"
-                } bg-emerald-500/20 blur-md`}
-              ></div>
+                className={`led-panel-frame flex h-full w-full flex-col justify-between p-2 transition-all duration-500 md:p-3 ${
+                  state === "ABORT"
+                    ? "border-red-900 shadow-red-900/20"
+                    : "border-emerald-900 shadow-emerald-900/20 shadow-emerald-500/30"
+                }`}
+                style={{
+                  boxShadow:
+                    state === "CLEAR"
+                      ? "0 0 20px rgba(16, 185, 129, 0.4), inset 0 0 10px rgba(16, 185, 129, 0.1)"
+                      : state === "ABORT"
+                        ? "0 0 10px rgba(239, 68, 68, 0.3)"
+                        : "none",
+                }}
+              >
+                {/* Screws */}
+                <div className="absolute top-1 left-1 md:top-2 md:left-2">
+                  <div className="screw-head"></div>
+                </div>
+                <div className="absolute top-1 right-1 md:top-2 md:right-2">
+                  <div className="screw-head"></div>
+                </div>
+                <div className="absolute bottom-1 left-1 md:bottom-2 md:left-2">
+                  <div className="screw-head"></div>
+                </div>
+                <div className="absolute right-1 bottom-1 md:right-2 md:bottom-2">
+                  <div className="screw-head"></div>
+                </div>
 
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span
-                  className={`font-mono text-xs font-bold tracking-wider transition-all duration-700 md:text-lg lg:text-2xl ${
-                    state === "ABORT"
-                      ? "text-red-200 drop-shadow-[0_0_8px_rgba(248,113,113,0.9)] md:drop-shadow-[0_0_10px_rgba(248,113,113,0.9)] lg:drop-shadow-[0_0_12px_rgba(248,113,113,0.9)]"
-                      : "text-emerald-200 drop-shadow-[0_0_8px_rgba(52,211,153,0.9)] md:drop-shadow-[0_0_10px_rgba(52,211,153,0.9)] lg:drop-shadow-[0_0_12px_rgba(52,211,153,0.9)]"
-                  } `}
+                {/* Warning Lights */}
+                <div
+                  className={`absolute -top-3 left-[20%] h-2 w-4 rounded-t-full border border-b-0 border-black ${state === "ABORT" ? "warning-light-red bg-red-600" : "bg-red-900"}`}
+                ></div>
+                <div
+                  className={`absolute -top-3 right-[20%] h-2 w-4 rounded-t-full border border-b-0 border-black ${state === "ABORT" ? "warning-light-red bg-red-600" : "bg-red-900"}`}
+                ></div>
+
+                {/* Main Screen Area */}
+                <div
+                  className={`led-screen-bg relative flex flex-1 flex-col items-center justify-center overflow-hidden rounded-sm border-2 border-black/50 p-1 transition-all duration-500 ${
+                    state === "ABORT" ? "bg-red-950/30" : "bg-emerald-950/30"
+                  }`}
                 >
-                  {state === "FADEOUT" ? "CLEAR" : state}
-                </span>
+                  <div className="led-scanlines opacity-50"></div>
+
+                  {/* Content Overlay */}
+                  <div className="relative z-20 flex w-full flex-col items-center justify-between gap-1 text-center">
+                    {/* Main Text */}
+                    <h2
+                      className={`led-pixel-font text-3xl font-bold tracking-tighter md:text-5xl ${
+                        state === "ABORT"
+                          ? "led-glow-text-red"
+                          : "led-glow-text-green"
+                      }`}
+                    >
+                      {state === "ABORT" ? "ABORT" : "CLEAR"}
+                    </h2>
+
+                    {/* Sub Text / Status Box */}
+                    <div className="flex w-full items-center justify-center gap-2">
+                      {state === "ABORT" ? (
+                        <>
+                          <div className="flex h-6 w-6 items-center justify-center border border-red-500/50 bg-red-500/10 md:h-8 md:w-8">
+                            <span className="text-lg font-bold text-red-500 md:text-2xl">
+                              ×
+                            </span>
+                          </div>
+                          <div className="flex flex-col items-start">
+                            <span className="led-pixel-font text-[8px] leading-none text-red-400 md:text-[10px]">
+                              CRITICAL
+                            </span>
+                            <span className="led-pixel-font text-[8px] leading-none text-red-700 md:text-[10px]">
+                              FAILURE
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex h-6 w-6 items-center justify-center border border-emerald-500/50 bg-emerald-500/10 md:h-8 md:w-8">
+                            <span className="text-lg font-bold text-emerald-500 md:text-2xl">
+                              ✓
+                            </span>
+                          </div>
+                          <div className="flex flex-col items-start">
+                            <span className="led-pixel-font text-[8px] leading-none text-emerald-400 md:text-[10px]">
+                              SYSTEM
+                            </span>
+                            <span className="led-pixel-font text-[8px] leading-none text-emerald-700 md:text-[10px]">
+                              OPTIMAL
+                            </span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Footer Strip */}
+                    <div
+                      className={`mt-1 h-1 w-full ${state === "ABORT" ? "hazard-striped-red" : "bg-emerald-900/50"}`}
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

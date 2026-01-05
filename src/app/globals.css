@@ -361,4 +361,140 @@
   .blog-content figcaption {
     @apply text-left text-sm text-white/60;
   }
+
+  /* LED Panel Realistic Styles */
+  .led-pixel-font {
+    font-family: var(--font-vt323), monospace;
+  }
+
+  .font-tech {
+    font-family: var(--font-black-ops-one), cursive;
+    letter-spacing: 0.05em;
+  }
+
+  .led-panel-frame {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    box-shadow:
+      0 0 0 1px #000,
+      0 4px 6px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  /* Screws */
+  .screw-head {
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #555, #222);
+    border-radius: 50%;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+  }
+  .screw-head::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 1px;
+    background: #111;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  /* Screen Grid */
+  .led-screen-bg {
+    background-color: #0a0a0a;
+    background-image: radial-gradient(
+      circle,
+      rgba(40, 40, 40, 0.4) 1px,
+      transparent 1px
+    );
+    background-size: 3px 3px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  }
+
+  .led-scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .led-glow-text-red {
+    color: #ff3333;
+    text-shadow:
+      0 0 2px #ff0000,
+      0 0 8px #ff0000,
+      0 0 16px rgba(255, 0, 0, 0.6);
+  }
+
+  .led-glow-text-green {
+    color: #33ff33;
+    text-shadow:
+      0 0 2px #00ff00,
+      0 0 8px #00ff00,
+      0 0 16px rgba(0, 255, 0, 0.6);
+  }
+
+  .hazard-striped {
+    background: repeating-linear-gradient(
+      45deg,
+      #333,
+      #333 10px,
+      #111 10px,
+      #111 20px
+    );
+  }
+
+  .hazard-striped-red {
+    background: repeating-linear-gradient(
+      45deg,
+      #800,
+      #800 10px,
+      #500 10px,
+      #500 20px
+    );
+  }
+
+  /* Animation for blinking lights */
+  @keyframes blink-red {
+    0%,
+    100% {
+      background-color: #500;
+      box-shadow: 0 0 0 #500;
+    }
+    50% {
+      background-color: #f00;
+      box-shadow: 0 0 10px #f00;
+    }
+  }
+
+  @keyframes blink-green {
+    0%,
+    100% {
+      background-color: #050;
+      box-shadow: 0 0 0 #050;
+    }
+    50% {
+      background-color: #0f0;
+      box-shadow: 0 0 10px #0f0;
+    }
+  }
+
+  .warning-light-red {
+    animation: blink-red 1s infinite;
+  }
+  .warning-light-green {
+    animation: blink-green 2s infinite;
+  }
 }
