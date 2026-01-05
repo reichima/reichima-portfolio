@@ -140,7 +140,7 @@ export default function HomeSection() {
                     state === "FADEOUT"
                       ? "transform 1.5s ease-in-out, opacity 1.5s ease-in-out"
                       : "transform 0.3s ease-out",
-                } as any
+                } as React.CSSProperties
               }
             >
               {/* Responsive Size Injection via inline styles or media queries in parent. 
