@@ -151,7 +151,7 @@ export default function HomeSection() {
                 className={`led-panel-frame flex h-full w-full flex-col justify-between p-2 transition-all duration-500 md:p-3 ${
                   state === "ABORT"
                     ? "border-red-900 shadow-red-900/20"
-                    : "border-emerald-900 shadow-emerald-900/20 shadow-emerald-500/30"
+                    : "border-emerald-900 shadow-emerald-500/30 shadow-emerald-900/20"
                 }`}
                 style={{
                   boxShadow:
@@ -256,9 +256,7 @@ export default function HomeSection() {
         {/* ロケットアニメーション - レスポンシブ対応 */}
         {showRocket && (
           <div
-            className={`text-4xl transition-all duration-4000 ease-out md:text-6xl lg:text-9xl ${
-              rocketLaunched ? "absolute mb-0" : "mb-8 md:mb-12 lg:mb-16"
-            }`}
+            className="pointer-events-none absolute inset-0 flex items-center justify-center text-4xl transition-all duration-4000 ease-out md:text-6xl lg:text-9xl"
             style={{
               transform: rocketLaunched
                 ? "translateX(150vw) scale(1.25) rotate(12deg)"
