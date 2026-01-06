@@ -110,7 +110,7 @@ export default function HomeSection() {
     <section
       id="home"
       ref={homeRef}
-      className="relative z-10 grid min-h-screen w-full snap-start place-items-center"
+      className="relative z-10 grid min-h-screen w-full snap-start place-items-center overflow-hidden"
     >
       {/* 背景のグリッドパターン */}
       {/* 背景のグリッドパターン - 削除または単色に変更 */}
