@@ -32,9 +32,9 @@ export default function Header() {
             className="rounded-lg text-xl font-semibold tracking-tight"
           >
             <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-md"></div>
+              <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-75 blur-md"></div>
               <Image
-                className="relative drop-shadow-[0_0_1rem_#a855f7] transition-all duration-300 hover:scale-110"
+                className="relative drop-shadow-[0_0_1rem_var(--portfolio-primary)] transition-all duration-300 hover:scale-110"
                 src="/logo.png"
                 alt="start Logo"
                 width={56}

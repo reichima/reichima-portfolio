@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="relative w-full border-t border-white/5 bg-slate-900 p-8">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-1/4 h-32 w-32 animate-pulse rounded-full bg-purple-500 mix-blend-multiply blur-xl filter"></div>
+        <div className="absolute top-0 left-1/4 h-32 w-32 animate-pulse rounded-full bg-portfolio-primary mix-blend-multiply blur-xl filter"></div>
         <div className="absolute right-1/4 bottom-0 h-32 w-32 animate-pulse rounded-full bg-pink-500 mix-blend-multiply blur-xl filter delay-700"></div>
       </div>
 
@@ -19,13 +19,13 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-sm"></div>
+                <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-75 blur-sm"></div>
                 <Image
                   src="/logo.png"
                   alt="Logo"
                   width={48}
                   height={48}
-                  className="relative drop-shadow-[0_0_0.5rem_#a855f7]"
+                  className="relative drop-shadow-[0_0_0.5rem_var(--portfolio-primary)]"
                   loading="lazy"
                 />
               </div>
@@ -42,25 +42,25 @@ export default function Footer() {
             <nav className="flex flex-col space-y-2">
               <Link
                 href="#home"
-                className="text-white/70 transition-colors hover:text-purple-400"
+                className="text-white/70 transition-colors hover:text-portfolio-primary"
               >
                 Home
               </Link>
               <Link
                 href="#about"
-                className="text-white/70 transition-colors hover:text-purple-400"
+                className="text-white/70 transition-colors hover:text-portfolio-primary"
               >
                 About
               </Link>
               <Link
                 href="#works"
-                className="text-white/70 transition-colors hover:text-purple-400"
+                className="text-white/70 transition-colors hover:text-portfolio-primary"
               >
                 Works
               </Link>
               <Link
                 href="#contact"
-                className="text-white/70 transition-colors hover:text-purple-400"
+                className="text-white/70 transition-colors hover:text-portfolio-primary"
               >
                 Contact
               </Link>
@@ -95,7 +95,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm text-white/70">
               <Link
                 href="mailto:rei1gggg@gmail.com"
-                className="flex items-center gap-2 space-x-2 text-white/70 transition-colors hover:text-purple-400"
+                className="flex items-center gap-2 space-x-2 text-white/70 transition-colors hover:text-portfolio-primary"
               >
                 <CiMail className="size-6" />
                 rei1gggg@gmail.com
@@ -113,13 +113,13 @@ export default function Footer() {
             <div className="flex space-x-6 text-sm">
               {/* <Link
                 href="#"
-                className="text-white/60 transition-colors hover:text-purple-400"
+                className="text-white/60 transition-colors hover:text-portfolio-primary"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="#"
-                className="text-white/60 transition-colors hover:text-purple-400"
+                className="text-white/60 transition-colors hover:text-portfolio-primary"
               >
                 Terms of Service
               </Link> */}

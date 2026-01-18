@@ -126,7 +126,7 @@ export default function AboutSection() {
         <TabsContent value="view" tabIndex={-1}>
           <div className="mt-4 flex flex-col items-center justify-center gap-12 lg:flex-row">
             <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-75 blur-lg"></div>
+              <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-75 blur-lg"></div>
               <Image
                 ref={profileImageRef}
                 src="/images/portfolio/profile.png"
@@ -141,7 +141,7 @@ export default function AboutSection() {
             <div ref={aboutTextRef} className="max-w-lg space-y-6">
               <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
-                  <Rocket className="mr-1 inline h-6 w-6 text-purple-400" />
+                  <Rocket className="mr-1 inline h-6 w-6 text-portfolio-primary" />
                   栃木でWebエンジニアをしているReichimaです
                 </p>
               </div>

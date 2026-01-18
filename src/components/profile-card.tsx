@@ -8,7 +8,7 @@ export default function ProfileCard() {
     <div className="mt-8 overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
       <div className="flex flex-col items-center gap-6 sm:flex-row">
         <div className="relative shrink-0">
-          <div className="absolute inset-0 animate-pulse rounded-full bg-purple-500 opacity-50 blur-md"></div>
+          <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-50 blur-md"></div>
           <Image
             src="/images/portfolio/profile.png"
             alt="Reichima"

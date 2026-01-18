@@ -86,7 +86,7 @@ export default function SpecialSection() {
         className="mt-12 flex flex-col items-center justify-center"
       >
         <div className="relative mb-8 opacity-0">
-          <div className="absolute inset-0 animate-pulse rounded-2xl bg-purple-500 opacity-75 blur-lg"></div>
+          <div className="absolute inset-0 animate-pulse rounded-2xl bg-portfolio-primary opacity-75 blur-lg"></div>
           <Image
             src="/images/portfolio/wait-image.png"
             alt="special content"
@@ -109,7 +109,7 @@ export default function SpecialSection() {
 
           <div className="grid gap-6 md:grid-cols-2">
             <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
-              <div className="mb-4 h-12 w-12 rounded-lg bg-purple-500 p-3">
+              <div className="mb-4 h-12 w-12 rounded-lg bg-portfolio-primary p-3">
                 <div className="h-full w-full rounded bg-white"></div>
               </div>
               <h4 className="mb-3 text-xl font-bold text-white">個人開発</h4>

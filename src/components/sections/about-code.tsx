@@ -16,7 +16,7 @@ export default function AboutCode() {
           <code className="text-blue-300">const </code>
           <code className="text-yellow-300">profile </code>
           <code className="text-white">= </code>
-          <code className="text-purple-300">{`{`}</code>
+          <code className="text-portfolio-primary-light">{`{`}</code>
           <br />
           <span className="pl-4">
             <code className="text-sky-300">name: </code>
@@ -35,7 +35,7 @@ export default function AboutCode() {
           <br />
           <span className="pl-4">
             <code className="text-sky-300">skills: </code>
-            <code className="text-purple-300">{`{`}</code>
+            <code className="text-portfolio-primary-light">{`{`}</code>
           </span>
           <br />
           <span className="pl-8">
@@ -57,7 +57,7 @@ export default function AboutCode() {
           </span>
           <br />
           <span className="pl-4">
-            <code className="text-purple-300">{`}`}</code>,
+            <code className="text-portfolio-primary-light">{`}`}</code>,
           </span>
           <br />
           <span className="pl-4">
@@ -85,7 +85,7 @@ export default function AboutCode() {
             </code>
           </span>
           <br />
-          <code className="text-purple-300">{`}`}</code>;
+          <code className="text-portfolio-primary-light">{`}`}</code>;
         </pre>
       </ScrollArea>
     </div>

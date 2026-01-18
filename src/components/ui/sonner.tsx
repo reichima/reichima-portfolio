@@ -19,7 +19,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             "group toast group-[.toaster]:bg-white/10 group-[.toaster]:text-white group-[.toaster]:border-white/20 group-[.toaster]:shadow-xl group-[.toaster]:backdrop-blur-md group-[.toaster]:rounded-xl",
           description: "group-[.toast]:text-white/80",
           actionButton:
-            "group-[.toast]:bg-gradient-to-r group-[.toast]:from-purple-500 group-[.toast]:to-pink-500 group-[.toast]:text-white group-[.toast]:border-0 group-[.toast]:rounded-lg",
+            "group-[.toast]:bg-gradient-to-r from-portfolio-primary group-[.toast]:to-pink-500 group-[.toast]:text-white group-[.toast]:border-0 group-[.toast]:rounded-lg",
           cancelButton:
             "group-[.toast]:bg-white/20 group-[.toast]:text-white/90 group-[.toast]:border-white/20 group-[.toast]:rounded-lg group-[.toast]:backdrop-blur-md",
           success:

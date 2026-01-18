@@ -86,7 +86,7 @@ export default function WorksSection() {
         >
           <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-purple-500 p-3">
+            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-portfolio-primary p-3">
               <Image
                 src="/images/portfolio/denzirou.png"
                 alt="denzirou logo"
@@ -101,13 +101,13 @@ export default function WorksSection() {
             </h3>
             <p className="mb-4 text-white/80">Webサイト構築</p>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
+              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
                 Next.js
               </span>
-              <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
+              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
                 Laravel
               </span>
-              <span className="rounded-full bg-purple-500/20 px-3 py-1 text-xs text-purple-300">
+              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
                 TypeScript
               </span>
             </div>
@@ -117,7 +117,7 @@ export default function WorksSection() {
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
           <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-purple-500 p-3">
+            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-portfolio-primary p-3">
               <Image
                 src="/images/portfolio/ogp.png"
                 alt="portfolio logo"
