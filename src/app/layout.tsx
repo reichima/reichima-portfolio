@@ -16,15 +16,26 @@ export const metadata: Metadata = {
   title: "Reichima Portfolio",
   description: "栃木のとあるWebエンジニアのポートフォリオ",
   openGraph: {
+    type: "website",
+    url: "https://reichima.com",
     title: "Reichima Portfolio",
     description: "栃木のとあるWebエンジニアのポートフォリオ",
+    siteName: "Reichima Portfolio",
+    locale: "ja_JP",
     images: [
       {
         url: "/images/portfolio/ogp.png",
         width: 1024,
         height: 630,
+        alt: "Reichima Portfolio",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reichima Portfolio",
+    description: "栃木のとあるWebエンジニアのポートフォリオ",
+    images: ["/images/portfolio/ogp.png"],
   },
   manifest: "/site.webmanifest",
   icons: {

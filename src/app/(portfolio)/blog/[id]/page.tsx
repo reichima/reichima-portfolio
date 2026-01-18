@@ -32,12 +32,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   try {
     const blog = await getBlogDetail(id);
+    const description = blog.content.replace(/<[^>]*>/g, "").slice(0, 160);
+    const url = `https://reichima.com/blog/${id}`;
+
     return {
       title: `${blog.title} | Blog`,
-      description: blog.content.replace(/<[^>]*>/g, "").slice(0, 160),
+      description,
       openGraph: {
+        type: "article",
+        url,
         title: blog.title,
-        description: blog.content.replace(/<[^>]*>/g, "").slice(0, 160),
+        description,
+        siteName: "Reichima Portfolio",
+        images: blog.eyecatch
+          ? [
+              {
+                url: blog.eyecatch.url,
+                width: blog.eyecatch.width,
+                height: blog.eyecatch.height,
+                alt: blog.title,
+              },
+            ]
+          : [],
+        publishedTime: blog.publishedAt,
+        modifiedTime: blog.updatedAt,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: blog.title,
+        description,
         images: blog.eyecatch ? [blog.eyecatch.url] : [],
       },
     };
