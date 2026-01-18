@@ -40,7 +40,7 @@
     "drizzle-orm": "^0.41.0",
     "gsap": "^3.13.0",
     "highlight.js": "^11.11.1",
-    "hono": "^4.10.7",
+    "hono": "^4.11.4",
     "lucide-react": "^0.473.0",
     "microcms-js-sdk": "^3.2.0",
     "next": "15.5.9",
@@ -63,7 +63,7 @@
     "@types/node": "^20.19.25",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "drizzle-kit": "^0.30.6",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.1",
     "eslint-config-next": "15.1.6",
     "husky": "^9.1.7",
@@ -81,5 +81,10 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": ">=0.25.0"
+    }
   }
 }
