@@ -7,6 +7,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CheckCircleIcon, Smile } from "lucide-react";
+import { motion } from "motion/react";
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
@@ -123,7 +124,7 @@ export default function ContactSection() {
               </div>
               <div className="mt-8 space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="h-3 w-3 rounded-full bg-portfolio-primary"></div>
+                  <div className="bg-portfolio-primary h-3 w-3 rounded-full"></div>
                   <span className="text-white/80">通常24時間以内に返信</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -151,7 +152,7 @@ export default function ContactSection() {
                       className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                         state.errors?.name
                           ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
-                          : "border-white/20 bg-white/10 focus:border-portfolio-primary focus:ring-portfolio-primary/20"
+                          : "focus:border-portfolio-primary focus:ring-portfolio-primary/20 border-white/20 bg-white/10"
                       }`}
                       placeholder="梅沢 うめお"
                       disabled={isPending}
@@ -172,7 +173,7 @@ export default function ContactSection() {
                       className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                         state.errors?.email
                           ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
-                          : "border-white/20 bg-white/10 focus:border-portfolio-primary focus:ring-portfolio-primary/20"
+                          : "focus:border-portfolio-primary focus:ring-portfolio-primary/20 border-white/20 bg-white/10"
                       }`}
                       placeholder="reichima@example.com"
                       disabled={isPending}
@@ -194,7 +195,7 @@ export default function ContactSection() {
                     className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                       state.errors?.subject
                         ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
-                        : "border-white/20 bg-white/10 focus:border-portfolio-primary focus:ring-portfolio-primary/20"
+                        : "focus:border-portfolio-primary focus:ring-portfolio-primary/20 border-white/20 bg-white/10"
                     }`}
                     placeholder="お問い合わせの件名"
                     disabled={isPending}
@@ -215,7 +216,7 @@ export default function ContactSection() {
                     className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                       state.errors?.message
                         ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
-                        : "border-white/20 bg-white/10 focus:border-portfolio-primary focus:ring-portfolio-primary/20"
+                        : "focus:border-portfolio-primary focus:ring-portfolio-primary/20 border-white/20 bg-white/10"
                     }`}
                     placeholder="2000文字以内でご記入ください"
                     disabled={isPending}
@@ -227,18 +228,22 @@ export default function ContactSection() {
                   )}
                 </div>
                 <div className="flex justify-end">
-                  <button
+                  <motion.button
                     type="button"
                     onClick={() => formRef.current?.requestSubmit()}
                     disabled={isPending}
-                    className={`rounded-lg px-8 py-3 font-semibold text-white transition-all duration-300 focus:ring-2 focus:ring-portfolio-primary/50 focus:outline-none ${
+                    className={`focus:ring-portfolio-primary/50 rounded-lg px-8 py-3 font-semibold text-white transition-all duration-300 focus:ring-2 focus:outline-none ${
                       isPending
                         ? "cursor-not-allowed bg-gray-500 opacity-50"
-                        : "bg-portfolio-primary hover:bg-portfolio-primary-dark hover:shadow-lg hover:shadow-portfolio-primary/25"
+                        : "bg-portfolio-primary hover:bg-portfolio-primary-dark hover:shadow-portfolio-primary/25 hover:shadow-lg"
                     }`}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{
+                      duration: 0.1,
+                    }}
                   >
                     {isPending ? "送信中..." : "送信する"}
-                  </button>
+                  </motion.button>
                 </div>
               </form>
             </div>
