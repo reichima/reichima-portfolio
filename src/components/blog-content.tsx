@@ -4,6 +4,12 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import { useEffect, useRef } from "react";
 
+declare global {
+  interface Window {
+    iframely?: { load: () => void };
+  }
+}
+
 type BlogContentProps = {
   content: string;
 };
@@ -17,6 +23,15 @@ export default function BlogContent({ content }: BlogContentProps) {
       codeBlocks.forEach((block) => {
         hljs.highlightElement(block as HTMLElement);
       });
+    }
+
+    // iframelyの処理
+    if (window.iframely) {
+      window.iframely.load();
+    } else {
+      const script = document.createElement("script");
+      script.src = "//cdn.iframe.ly/embed.js";
+      document.body.appendChild(script);
     }
   }, [content]);
 
