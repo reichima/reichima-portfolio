@@ -151,7 +151,7 @@ export default function HomeSection() {
                 className={`led-panel-frame flex h-full w-full flex-col justify-between p-2 transition-all duration-500 md:p-3 ${
                   state === "ABORT"
                     ? "border-red-900 shadow-red-900/20"
-                    : "border-emerald-900 shadow-emerald-500/30 shadow-emerald-900/20"
+                    : "border-emerald-900 shadow-emerald-900/20"
                 }`}
                 style={{
                   boxShadow:
@@ -344,14 +344,6 @@ export default function HomeSection() {
         >
           <Scroll />
         </div>
-      </div>
-
-      {/* レスポンシブな装飾要素 */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 h-2 w-2 animate-pulse rounded-full bg-portfolio-primary blur-sm md:h-3 md:w-3"></div>
-        <div className="absolute top-3/4 right-1/4 h-2 w-2 animate-pulse rounded-full bg-blue-400 blur-sm delay-1000 md:h-4 md:w-4"></div>
-        <div className="absolute top-1/3 right-1/3 h-1 w-1 animate-pulse rounded-full bg-emerald-400 blur-sm delay-2000 md:h-2 md:w-2"></div>
-        <div className="absolute bottom-1/4 left-1/3 h-2 w-2 animate-pulse rounded-full bg-yellow-400 blur-sm delay-500 md:h-3 md:w-3"></div>
       </div>
 
       {/* CSS Keyframes */}
