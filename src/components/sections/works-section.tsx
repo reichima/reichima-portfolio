@@ -78,6 +78,39 @@ export default function WorksSection() {
       </h2>
 
       <div ref={worksContentRef} className="mt-12 grid gap-8 lg:grid-cols-3">
+        <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
+          <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+          <div className="relative z-10">
+            <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
+              <Image
+                src="/images/portfolio/household_budget.png"
+                alt="household budget app"
+                width={128}
+                height={128}
+                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+              />
+            </div>
+            <h3 className="mb-3 text-xl font-bold text-white">
+              家計簿システム
+            </h3>
+            <p className="mb-4 text-white/80">自宅用</p>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs text-red-300">
+                Laravel
+              </span>
+              <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs text-red-300">
+                Inertia
+              </span>
+              <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs text-red-300">
+                React
+              </span>
+              <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs text-red-300">
+                Shadcn
+              </span>
+            </div>
+          </div>
+        </div>
         <a
           href="https://denzirou.jp/"
           target="_blank"
@@ -86,13 +119,13 @@ export default function WorksSection() {
         >
           <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-portfolio-primary p-3">
+            <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
                 src="/images/portfolio/denzirou.png"
                 alt="denzirou logo"
                 width={128}
                 height={128}
-                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
+                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
             </div>
@@ -101,13 +134,13 @@ export default function WorksSection() {
             </h3>
             <p className="mb-4 text-white/80">Webサイト構築</p>
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
+              <span className="bg-portfolio-primary/20 text-portfolio-primary-light rounded-full px-3 py-1 text-xs">
                 Next.js
               </span>
-              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
+              <span className="bg-portfolio-primary/20 text-portfolio-primary-light rounded-full px-3 py-1 text-xs">
                 Laravel
               </span>
-              <span className="rounded-full bg-portfolio-primary/20 px-3 py-1 text-xs text-portfolio-primary-light">
+              <span className="bg-portfolio-primary/20 text-portfolio-primary-light rounded-full px-3 py-1 text-xs">
                 TypeScript
               </span>
             </div>
@@ -117,13 +150,13 @@ export default function WorksSection() {
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
           <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
-            <div className="mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-portfolio-primary p-3">
+            <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
                 src="/images/portfolio/ogp.png"
                 alt="portfolio logo"
                 width={128}
                 height={128}
-                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-120"
+                className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-110"
                 loading="lazy"
               />
             </div>
@@ -140,28 +173,6 @@ export default function WorksSection() {
               </span>
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
                 Hono
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
-          <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-          <div className="relative z-10">
-            <div className="mb-4 h-12 w-12 rounded-lg bg-blue-500 p-3">
-              <div className="h-full w-full rounded bg-white"></div>
-            </div>
-            <h3 className="mb-3 text-xl font-bold text-white">Coming Soon</h3>
-            <p className="mb-4 text-white/80">準備中</p>
-            <div className="flex flex-wrap gap-2">
-              <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                ReactNative
-              </span>
-              <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                Go
-              </span>
-              <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs text-blue-300">
-                PostgreSQL
               </span>
             </div>
           </div>
