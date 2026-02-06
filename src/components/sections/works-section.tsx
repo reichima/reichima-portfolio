@@ -78,8 +78,12 @@ export default function WorksSection() {
       </h2>
 
       <div ref={worksContentRef} className="mt-12 grid gap-8 lg:grid-cols-3">
-        <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
-          <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+        <a
+          href="https://reichima.com/blog/omkrvty4lgf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+        >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
@@ -110,14 +114,13 @@ export default function WorksSection() {
               </span>
             </div>
           </div>
-        </div>
+        </a>
         <a
           href="https://denzirou.jp/"
           target="_blank"
           rel="noopener noreferrer"
           className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
-          <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
@@ -148,7 +151,6 @@ export default function WorksSection() {
         </a>
 
         <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
-          <div className="absolute inset-0 bg-white/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
