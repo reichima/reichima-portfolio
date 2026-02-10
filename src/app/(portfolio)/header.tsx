@@ -22,17 +22,17 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed z-50 flex h-24 w-full flex-wrap items-center justify-between bg-white/5 p-4 backdrop-blur-md",
+          "fixed z-50 flex h-24 w-full flex-wrap items-center justify-between bg-white/5 p-4 backdrop-blur-sm",
           isMenuOpen ? "border-none" : "border-b border-white/10 shadow-xl",
         )}
       >
-        <div className="flex flex-shrink-0 items-center text-white">
+        <div className="flex shrink-0 items-center text-white">
           <Link
             href="/"
             className="rounded-lg text-xl font-semibold tracking-tight"
           >
             <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-75 blur-md"></div>
+              <div className="bg-portfolio-primary absolute inset-0 animate-pulse rounded-full opacity-75 blur-md"></div>
               <Image
                 className="relative drop-shadow-[0_0_1rem_var(--portfolio-primary)] transition-all duration-300 hover:scale-110"
                 src="/logo.png"
@@ -72,8 +72,8 @@ export default function Header() {
         </div>
 
         {/* デスクトップ用メニュー */}
-        <div className="hidden w-full flex-grow lg:flex lg:w-auto lg:items-center">
-          <div className="flex justify-around text-sm lg:flex-grow">
+        <div className="hidden w-full grow lg:flex lg:w-auto lg:items-center">
+          <div className="flex justify-around text-sm lg:grow">
             <Link
               href="/#home"
               className="font-orbitron group relative mt-4 mr-4 block rounded-lg px-4 py-2 text-white/90 transition-all duration-300 hover:text-white lg:mt-0 lg:inline-block"

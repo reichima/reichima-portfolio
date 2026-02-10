@@ -82,7 +82,7 @@ export default function WorksSection() {
           href="https://reichima.com/blog/omkrvty4lgf"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">

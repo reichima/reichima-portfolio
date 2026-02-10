@@ -70,7 +70,7 @@ export default function Footer() {
                 className="rounded-lg"
                 aria-label="GitHubプロフィールを開く"
               >
-                <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
+                <div className="liquid-glass-btn rounded-lg bg-white/10 p-3 text-white hover:scale-105">
                   <FaGithub className="size-6" />
                 </div>
               </Link>
@@ -80,7 +80,7 @@ export default function Footer() {
                 className="rounded-lg"
                 aria-label="X(Twitter)プロフィールを開く"
               >
-                <div className="rounded-lg bg-gray-300 p-3 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-gray-400">
+                <div className="liquid-glass-btn rounded-lg bg-white/10 p-3 text-white hover:scale-105">
                   <FaXTwitter className="size-6" />
                 </div>
               </Link>
