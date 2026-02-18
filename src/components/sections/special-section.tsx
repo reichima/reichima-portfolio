@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { FaFireAlt } from "react-icons/fa";
