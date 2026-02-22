@@ -5,8 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { FaFireAlt } from "react-icons/fa";
-import { GiCrown } from "react-icons/gi";
 import { GoHistory } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,11 +91,9 @@ export default function SpecialSection() {
           <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-yellow-500 via-red-500 to-purple-500 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-75"></div>
           <div className="relative rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md transition-all duration-300 group-hover:bg-white/15">
             <div className="mb-4 flex items-center justify-center gap-3">
-              <GiCrown className="text-4xl text-yellow-400" />
               <h3 className="font-orbitron text-3xl font-bold text-white">
                 Game Ranking
               </h3>
-              <FaFireAlt className="text-2xl text-red-400" />
             </div>
             <p className="mb-6 text-center text-lg text-white/80">
               歴代プレイしたゲームの中から圧倒的主観のみでランキング付けしました。

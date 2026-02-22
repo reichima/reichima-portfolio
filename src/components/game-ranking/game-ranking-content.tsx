@@ -4,7 +4,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FaFireAlt } from "react-icons/fa";
 import { GiCrown } from "react-icons/gi";
 import GameDetailDialog from "./game-detail-dialog";
 import type { GameRankingItem } from "./game-ranking-data";
@@ -37,7 +36,11 @@ const top3Styles = [
 
 const ITEMS_PER_PAGE = 5;
 
-export default function GameRankingContent({ games }: { games: GameRankingItem[] }) {
+export default function GameRankingContent({
+  games,
+}: {
+  games: GameRankingItem[];
+}) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const top3Ref = useRef<HTMLDivElement>(null);
@@ -137,9 +140,7 @@ export default function GameRankingContent({ games }: { games: GameRankingItem[]
         ref={titleRef}
         className="font-orbitron mb-12 text-center text-4xl font-bold tracking-wider text-white opacity-0 md:text-6xl"
       >
-        <GiCrown className="mr-2 inline text-yellow-400" />
         Game Ranking
-        <FaFireAlt className="ml-2 inline text-red-400" />
       </h1>
 
       {/* Top 3 */}
@@ -210,7 +211,6 @@ export default function GameRankingContent({ games }: { games: GameRankingItem[]
                 {game.name}
               </h3>
             </div>
-
           </button>
         ))}
       </div>
