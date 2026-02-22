@@ -126,7 +126,7 @@ export default function AboutSection() {
         <TabsContent value="view" tabIndex={-1}>
           <div className="mt-4 flex flex-col items-center justify-center gap-12 lg:flex-row">
             <div className="relative">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-portfolio-primary opacity-75 blur-lg"></div>
+              <div className="bg-portfolio-primary absolute inset-0 animate-pulse rounded-full opacity-75 blur-lg"></div>
               <Image
                 ref={profileImageRef}
                 src="/images/portfolio/profile.png"
@@ -141,7 +141,7 @@ export default function AboutSection() {
             <div ref={aboutTextRef} className="max-w-lg space-y-6">
               <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
-                  <Rocket className="mr-1 inline h-6 w-6 text-portfolio-primary" />
+                  <Rocket className="text-portfolio-primary mr-1 inline h-6 w-6" />
                   栃木でWebエンジニアをしているReichimaです
                 </p>
               </div>
@@ -163,9 +163,7 @@ export default function AboutSection() {
               <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
                   <GiTalk className="mr-1 inline h-6 w-6 text-blue-400" />
-                  土日、平日夜稼働での副業案件を募集しています。
-                  <br />
-                  お気軽にご相談ください
+                  最近はGoとAI開発にハマっています。
                 </p>
               </div>
             </div>
