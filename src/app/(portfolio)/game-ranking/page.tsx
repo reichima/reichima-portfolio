@@ -1,6 +1,5 @@
 import GameRankingContent from "@/components/game-ranking/game-ranking-content";
 import { fetchGameRankings } from "@/components/game-ranking/game-ranking-data";
-import Link from "next/link";
 
 export default async function GameRankingPage() {
   const games = await fetchGameRankings();
@@ -8,12 +7,7 @@ export default async function GameRankingPage() {
   return (
     <main className="min-h-screen w-full bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 px-4 py-12 md:px-8">
       <div className="mx-auto max-w-5xl">
-        <Link
-          href="/#special"
-          className="mb-8 inline-flex items-center gap-1 text-sm text-white/50 transition-colors hover:text-white/80"
-        >
-          ← ポートフォリオに戻る
-        </Link>
+        <div className="h-16" />
 
         <GameRankingContent games={games} />
       </div>
