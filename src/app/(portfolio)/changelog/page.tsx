@@ -25,7 +25,6 @@ type ChangeType =
 interface ChangelogEntry {
   date: string;
   title: string;
-  description: string;
   type: ChangeType;
 }
 
@@ -73,10 +72,13 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-02-22",
+    title: "ゲームランキングページを実装",
+    type: "feature",
+  },
+  {
     date: "2026-02-18",
     title: "変更ログを実装",
-    description:
-      "ポートフォリオの更新履歴をタイムライン形式で表示するChangelogページを追加",
     type: "feature",
   },
 ];
@@ -269,12 +271,9 @@ export default function ChangelogPage() {
                           {entry.date}
                         </time>
                       </div>
-                      <h3 className="mb-1 font-semibold text-white">
+                      <h3 className="font-semibold text-white">
                         {entry.title}
                       </h3>
-                      <p className="text-sm text-white/60">
-                        {entry.description}
-                      </p>
                     </div>
                   </div>
                 );

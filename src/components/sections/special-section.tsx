@@ -2,10 +2,12 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { FaFireAlt } from "react-icons/fa";
+import { GiCrown } from "react-icons/gi";
+import { GoHistory } from "react-icons/go";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,7 +17,6 @@ export default function SpecialSection() {
   const specialContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // GSAP ScrollTrigger animations
     if (
       specialRef.current &&
       specialTitleRef.current &&
@@ -77,7 +78,6 @@ export default function SpecialSection() {
       <h2
         ref={specialTitleRef}
         className="font-orbitron relative py-6 pl-2 text-6xl font-bold tracking-wider text-white opacity-0"
-        style={{}}
       >
         Special
       </h2>
@@ -86,6 +86,30 @@ export default function SpecialSection() {
         ref={specialContentRef}
         className="mt-12 flex flex-col items-center justify-center"
       >
+        <Link
+          href="/game-ranking"
+          className="group relative mb-8 block w-full max-w-3xl opacity-0"
+        >
+          <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-yellow-500 via-red-500 to-purple-500 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-75"></div>
+          <div className="relative rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md transition-all duration-300 group-hover:bg-white/15">
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <GiCrown className="text-4xl text-yellow-400" />
+              <h3 className="font-orbitron text-3xl font-bold text-white">
+                Game Ranking
+              </h3>
+              <FaFireAlt className="text-2xl text-red-400" />
+            </div>
+            <p className="mb-6 text-center text-lg text-white/80">
+              歴代プレイしたゲームの中から圧倒的主観のみでランキング付けしました。
+            </p>
+            <div className="flex justify-center">
+              <span className="rounded-full border border-white/20 bg-white/10 px-6 py-2 text-sm font-bold text-white transition-all duration-300 group-hover:bg-white/20">
+                ランキングを見る →
+              </span>
+            </div>
+          </div>
+        </Link>
+
         <div className="max-w-3xl space-y-6 opacity-0">
           <div className="grid gap-6 md:grid-cols-2">
             <Link

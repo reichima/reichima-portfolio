@@ -616,4 +616,40 @@
   .warning-light-green {
     animation: blink-green 2s infinite;
   }
+
+  /* Game Ranking - Rank Number Styles */
+  .rank-number-gold {
+    background: linear-gradient(135deg, #ffd700, #ffaa00, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .rank-number-silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8, #c0c0c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .rank-number-bronze {
+    background: linear-gradient(135deg, #cd7f32, #e8a860, #cd7f32);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  .animate-shimmer {
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
 }
