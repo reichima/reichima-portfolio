@@ -24,6 +24,9 @@ export default function GameDetailDialog({
 }: GameDetailDialogProps) {
   if (!game) return null;
 
+  const allImages = [game.thumbnail, ...game.images];
+  const hasMultiple = allImages.length > 1;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[85vh] max-w-2xl overflow-y-auto border-white/20 bg-slate-900/95 text-white backdrop-blur-xl">
@@ -37,34 +40,47 @@ export default function GameDetailDialog({
         </DialogHeader>
 
         <div className="mt-2">
-          <Splide
-            options={{
-              type: "loop",
-              perPage: 1,
-              pagination: true,
-              arrows: true,
-              speed: 500,
-              easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-            }}
-            aria-label={`${game.name}のスクリーンショット`}
-            className="game-splide"
-          >
-            {[game.thumbnail, ...game.images].map((image, index) => (
-              <SplideSlide key={index}>
-                <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                  <Image
-                    src={image}
-                    alt={`${game.name} スクリーンショット ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 672px) 100vw, 672px"
-                  />
-                </div>
-              </SplideSlide>
-            ))}
-          </Splide>
+          {hasMultiple ? (
+            <Splide
+              options={{
+                type: "fade",
+                rewind: true,
+                perPage: 1,
+                pagination: true,
+                arrows: true,
+                speed: 500,
+                easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+              }}
+              aria-label={`${game.name}のスクリーンショット`}
+              className="game-splide"
+            >
+              {allImages.map((image, index) => (
+                <SplideSlide key={index}>
+                  <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                    <Image
+                      src={image}
+                      alt={`${game.name} スクリーンショット ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 672px) 100vw, 672px"
+                    />
+                  </div>
+                </SplideSlide>
+              ))}
+            </Splide>
+          ) : (
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <Image
+                src={allImages[0]}
+                alt={`${game.name} スクリーンショット`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 672px) 100vw, 672px"
+              />
+            </div>
+          )}
 
-          <p className="mt-4 leading-relaxed text-white/90">
+          <p className="mt-6 leading-relaxed text-white/90">
             {game.description}
           </p>
         </div>
