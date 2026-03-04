@@ -72,6 +72,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-03-04",
+    title: "タブ操作時のフォーカス順序・スタイルを調整",
+    type: "improvement",
+  },
+  {
     date: "2026-02-22",
     title: "ゲームランキングページを実装",
     type: "feature",

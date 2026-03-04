@@ -2,7 +2,7 @@
 
 import type { Blog } from "@/lib/microcms";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/core";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,7 +42,7 @@ export default function BlogSlider({ blogs }: BlogSliderProps) {
           },
         }}
         aria-label="ブログ記事"
-        className="blog-splide"
+        className="splide-dark blog-splide"
       >
         {blogs.map((blog) => (
           <SplideSlide key={blog.id}>
@@ -87,42 +87,9 @@ export default function BlogSlider({ blogs }: BlogSliderProps) {
       </Splide>
 
       <style jsx global>{`
-        .blog-splide .splide__arrow {
-          background: rgba(255, 255, 255, 0.15);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          width: 3rem;
-          height: 3rem;
-          opacity: 0.7;
-          transition: all 0.3s ease;
-        }
-        .blog-splide .splide__arrow--prev {
-          left: 1rem;
-        }
-        .blog-splide .splide__arrow--next {
-          right: 1rem;
-        }
-        .blog-splide .splide__arrow:hover {
-          background: rgba(255, 255, 255, 0.25);
-          opacity: 1;
-        }
-        .blog-splide .splide__arrow svg {
-          fill: white;
-          width: 1.2rem;
-          height: 1.2rem;
-        }
-        .blog-splide .splide__pagination {
-          bottom: -2.5rem;
-        }
-        .blog-splide .splide__pagination__page {
-          background: rgba(255, 255, 255, 0.3);
-          width: 8px;
-          height: 8px;
-          transition: all 0.3s ease;
-        }
-        .blog-splide .splide__pagination__page.is-active {
-          background: rgb(6, 182, 212);
-          transform: scale(1.3);
+        .blog-splide .splide__track,
+        .blog-splide .splide__list {
+          overflow: visible;
         }
       `}</style>
     </>

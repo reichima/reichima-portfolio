@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/core";
 import Image from "next/image";
 import type { GameRankingItem } from "./game-ranking-data";
 
@@ -52,7 +52,7 @@ export default function GameDetailDialog({
                 easing: "cubic-bezier(0.25, 1, 0.5, 1)",
               }}
               aria-label={`${game.name}のスクリーンショット`}
-              className="game-splide"
+              className="splide-dark game-splide"
             >
               {allImages.map((image, index) => (
                 <SplideSlide key={index}>
@@ -86,35 +86,11 @@ export default function GameDetailDialog({
         </div>
 
         <style jsx global>{`
-          .game-splide .splide__arrow {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            width: 2.5rem;
-            height: 2.5rem;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-          }
-          .game-splide .splide__arrow:hover {
-            background: rgba(255, 255, 255, 0.25);
-            opacity: 1;
-          }
-          .game-splide .splide__arrow svg {
-            fill: white;
-            width: 1rem;
-            height: 1rem;
-          }
-          .game-splide .splide__pagination {
-            bottom: -1.5rem;
-          }
-          .game-splide .splide__pagination__page {
-            background: rgba(255, 255, 255, 0.3);
-            width: 8px;
-            height: 8px;
-          }
-          .game-splide .splide__pagination__page.is-active {
-            background: rgb(168, 85, 247);
-            transform: scale(1.3);
+          .game-splide {
+            --splide-arrow-size: 2.5rem;
+            --splide-arrow-icon-size: 1rem;
+            --splide-pagination-bottom: -1.5rem;
+            --splide-active-color: rgb(168, 85, 247);
           }
         `}</style>
       </DialogContent>
