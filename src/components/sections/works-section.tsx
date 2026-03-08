@@ -150,12 +150,17 @@ export default function WorksSection() {
           </div>
         </a>
 
-        <div className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20">
+        <a
+          href="https://menherun.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+        >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
               <Image
-                src="/images/portfolio/ogp.png"
-                alt="portfolio logo"
+                src="/images/portfolio/menherun.png"
+                alt="Menherun"
                 width={128}
                 height={128}
                 className="h-48 w-full rounded bg-white object-cover transition-transform duration-300 group-hover:scale-110"
@@ -163,22 +168,16 @@ export default function WorksSection() {
               />
             </div>
             <h3 className="mb-3 text-xl font-bold text-white">
-              ポートフォリオサイト
+              Menherun
             </h3>
-            <p className="mb-4 text-white/80">こちらのサイト</p>
+            <p className="mb-4 text-white/80">ランゲーム</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                Next.js
-              </span>
-              <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                GSAP
-              </span>
-              <span className="rounded-full bg-pink-500/20 px-3 py-1 text-xs text-pink-300">
-                Hono
+                Phaser.js
               </span>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </section>
   );

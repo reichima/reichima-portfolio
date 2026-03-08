@@ -118,16 +118,25 @@ export default function SpecialSection() {
               <h4 className="mb-3 text-xl font-bold text-white">変更ログ</h4>
               <p className="text-white/80">ポートフォリオの更新履歴を確認</p>
             </Link>
-            <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
-              <Image
-                src="/images/portfolio/wait-image.png"
-                alt="special content"
-                width={600}
-                height={600}
-                className="relative rounded-2xl border-4 border-white/20 shadow-2xl"
-                loading="lazy"
-              />
-            </div>
+            <a
+              href="https://menherun.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:bg-white/15"
+            >
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <Image
+                  src="/images/portfolio/menherun.png"
+                  alt="Menherun"
+                  width={600}
+                  height={300}
+                  className="rounded-lg transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mb-3 text-xl font-bold text-white">Menherun</h4>
+              <p className="text-white/80">ランゲーム・PC推奨</p>
+            </a>
           </div>
         </div>
       </div>

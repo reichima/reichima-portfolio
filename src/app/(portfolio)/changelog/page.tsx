@@ -72,6 +72,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-03-08",
+    title: "ランゲーム「Menherun」をSpecial・Worksに追加",
+    type: "feature",
+  },
+  {
     date: "2026-03-04",
     title: "タブ操作時のフォーカス順序・スタイルを調整",
     type: "improvement",
