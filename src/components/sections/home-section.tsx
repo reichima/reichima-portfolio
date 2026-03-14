@@ -1,7 +1,6 @@
 "use client";
 
 import Scroll from "@/components/scroll";
-import { useKvAnimation } from "@/contexts/kv-animation-context";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -20,7 +19,6 @@ export default function HomeSection() {
   const [showRocket, setShowRocket] = useState(false);
   const [rocketLaunched, setRocketLaunched] = useState(false);
   const [showPortfolioText, setShowPortfolioText] = useState(false);
-  const { setIsKvAnimating } = useKvAnimation();
 
   useEffect(() => {
     // ハッシュ付きアクセス(#contactなど)の場合はアニメーションをスキップ
@@ -28,9 +26,11 @@ export default function HomeSection() {
     if (hasHash) {
       setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
       setShowPortfolioText(true);
-      setIsKvAnimating(false);
       return;
     }
+
+    // KVアニメーション中: ヘッダー非表示 & スクロールロック
+    document.body.dataset.kvAnimating = "";
 
     // GSAP ScrollTrigger animations
     if (homeRef.current && homeTitleRef.current && homeSubtitleRef.current) {
@@ -105,7 +105,7 @@ export default function HomeSection() {
     // Portfolioテキスト表示: 7秒後
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
-      setIsKvAnimating(false);
+      delete document.body.dataset.kvAnimating;
     }, 7000);
 
     return () => {
@@ -115,8 +115,9 @@ export default function HomeSection() {
       clearTimeout(rocketTimer);
       clearTimeout(launchTimer);
       clearTimeout(textTimer);
+      delete document.body.dataset.kvAnimating;
     };
-  }, [setIsKvAnimating]);
+  }, []);
 
   return (
     <section
