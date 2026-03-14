@@ -72,6 +72,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-03-14",
+    title: "KVアニメーション中のヘッダー非表示・スクロールロックを追加",
+    type: "improvement",
+  },
+  {
     date: "2026-03-08",
     title: "ランゲーム「Menherun」をSpecial・Worksに追加",
     type: "feature",

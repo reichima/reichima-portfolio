@@ -1,6 +1,7 @@
 "use client";
 
 import Scroll from "@/components/scroll";
+import { useKvAnimation } from "@/contexts/kv-animation-context";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
@@ -19,8 +20,18 @@ export default function HomeSection() {
   const [showRocket, setShowRocket] = useState(false);
   const [rocketLaunched, setRocketLaunched] = useState(false);
   const [showPortfolioText, setShowPortfolioText] = useState(false);
+  const { setIsKvAnimating } = useKvAnimation();
 
   useEffect(() => {
+    // ハッシュ付きアクセス(#contactなど)の場合はアニメーションをスキップ
+    const hasHash = window.location.hash && window.location.hash !== "#home";
+    if (hasHash) {
+      setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
+      setShowPortfolioText(true);
+      setIsKvAnimating(false);
+      return;
+    }
+
     // GSAP ScrollTrigger animations
     if (homeRef.current && homeTitleRef.current && homeSubtitleRef.current) {
       const tl = gsap.timeline({
@@ -94,6 +105,7 @@ export default function HomeSection() {
     // Portfolioテキスト表示: 7秒後
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
+      setIsKvAnimating(false);
     }, 7000);
 
     return () => {
@@ -104,7 +116,7 @@ export default function HomeSection() {
       clearTimeout(launchTimer);
       clearTimeout(textTimer);
     };
-  }, []);
+  }, [setIsKvAnimating]);
 
   return (
     <section

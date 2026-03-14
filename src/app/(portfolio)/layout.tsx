@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/app/(portfolio)/header";
+import { KvAnimationProvider } from "@/contexts/kv-animation-context";
 import { cn } from "@/lib/utils";
 import { Black_Ops_One, Orbitron, VT323 } from "next/font/google";
 
@@ -27,16 +28,18 @@ const blackOpsOne = Black_Ops_One({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={cn(
-        "relative h-screen",
-        orbitron.variable,
-        vt323.variable,
-        blackOpsOne.variable,
-      )}
-    >
-      <Header />
-      <div className="grow">{children}</div>
-    </div>
+    <KvAnimationProvider>
+      <div
+        className={cn(
+          "relative h-screen",
+          orbitron.variable,
+          vt323.variable,
+          blackOpsOne.variable,
+        )}
+      >
+        <Header />
+        <div className="grow">{children}</div>
+      </div>
+    </KvAnimationProvider>
   );
 }

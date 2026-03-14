@@ -1,5 +1,6 @@
 "use client";
 
+import { useKvAnimation } from "@/contexts/kv-animation-context";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import Image from "next/image";
@@ -9,6 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isKvAnimating } = useKvAnimation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,8 +24,11 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed z-50 flex h-24 w-full flex-wrap items-center justify-between bg-white/5 p-4 backdrop-blur-sm",
+          "fixed top-0 z-50 flex h-24 w-full flex-wrap items-center justify-between bg-white/5 p-4 backdrop-blur-sm transition-[transform,opacity] duration-700 ease-out",
           isMenuOpen ? "border-none" : "border-b border-white/10 shadow-xl",
+          isKvAnimating
+            ? "-translate-y-full opacity-0"
+            : "translate-y-0 opacity-100",
         )}
       >
         <div className="flex shrink-0 items-center text-white">
