@@ -243,10 +243,6 @@ export default function GameRankingContent({
                   {game.name}
                 </h3>
               </div>
-
-              <span className="hidden text-sm text-white/30 transition-colors group-hover:text-white/60 md:block">
-                詳細を見る →
-              </span>
             </button>
           ))}
         </div>
