@@ -1,25 +1,17 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { GoHistory } from "react-icons/go";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function SpecialSection() {
   const specialRef = useRef<HTMLElement>(null);
   const specialTitleRef = useRef<HTMLHeadingElement>(null);
-  const specialContentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (
-      specialRef.current &&
-      specialTitleRef.current &&
-      specialContentRef.current
-    ) {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: specialRef.current,
@@ -31,11 +23,7 @@ export default function SpecialSection() {
 
       tl.fromTo(
         specialTitleRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-          rotation: -45,
-        },
+        { opacity: 0, scale: 0.5, rotation: -45 },
         {
           opacity: 1,
           scale: 1,
@@ -45,14 +33,9 @@ export default function SpecialSection() {
         },
       );
 
-      const specialElements = specialContentRef.current.children;
       tl.fromTo(
-        specialElements,
-        {
-          opacity: 0,
-          y: 100,
-          scale: 0.8,
-        },
+        ".special-content-item",
+        { opacity: 0, y: 100, scale: 0.8 },
         {
           opacity: 1,
           y: 0,
@@ -63,8 +46,9 @@ export default function SpecialSection() {
         },
         "-=0.8",
       );
-    }
-  }, []);
+    },
+    { scope: specialRef },
+  );
 
   return (
     <section
@@ -80,13 +64,10 @@ export default function SpecialSection() {
         Special
       </h2>
 
-      <div
-        ref={specialContentRef}
-        className="mt-12 flex flex-col items-center justify-center"
-      >
+      <div className="mt-12 flex flex-col items-center justify-center">
         <Link
           href="/game-ranking"
-          className="group relative mb-8 block w-full max-w-3xl opacity-0"
+          className="special-content-item group relative mb-8 block w-full max-w-3xl opacity-0"
         >
           <div className="absolute -inset-1 rounded-2xl bg-linear-to-r from-yellow-500 via-red-500 to-purple-500 opacity-50 blur-lg transition-opacity duration-300 group-hover:opacity-75"></div>
           <div className="relative rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md transition-all duration-300 group-hover:bg-white/15">
@@ -106,7 +87,7 @@ export default function SpecialSection() {
           </div>
         </Link>
 
-        <div className="max-w-3xl space-y-6 opacity-0">
+        <div className="special-content-item max-w-3xl space-y-6 opacity-0">
           <div className="grid gap-6 md:grid-cols-2">
             <Link
               href="/changelog"

@@ -4,14 +4,11 @@ import {
   sendContactAction,
   type ContactActionState,
 } from "@/features/contact/actions/send-contact";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { CheckCircleIcon, Smile } from "lucide-react";
 import { motion } from "motion/react";
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const initialState: ContactActionState = {
   success: false,
@@ -21,7 +18,6 @@ const initialState: ContactActionState = {
 export default function ContactSection() {
   const contactRef = useRef<HTMLElement>(null);
   const contactTitleRef = useRef<HTMLHeadingElement>(null);
-  const contactContentRef = useRef<HTMLDivElement>(null);
 
   const [state, formAction, isPending] = useActionState(
     sendContactAction,
@@ -29,13 +25,8 @@ export default function ContactSection() {
   );
   const formRef = useRef<HTMLFormElement>(null);
 
-  // GSAP ScrollTrigger animations
-  useEffect(() => {
-    if (
-      contactRef.current &&
-      contactTitleRef.current &&
-      contactContentRef.current
-    ) {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: contactRef.current,
@@ -47,28 +38,13 @@ export default function ContactSection() {
 
       tl.fromTo(
         contactTitleRef.current,
-        {
-          opacity: 0,
-          x: 100,
-          rotationY: 90,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotationY: 0,
-          duration: 1,
-          ease: "power2.out",
-        },
+        { opacity: 0, x: 100, rotationY: 90 },
+        { opacity: 1, x: 0, rotationY: 0, duration: 1, ease: "power2.out" },
       );
 
-      const contactElements = contactContentRef.current.children;
       tl.fromTo(
-        contactElements,
-        {
-          opacity: 0,
-          y: 80,
-          scale: 0.9,
-        },
+        ".contact-content-item",
+        { opacity: 0, y: 80, scale: 0.9 },
         {
           opacity: 1,
           y: 0,
@@ -79,8 +55,9 @@ export default function ContactSection() {
         },
         "-=0.5",
       );
-    }
-  }, []);
+    },
+    { scope: contactRef },
+  );
 
   // 送信結果の処理
   useEffect(() => {
@@ -109,9 +86,9 @@ export default function ContactSection() {
         Contact
       </h2>
 
-      <div ref={contactContentRef} className="mx-auto mt-12 max-w-6xl">
+      <div className="mx-auto mt-12 max-w-6xl">
         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-          <div className="lg:col-span-2 lg:py-12">
+          <div className="contact-content-item lg:col-span-2 lg:py-12">
             <div className="rounded-xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md">
               <h3 className="mb-6 text-2xl font-bold text-white">
                 Please Contact Me
@@ -138,7 +115,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="contact-content-item lg:col-span-3">
             <div className="rounded-xl border border-white/20 bg-white/10 p-8 shadow-xl backdrop-blur-md lg:p-12">
               <form ref={formRef} action={formAction} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

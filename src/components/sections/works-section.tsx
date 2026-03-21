@@ -1,20 +1,15 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
 
 export default function WorksSection() {
   const worksRef = useRef<HTMLElement>(null);
   const worksTitleRef = useRef<HTMLHeadingElement>(null);
-  const worksContentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // GSAP ScrollTrigger animations
-    if (worksRef.current && worksTitleRef.current && worksContentRef.current) {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: worksRef.current,
@@ -24,32 +19,15 @@ export default function WorksSection() {
         },
       });
 
-      // Title animation
       tl.fromTo(
         worksTitleRef.current,
-        {
-          opacity: 0,
-          y: -50,
-          scale: 0.8,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: "power2.out",
-        },
+        { opacity: 0, y: -50, scale: 0.8 },
+        { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" },
       );
 
-      // Works cards animation
-      const workCards = worksContentRef.current.children;
       tl.fromTo(
-        workCards,
-        {
-          opacity: 0,
-          y: 100,
-          rotationX: 45,
-        },
+        ".works-card",
+        { opacity: 0, y: 100, rotationX: 45 },
         {
           opacity: 1,
           y: 0,
@@ -60,8 +38,9 @@ export default function WorksSection() {
         },
         "-=0.5",
       );
-    }
-  }, []);
+    },
+    { scope: worksRef },
+  );
 
   return (
     <section
@@ -77,12 +56,12 @@ export default function WorksSection() {
         Works
       </h2>
 
-      <div ref={worksContentRef} className="mt-12 grid gap-8 lg:grid-cols-3">
+      <div className="mt-12 grid gap-8 lg:grid-cols-3">
         <a
           href="https://reichima.com/blog/omkrvty4lgf"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+          className="works-card group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
@@ -119,7 +98,7 @@ export default function WorksSection() {
           href="https://denzirou.jp/"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+          className="works-card group relative block overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">
@@ -154,7 +133,7 @@ export default function WorksSection() {
           href="https://menherun.netlify.app/"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
+          className="works-card group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 p-6 opacity-0 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:bg-white/20"
         >
           <div className="relative z-10">
             <div className="bg-portfolio-primary mb-4 flex items-center justify-center overflow-hidden rounded-lg p-3">

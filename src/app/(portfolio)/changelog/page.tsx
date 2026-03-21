@@ -1,8 +1,8 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { Gamepad2 } from "lucide-react";
+import { useRef } from "react";
 import {
   GoPackage,
   GoPencil,
@@ -12,15 +12,14 @@ import {
   GoZap,
 } from "react-icons/go";
 
-gsap.registerPlugin(ScrollTrigger);
-
 type ChangeType =
   | "feature"
   | "improvement"
   | "fix"
   | "style"
   | "dependency"
-  | "performance";
+  | "performance"
+  | "menherun";
 
 interface ChangelogEntry {
   date: string;
@@ -68,9 +67,20 @@ const typeConfig: Record<
     bg: "bg-blue-500/20",
     label: "パフォーマンス",
   },
+  menherun: {
+    icon: Gamepad2,
+    color: "text-pink-300",
+    bg: "bg-pink-500/20",
+    label: "Menherun",
+  },
 };
 
 const changelog: ChangelogEntry[] = [
+  {
+    date: "2026-03-21",
+    title: "新アイテム「Phone」を追加",
+    type: "menherun",
+  },
   {
     date: "2026-03-14",
     title: "KVアニメーション中のヘッダー非表示・スクロールロックを追加",
@@ -78,8 +88,8 @@ const changelog: ChangelogEntry[] = [
   },
   {
     date: "2026-03-08",
-    title: "ランゲーム「Menherun」をSpecial・Worksに追加",
-    type: "feature",
+    title: "ランゲーム「Menherun」を追加",
+    type: "menherun",
   },
   {
     date: "2026-03-04",
@@ -128,92 +138,82 @@ function formatMonth(ym: string) {
 }
 
 export default function ChangelogPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       // Header fade in
-      if (headerRef.current) {
-        gsap.fromTo(
-          headerRef.current.children,
-          { opacity: 0, y: -30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
-          },
-        );
-      }
-
-      if (!timelineRef.current) return;
+      gsap.fromTo(
+        ".changelog-header-item",
+        { opacity: 0, y: -30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power2.out",
+        },
+      );
 
       // Single continuous line grows with scroll
-      const line = timelineRef.current.querySelector(".changelog-line");
-      if (line) {
+      gsap.fromTo(
+        ".changelog-line",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 80%",
+            end: "bottom 80%",
+            scrub: 0.3,
+          },
+        },
+      );
+
+      // Each dot: pop in as scroll reaches it
+      gsap.utils.toArray<HTMLElement>(".changelog-dot").forEach((dot) => {
         gsap.fromTo(
-          line,
-          { scaleY: 0 },
+          dot,
+          { scale: 0, opacity: 0 },
           {
-            scaleY: 1,
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "back.out(3)",
+            scrollTrigger: {
+              trigger: dot,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+
+      // Each card: fade in linked to scroll
+      gsap.utils.toArray<HTMLElement>(".changelog-card").forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: -16 },
+          {
+            opacity: 1,
+            x: 0,
             ease: "none",
             scrollTrigger: {
-              trigger: timelineRef.current,
-              start: "top 80%",
-              end: "bottom 80%",
+              trigger: card,
+              start: "top 82%",
+              end: "top 65%",
               scrub: 0.3,
             },
           },
         );
-      }
-
-      // Each dot: pop in as scroll reaches it
-      timelineRef.current
-        .querySelectorAll<HTMLElement>(".changelog-dot")
-        .forEach((dot) => {
-          gsap.fromTo(
-            dot,
-            { scale: 0, opacity: 0 },
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 0.3,
-              ease: "back.out(3)",
-              scrollTrigger: {
-                trigger: dot,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-              },
-            },
-          );
-        });
-
-      // Each card: fade in linked to scroll
-      timelineRef.current
-        .querySelectorAll<HTMLElement>(".changelog-card")
-        .forEach((card) => {
-          gsap.fromTo(
-            card,
-            { opacity: 0, x: -16 },
-            {
-              opacity: 1,
-              x: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 82%",
-                end: "top 65%",
-                scrub: 0.3,
-              },
-            },
-          );
-        });
+      });
 
       // Month headings
-      timelineRef.current
-        .querySelectorAll<HTMLElement>(".changelog-heading")
+      gsap.utils
+        .toArray<HTMLElement>(".changelog-heading")
         .forEach((heading) => {
           gsap.fromTo(
             heading,
@@ -231,22 +231,24 @@ export default function ChangelogPage() {
             },
           );
         });
-    });
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: containerRef },
+  );
 
   const grouped = groupByMonth(changelog);
 
   return (
-    <main className="min-h-screen w-full bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 px-4 py-12 md:px-8">
+    <main
+      ref={containerRef}
+      className="min-h-screen w-full bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 px-4 py-12 md:px-8"
+    >
       <div className="mx-auto max-w-3xl">
         <div ref={headerRef}>
-          <div className="h-16" />
-          <h1 className="font-orbitron mb-2 text-4xl font-bold tracking-wider text-white opacity-0 md:text-5xl">
+          <div className="changelog-header-item h-16" />
+          <h1 className="changelog-header-item font-orbitron mb-2 text-4xl font-bold tracking-wider text-white opacity-0 md:text-5xl">
             Changelog
           </h1>
-          <p className="mb-12 text-white/60 opacity-0">
+          <p className="changelog-header-item mb-12 text-white/60 opacity-0">
             ポートフォリオサイトの更新履歴
           </p>
         </div>

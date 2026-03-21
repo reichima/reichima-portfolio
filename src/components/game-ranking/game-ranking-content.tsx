@@ -1,14 +1,11 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GiCrown } from "react-icons/gi";
 import GameDetailDialog from "./game-detail-dialog";
 import type { GameRankingItem } from "./game-ranking-data";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const top3Styles = [
   {
@@ -43,8 +40,6 @@ export default function GameRankingContent({
 }) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const top3Ref = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const [selectedGame, setSelectedGame] = useState<GameRankingItem | null>(
     null,
@@ -73,66 +68,59 @@ export default function GameRankingContent({
     return () => observer.disconnect();
   }, [hasMore, loadMore]);
 
-  useEffect(() => {
-    if (
-      !sectionRef.current ||
-      !titleRef.current ||
-      !top3Ref.current ||
-      !listRef.current
-    )
-      return;
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
-      },
-    });
+      tl.fromTo(
+        titleRef.current,
+        { opacity: 0, scale: 0.5, rotation: -10 },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 1.2,
+          ease: "back.out(1.7)",
+        },
+      );
 
-    tl.fromTo(
-      titleRef.current,
-      { opacity: 0, scale: 0.5, rotation: -10 },
-      {
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-      },
-    );
+      tl.fromTo(
+        ".top3-card",
+        { opacity: 0, y: 120, scale: 0.6, rotationY: -30 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotationY: 0,
+          duration: 0.8,
+          stagger: 0.25,
+          ease: "back.out(1.4)",
+        },
+        "-=0.6",
+      );
 
-    const top3Cards = top3Ref.current.children;
-    tl.fromTo(
-      top3Cards,
-      { opacity: 0, y: 120, scale: 0.6, rotationY: -30 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        rotationY: 0,
-        duration: 0.8,
-        stagger: 0.25,
-        ease: "back.out(1.4)",
-      },
-      "-=0.6",
-    );
-
-    const listItems = listRef.current.children;
-    tl.fromTo(
-      listItems,
-      { opacity: 0, x: -80 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
-      },
-      "-=0.4",
-    );
-  }, []);
+      tl.fromTo(
+        ".ranking-list-item",
+        { opacity: 0, x: -80 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.4",
+      );
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <div ref={sectionRef}>
@@ -144,9 +132,7 @@ export default function GameRankingContent({
       </h1>
 
       {/* Top 3 */}
-      <div
-        ref={top3Ref}
-        className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3"
+      <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3"
       >
         {top3.map((game, index) => {
           const style = top3Styles[index];
@@ -154,7 +140,7 @@ export default function GameRankingContent({
             <button
               key={game.rank}
               onClick={() => setSelectedGame(game)}
-              className={`group cursor-pointer rounded-xl border ${style.border} ${style.bg} ${style.glow} p-6 text-left backdrop-blur-md transition-all duration-300 hover:scale-105`}
+              className={`top3-card group cursor-pointer rounded-xl border ${style.border} ${style.bg} ${style.glow} p-6 text-left backdrop-blur-md transition-all duration-300 hover:scale-105`}
             >
               <div className="mb-4 flex items-center gap-3">
                 <GiCrown className={`text-3xl ${style.crownColor}`} />
@@ -185,12 +171,12 @@ export default function GameRankingContent({
       </div>
 
       {/* 4-10位 */}
-      <div ref={listRef} className="space-y-3">
+      <div className="space-y-3">
         {top10Rest.map((game) => (
           <button
             key={game.rank}
             onClick={() => setSelectedGame(game)}
-            className="group flex w-full cursor-pointer items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 text-left backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/10"
+            className="ranking-list-item group flex w-full cursor-pointer items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 text-left backdrop-blur-md transition-all duration-300 hover:border-white/20 hover:bg-white/10"
           >
             <span className="font-orbitron min-w-[3rem] text-center text-3xl font-black text-white/40">
               {game.rank}

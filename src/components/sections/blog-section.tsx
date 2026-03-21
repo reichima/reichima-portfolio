@@ -1,12 +1,9 @@
 "use client";
 
 import type { Blog } from "@/lib/microcms";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
 
 const BlogSlider = dynamic(() => import("./blog-slider"), { ssr: false });
 
@@ -19,8 +16,8 @@ export default function BlogSection({ blogs }: BlogSectionProps) {
   const blogTitleRef = useRef<HTMLHeadingElement>(null);
   const blogContentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (blogRef.current && blogTitleRef.current && blogContentRef.current) {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: blogRef.current,
@@ -42,8 +39,9 @@ export default function BlogSection({ blogs }: BlogSectionProps) {
         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
         "-=0.5",
       );
-    }
-  }, []);
+    },
+    { scope: blogRef },
+  );
 
   return (
     <section

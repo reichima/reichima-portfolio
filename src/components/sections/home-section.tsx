@@ -1,12 +1,9 @@
 "use client";
 
 import Scroll from "@/components/scroll";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeSection() {
   const homeRef = useRef<HTMLElement>(null);
@@ -20,6 +17,37 @@ export default function HomeSection() {
   const [rocketLaunched, setRocketLaunched] = useState(false);
   const [showPortfolioText, setShowPortfolioText] = useState(false);
 
+  // GSAP ScrollTrigger animations - KVアニメーション完了後に開始
+  useGSAP(
+    () => {
+      if (!showPortfolioText) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: homeRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.fromTo(
+        homeTitleRef.current,
+        { opacity: 0, y: 100, scale: 0.5 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: "power2.out" },
+      );
+
+      tl.fromTo(
+        homeSubtitleRef.current,
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+        "-=0.8",
+      );
+    },
+    { scope: homeRef, dependencies: [showPortfolioText] },
+  );
+
+  // パネル・ロケットアニメーション (非GSAP)
   useEffect(() => {
     // ハッシュ付きアクセス(#contactなど)の場合はアニメーションをスキップ
     const hasHash = window.location.hash && window.location.hash !== "#home";
@@ -32,77 +60,27 @@ export default function HomeSection() {
     // KVアニメーション中: ヘッダー非表示 & スクロールロック
     document.body.dataset.kvAnimating = "";
 
-    // GSAP ScrollTrigger animations
-    if (homeRef.current && homeTitleRef.current && homeSubtitleRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: homeRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      tl.fromTo(
-        homeTitleRef.current,
-        {
-          opacity: 0,
-          y: 100,
-          scale: 0.5,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          ease: "power2.out",
-        },
-      );
-
-      tl.fromTo(
-        homeSubtitleRef.current,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-        },
-        "-=0.8",
-      );
-    }
-
-    // パネル1: 1秒後にCLEARに変更
     const timer1 = setTimeout(() => {
       setPanelStates((prev) => ["CLEAR", prev[1], prev[2]]);
     }, 1000);
 
-    // パネル2: 2秒後にCLEARに変更
     const timer2 = setTimeout(() => {
       setPanelStates((prev) => [prev[0], "CLEAR", prev[2]]);
     }, 2000);
 
-    // パネル3: 3秒後にCLEARに変更
     const timer3 = setTimeout(() => {
       setPanelStates((prev) => [prev[0], prev[1], "CLEAR"]);
     }, 3000);
 
-    // ロケット表示: 4秒後
     const rocketTimer = setTimeout(() => {
       setShowRocket(true);
     }, 4000);
 
-    // ロケット発射: 5秒後 & パネルフェードアウト開始
     const launchTimer = setTimeout(() => {
       setRocketLaunched(true);
-      // 全パネルを同時にフェードアウト
       setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
     }, 5000);
 
-    // Portfolioテキスト表示: 7秒後
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
       delete document.body.dataset.kvAnimating;

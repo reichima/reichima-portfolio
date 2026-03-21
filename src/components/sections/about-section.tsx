@@ -1,32 +1,22 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { PcCase, Rocket } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GiSkills, GiTalk } from "react-icons/gi";
 import AboutCode from "./about-code";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
   const aboutRef = useRef<HTMLElement>(null);
   const profileImageRef = useRef<HTMLImageElement>(null);
   const aboutTitleRef = useRef<HTMLHeadingElement>(null);
-  const aboutTextRef = useRef<HTMLDivElement>(null);
 
   const [activeTab, setActiveTab] = useState("view");
 
-  useEffect(() => {
-    // GSAP ScrollTrigger animations
-    if (
-      aboutRef.current &&
-      profileImageRef.current &&
-      aboutTitleRef.current &&
-      aboutTextRef.current
-    ) {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: aboutRef.current,
@@ -36,31 +26,15 @@ export default function AboutSection() {
         },
       });
 
-      // Title animation
       tl.fromTo(
         aboutTitleRef.current,
-        {
-          opacity: 0,
-          x: -100,
-          rotationY: -90,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotationY: 0,
-          duration: 1,
-          ease: "power2.out",
-        },
+        { opacity: 0, x: -100, rotationY: -90 },
+        { opacity: 1, x: 0, rotationY: 0, duration: 1, ease: "power2.out" },
       );
 
-      // Profile image animation
       tl.fromTo(
         profileImageRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-          rotation: -180,
-        },
+        { opacity: 0, scale: 0.5, rotation: -180 },
         {
           opacity: 1,
           scale: 1,
@@ -71,15 +45,9 @@ export default function AboutSection() {
         "-=0.5",
       );
 
-      // Text content animation
-      const textElements = aboutTextRef.current.children;
       tl.fromTo(
-        textElements,
-        {
-          opacity: 0,
-          y: 50,
-          scale: 0.8,
-        },
+        ".about-text-item",
+        { opacity: 0, y: 50, scale: 0.8 },
         {
           opacity: 1,
           y: 0,
@@ -90,8 +58,9 @@ export default function AboutSection() {
         },
         "-=0.8",
       );
-    }
-  }, []);
+    },
+    { scope: aboutRef },
+  );
 
   return (
     <section
@@ -138,29 +107,29 @@ export default function AboutSection() {
               />
             </div>
 
-            <div ref={aboutTextRef} className="max-w-lg space-y-6">
-              <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+            <div className="max-w-lg space-y-6">
+              <div className="about-text-item rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
                   <Rocket className="text-portfolio-primary mr-1 inline h-6 w-6" />
                   栃木でWebエンジニアをしているReichimaです
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+              <div className="about-text-item rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
                   <PcCase className="mr-1 inline h-6 w-6 text-yellow-400" />
                   バックエンドが主ですが、フロントエンドやサーバー構築も可能です。
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+              <div className="about-text-item rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
                   <GiSkills className="mr-1 inline h-6 w-6 text-yellow-400" />
                   PHP(Laravel)、TypeScript(Next.js、Hono)、Rubyをよく使用します。
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
+              <div className="about-text-item rounded-xl border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md">
                 <p className="text-lg leading-relaxed text-white/90">
                   <GiTalk className="mr-1 inline h-6 w-6 text-blue-400" />
                   最近はGoとAI開発にハマっています。
