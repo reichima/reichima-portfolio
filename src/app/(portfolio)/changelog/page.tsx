@@ -77,6 +77,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-03-22",
+    title: "KVの演出改善（ロケット雲アニメーション・タイミング調整）",
+    type: "improvement",
+  },
+  {
     date: "2026-03-21",
     title: "新アイテム「Phone」を追加",
     type: "menherun",

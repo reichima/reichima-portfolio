@@ -5,10 +5,28 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+const TITLE_CHARS = "Reichima Portfolio".split("");
+const SUBTITLE_CHARS = "Creative Developer Online".split("");
+
+function SplitChars({
+  chars,
+  className,
+}: {
+  chars: string[];
+  className: string;
+}) {
+  return chars.map((char, i) => (
+    <span key={i} className={`${className} inline-block`} style={{ opacity: 0 }}>
+      {char === " " ? "\u00A0" : char}
+    </span>
+  ));
+}
+
 export default function HomeSection() {
   const homeRef = useRef<HTMLElement>(null);
   const homeTitleRef = useRef<HTMLHeadingElement>(null);
   const homeSubtitleRef = useRef<HTMLParagraphElement>(null);
+  const systemTextRef = useRef<HTMLDivElement>(null);
 
   const [panelStates, setPanelStates] = useState<
     ("ABORT" | "CLEAR" | "FADEOUT")[]
@@ -17,41 +35,122 @@ export default function HomeSection() {
   const [rocketLaunched, setRocketLaunched] = useState(false);
   const [showPortfolioText, setShowPortfolioText] = useState(false);
 
-  // GSAP ScrollTrigger animations - KVアニメーション完了後に開始
+  // タイトル文字のロケット雲アニメーション
   useGSAP(
     () => {
-      if (!showPortfolioText) return;
+      if (!showPortfolioText || !homeTitleRef.current) return;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: homeRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+      const chars = homeTitleRef.current.querySelectorAll(".title-char");
+
+      gsap.fromTo(
+        chars,
+        {
+          opacity: 0,
+          scale: 0,
+          y: () => gsap.utils.random(-15, 15),
+          filter: "blur(10px)",
         },
-      });
-
-      tl.fromTo(
-        homeTitleRef.current,
-        { opacity: 0, y: 100, scale: 0.5 },
-        { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: "power2.out" },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+          onComplete: () => {
+            if (homeTitleRef.current) {
+              homeTitleRef.current.style.animation =
+                "cloudFloat 6s ease-in-out infinite";
+            }
+          },
+        },
       );
+    },
+    { scope: homeRef, dependencies: [showPortfolioText] },
+  );
 
+  // SYSTEM INITIALIZED & Creative Developer Online のバチバチ演出
+  useGSAP(
+    () => {
+      if (!showPortfolioText || !systemTextRef.current) return;
+
+      const tl = gsap.timeline({ delay: 1.2 });
+
+      // SYSTEM INITIALIZED - 電気的なフリッカー
       tl.fromTo(
-        homeSubtitleRef.current,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
-        "-=0.8",
+        systemTextRef.current,
+        { opacity: 0, scaleX: 0.8 },
+        { opacity: 1, scaleX: 1, duration: 0.1, ease: "none" },
+      )
+        .to(systemTextRef.current, {
+          opacity: 0,
+          duration: 0.05,
+        })
+        .to(systemTextRef.current, {
+          opacity: 1,
+          duration: 0.05,
+        })
+        .to(systemTextRef.current, {
+          opacity: 0.3,
+          duration: 0.08,
+        })
+        .to(systemTextRef.current, {
+          opacity: 1,
+          textShadow:
+            "0 0 10px rgba(52,211,153,0.8), 0 0 20px rgba(52,211,153,0.4), 0 0 40px rgba(52,211,153,0.2)",
+          duration: 0.1,
+        })
+        .to(systemTextRef.current, {
+          opacity: 0.6,
+          duration: 0.04,
+        })
+        .to(systemTextRef.current, {
+          opacity: 1,
+          duration: 0.06,
+        });
+
+      // Creative Developer Online - 1文字ずつバチバチ出現
+      const subtitleChars = homeSubtitleRef.current?.querySelectorAll(
+        ".subtitle-char",
       );
+      if (subtitleChars) {
+        tl.fromTo(
+          subtitleChars,
+          {
+            opacity: 0,
+            textShadow: "none",
+          },
+          {
+            opacity: 1,
+            textShadow:
+              "0 0 8px rgba(148,163,184,0.6), 0 0 16px rgba(148,163,184,0.3)",
+            duration: 0.04,
+            stagger: 0.05,
+            ease: "none",
+            onComplete: () => {
+              const flickerTl = gsap.timeline();
+              subtitleChars.forEach((char, i) => {
+                flickerTl
+                  .to(char, { opacity: 0.3, duration: 0.03 }, i * 0.03)
+                  .to(char, { opacity: 1, textShadow: "none", duration: 0.05 }, i * 0.03 + 0.03);
+              });
+              tl.add(flickerTl);
+            },
+          },
+          "+=0.3",
+        );
+      }
     },
     { scope: homeRef, dependencies: [showPortfolioText] },
   );
 
   // パネル・ロケットアニメーション (非GSAP)
   useEffect(() => {
-    // ハッシュ付きアクセス(#contactなど)の場合はアニメーションをスキップ
+    // ハッシュ付きアクセスやスクロール位置が下の場合はアニメーションをスキップ
     const hasHash = window.location.hash && window.location.hash !== "#home";
-    if (hasHash) {
+    const isScrolledDown = window.scrollY > 100;
+    if (hasHash || isScrolledDown) {
       setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
       setShowPortfolioText(true);
       return;
@@ -79,12 +178,12 @@ export default function HomeSection() {
     const launchTimer = setTimeout(() => {
       setRocketLaunched(true);
       setPanelStates(["FADEOUT", "FADEOUT", "FADEOUT"]);
-    }, 5000);
+    }, 4500);
 
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
       delete document.body.dataset.kvAnimating;
-    }, 7000);
+    }, 5800);
 
     return () => {
       clearTimeout(timer1);
@@ -104,7 +203,6 @@ export default function HomeSection() {
       className="relative z-10 grid min-h-screen w-full snap-start place-items-center overflow-hidden"
     >
       {/* 背景のグリッドパターン */}
-      {/* 背景のグリッドパターン - 削除または単色に変更 */}
       <div className="absolute inset-0 bg-[size:24px_24px] opacity-10"></div>
 
       <div className="relative z-10 text-center">
@@ -274,42 +372,26 @@ export default function HomeSection() {
           <div className="relative">
             {/* 雲のようなバックグラウンド効果 */}
             <div
-              className={`absolute inset-0 -m-4 rounded-[30px] bg-white/5 blur-lg transition-all duration-3000 ease-out md:-m-6 md:rounded-[40px] md:blur-xl lg:-m-8 lg:rounded-[50px] ${
-                showPortfolioText
-                  ? "scale-100 opacity-100"
-                  : "scale-75 opacity-0"
-              }`}
+              className="absolute inset-0 -m-4 scale-100 rounded-[30px] bg-white/5 opacity-100 blur-lg transition-all duration-3000 ease-out md:-m-6 md:rounded-[40px] md:blur-xl lg:-m-8 lg:rounded-[50px]"
             ></div>
 
             <div className="relative z-10 mb-8 space-y-3 md:mb-10 md:space-y-4 lg:mb-12 lg:space-y-6">
               <h1
                 ref={homeTitleRef}
-                className={`font-orbitron text-3xl font-bold tracking-wider text-white transition-all duration-3000 ease-out md:text-5xl lg:text-7xl xl:text-8xl ${
-                  showPortfolioText
-                    ? "translate-y-0 scale-100 opacity-100"
-                    : "translate-y-12 scale-95 opacity-0"
-                }`}
+                className="font-orbitron text-3xl font-bold tracking-wider text-white md:text-5xl lg:text-7xl xl:text-8xl"
                 style={{
-                  animation: showPortfolioText
-                    ? "cloudFloat 6s ease-in-out infinite"
-                    : "none",
-                  filter:
-                    "drop-shadow(0 0 15px rgba(255,255,255,0.3)) md:drop-shadow(0 0 20px rgba(255,255,255,0.3))",
+                  filter: "drop-shadow(0 0 15px rgba(255,255,255,0.3))",
                 }}
               >
-                Reichima Portfolio
+                <SplitChars chars={TITLE_CHARS} className="title-char" />
               </h1>
 
               <div
-                className={`text-lg text-slate-300 transition-all delay-700 duration-3000 ease-out md:text-xl lg:text-2xl ${
-                  showPortfolioText
-                    ? "translate-y-0 scale-100 opacity-100"
-                    : "translate-y-8 scale-95 opacity-0"
-                }`}
+                ref={systemTextRef}
+                className="mb-2 font-mono text-sm text-emerald-400 md:mb-3 md:text-base lg:text-xl"
+                style={{ opacity: 0 }}
               >
-                <div className="mb-2 font-mono text-sm text-emerald-400 md:mb-3 md:text-base lg:text-xl">
-                  [ SYSTEM INITIALIZED ]
-                </div>
+                [ SYSTEM INITIALIZED ]
               </div>
             </div>
           </div>
@@ -317,13 +399,9 @@ export default function HomeSection() {
 
         <p
           ref={homeSubtitleRef}
-          className={`font-orbitron mb-12 text-base text-slate-400 transition-all delay-1400 duration-3000 ease-out md:mb-12 md:text-lg lg:mb-16 lg:text-xl xl:text-2xl ${
-            showPortfolioText
-              ? "translate-y-0 opacity-100"
-              : "translate-y-8 opacity-0"
-          }`}
+          className="font-orbitron mb-12 text-base text-slate-400 md:mb-12 md:text-lg lg:mb-16 lg:text-xl xl:text-2xl"
         >
-          Creative Developer Online
+          <SplitChars chars={SUBTITLE_CHARS} className="subtitle-char" />
         </p>
 
         <div
