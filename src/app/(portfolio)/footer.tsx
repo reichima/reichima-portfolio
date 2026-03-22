@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CiMail } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -83,15 +82,6 @@ export default function Footer() {
                 <div className="liquid-glass-btn rounded-lg bg-white/10 p-3 text-white hover:scale-105">
                   <FaXTwitter className="size-6" />
                 </div>
-              </Link>
-            </div>
-            <div className="space-y-2 text-sm text-white/70">
-              <Link
-                href="mailto:rei1gggg@gmail.com"
-                className="hover:text-portfolio-primary flex items-center gap-2 space-x-2 text-white/70 transition-colors"
-              >
-                <CiMail className="size-6" />
-                rei1gggg@gmail.com
               </Link>
             </div>
           </div>
