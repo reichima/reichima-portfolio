@@ -2,6 +2,7 @@ import BackToTop from "@/components/back-to-top";
 import BlogContent from "@/components/blog-content";
 import ProfileCard from "@/components/profile-card";
 import ShareButtons from "@/components/share-buttons";
+import TableOfContents from "@/components/table-of-contents";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { getBlogDetail, getBlogs } from "@/lib/microcms";
+import { extractHeadings } from "@/lib/toc";
 import { Clock } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -100,9 +102,11 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const readingTime = calculateReadingTime(blog.content);
 
+  const { tocItems, contentWithIds } = extractHeadings(blog.content);
+
   return (
     <main>
-      <div className="mx-auto max-w-4xl px-4 pt-32 pb-8">
+      <div className="mx-auto max-w-7xl px-4 pt-32 pb-8">
         <Breadcrumb className="mb-8">
           <BreadcrumbList className="text-white/60">
             <BreadcrumbItem>
@@ -129,49 +133,79 @@ export default async function BlogDetailPage({ params }: Props) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <article className="overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md">
-          {blog.eyecatch && (
-            <div className="relative h-64 w-full md:h-96">
-              <Image
-                src={blog.eyecatch.url}
-                alt={blog.title}
-                fill
-                className="object-cover"
-                priority
-              />
+        <div className="xl:grid xl:grid-cols-[200px_1fr_200px] xl:gap-6">
+          {/* 左サイドバー: プロフィール */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-28">
+              <ProfileCard variant="sidebar" />
             </div>
-          )}
+          </aside>
 
-          <div className="p-8">
-            <div className="mb-4 flex flex-wrap items-center gap-4">
-              <time className="text-sm text-white/60">
-                {formatDate(blog.publishedAt)}
-              </time>
-              <span className="flex items-center gap-1 text-sm text-white/60">
-                <Clock className="h-4 w-4" />
-                {readingTime}分で読めます
-              </span>
-              {blog.category && (
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
-                  {blog.category.name}
-                </span>
+          {/* 中央: 記事 */}
+          <div className="min-w-0">
+            <article className="overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md">
+              {blog.eyecatch && (
+                <div className="relative h-64 w-full md:h-96">
+                  <Image
+                    src={blog.eyecatch.url}
+                    alt={blog.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
               )}
-            </div>
 
-            <h1 className="mb-8 text-3xl font-bold text-white md:text-4xl">
-              {blog.title}
-            </h1>
+              <div className="p-8">
+                <div className="mb-4 flex flex-wrap items-center gap-4">
+                  <time className="text-sm text-white/60">
+                    {formatDate(blog.publishedAt)}
+                  </time>
+                  <span className="flex items-center gap-1 text-sm text-white/60">
+                    <Clock className="h-4 w-4" />
+                    {readingTime}分で読めます
+                  </span>
+                  {blog.category && (
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                      {blog.category.name}
+                    </span>
+                  )}
+                </div>
 
-            <BlogContent content={blog.content} />
+                <h1 className="mb-8 text-3xl font-bold text-white md:text-4xl">
+                  {blog.title}
+                </h1>
 
-            {/* シェアボタン */}
-            <div className="mt-12 border-t border-white/10 pt-8">
-              <p className="mb-4 text-sm text-white/60">この記事をシェアする</p>
-              <ShareButtons title={blog.title} />
+                {/* モバイル: インライン目次 */}
+                <div className="xl:hidden">
+                  <TableOfContents items={tocItems} />
+                </div>
+
+                <BlogContent content={contentWithIds} />
+
+                {/* シェアボタン */}
+                <div className="mt-12 border-t border-white/10 pt-8">
+                  <p className="mb-4 text-sm text-white/60">
+                    この記事をシェアする
+                  </p>
+                  <ShareButtons title={blog.title} />
+                </div>
+              </div>
+            </article>
+
+            {/* モバイル: プロフィール */}
+            <div className="xl:hidden">
+              <ProfileCard />
             </div>
           </div>
-        </article>
-        <ProfileCard />
+
+          {/* 右サイドバー: 目次 */}
+          <aside className="hidden xl:block">
+            <div className="sticky top-28">
+              <TableOfContents items={tocItems} variant="sidebar" />
+            </div>
+          </aside>
+        </div>
       </div>
 
       <BackToTop />

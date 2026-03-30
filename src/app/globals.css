@@ -354,10 +354,12 @@
   .blog-content h2 {
     @apply relative mt-12 mb-6 bg-white/5 py-3 pl-4 text-xl font-bold text-white;
     border-left: 4px solid var(--portfolio-primary);
+    scroll-margin-top: 7rem;
   }
 
   .blog-content h3 {
     @apply relative mt-8 mb-4 border-b border-white/20 pb-2 text-lg font-bold text-white;
+    scroll-margin-top: 7rem;
   }
 
   .blog-content h3::before {
@@ -444,6 +446,62 @@
 
   .blog-content figcaption {
     @apply text-left text-sm text-white/60;
+  }
+
+  /* 目次 */
+  .toc {
+    @apply rounded-lg border border-white/10 bg-white/[0.03];
+  }
+
+  .toc-toggle {
+    @apply flex w-full items-center justify-between px-5 py-4 text-left;
+  }
+
+  .toc-label {
+    @apply text-xs font-medium tracking-widest text-white/50 uppercase;
+  }
+
+  .toc-chevron {
+    @apply text-white/30 transition-transform duration-200;
+  }
+
+  .toc-chevron--open {
+    @apply rotate-180;
+  }
+
+  .toc-list {
+    @apply list-none space-y-0 border-t border-white/6 px-5 pt-3 pb-4;
+  }
+
+  .toc-list--sidebar {
+    @apply border-t-0 px-4 pt-0 pb-4;
+  }
+
+  .toc-item {
+    @apply relative;
+  }
+
+  .toc-item--nested {
+    @apply pl-4;
+  }
+
+  .toc-item--nested::before {
+    @apply absolute top-0 left-0 h-full content-[""];
+    width: 1px;
+    background: var(--portfolio-primary);
+    opacity: 0.2;
+  }
+
+  .toc-link {
+    @apply block py-1.5 text-[13px] leading-snug text-white/45 transition-colors duration-150;
+  }
+
+  .toc-link:hover {
+    @apply text-white/80;
+  }
+
+  .toc-item--active > .toc-link {
+    color: var(--portfolio-primary-light);
   }
 
   /* Button variant */

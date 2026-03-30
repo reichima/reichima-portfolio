@@ -77,6 +77,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-03-30",
+    title: "ブログ詳細画面に目次機能を追加",
+    type: "feature",
+  },
+  {
     date: "2026-03-22",
     title: "KVの演出改善（ロケット雲アニメーション・タイミング調整）",
     type: "improvement",
