@@ -183,7 +183,7 @@ export default function HomeSection() {
     const textTimer = setTimeout(() => {
       setShowPortfolioText(true);
       delete document.body.dataset.kvAnimating;
-    }, 5800);
+    }, 6100);
 
     return () => {
       clearTimeout(timer1);
@@ -207,7 +207,8 @@ export default function HomeSection() {
 
       <div className="relative z-10 text-center">
         {/* パネルアニメーション - レスポンシブ対応 */}
-        <div className="mb-8 flex flex-col items-center justify-center gap-4 md:mb-16 md:flex-row md:gap-6 lg:gap-10">
+        {!showPortfolioText && (
+          <div className="mb-8 flex flex-col items-center justify-center gap-4 md:mb-16 md:flex-row md:gap-6 lg:gap-10">
           {panelStates.map((state, index) => (
             <div
               key={index}
@@ -340,7 +341,8 @@ export default function HomeSection() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
 
         {/* ロケットアニメーション - レスポンシブ対応 */}
         {showRocket && (
