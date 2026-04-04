@@ -116,7 +116,7 @@ export default function SpecialSection() {
                 />
               </div>
               <h4 className="mb-3 text-xl font-bold text-white">Menherun</h4>
-              <p className="text-white/80">ランゲーム・PC推奨</p>
+              <p className="text-white/80">ランゲーム</p>
             </a>
           </div>
         </div>

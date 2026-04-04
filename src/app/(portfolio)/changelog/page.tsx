@@ -77,6 +77,11 @@ const typeConfig: Record<
 
 const changelog: ChangelogEntry[] = [
   {
+    date: "2026-04-04",
+    title: "Menherunに画面横向きへの誘導を追加",
+    type: "menherun",
+  },
+  {
     date: "2026-03-30",
     title: "ブログ詳細画面に目次機能を追加",
     type: "feature",
