@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 import { z } from "zod";
-import { contactSchema } from "../schemas";
+import { contactSchema, type ContactFormData } from "../schemas";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -10,25 +10,24 @@ export interface ContactActionState {
   success: boolean;
   message: string;
   errors?: Record<string, string>;
+  values?: ContactFormData;
 }
 
 export const sendContactAction = async (
-  prevState: ContactActionState,
+  _prevState: ContactActionState,
   formData: FormData,
 ): Promise<ContactActionState> => {
-  try {
-    const data = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      subject: formData.get("subject") as string,
-      message: formData.get("message") as string,
-    };
+  const data = {
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    subject: formData.get("subject") as string,
+    message: formData.get("message") as string,
+  };
 
-    // バリデーション
+  try {
     const validatedData = contactSchema.parse(data);
 
-    // メール送信
-    const emailResult = await resend.emails.send({
+    const notificationEmail = resend.emails.send({
       from: process.env.FROM_EMAIL || "noreply@yourdomain.com",
       to: process.env.TO_EMAIL || "contact@yourdomain.com",
       subject: `お問い合わせ: ${validatedData.subject}`,
@@ -72,8 +71,7 @@ export const sendContactAction = async (
       replyTo: validatedData.email,
     });
 
-    // 送信者への自動返信メール
-    const autoReplyResult = await resend.emails.send({
+    const autoReplyEmail = resend.emails.send({
       from: process.env.FROM_EMAIL || "noreply@yourdomain.com",
       to: validatedData.email,
       subject: "お問い合わせを受け付けました",
@@ -112,6 +110,11 @@ export const sendContactAction = async (
       `,
     });
 
+    const [emailResult, autoReplyResult] = await Promise.all([
+      notificationEmail,
+      autoReplyEmail,
+    ]);
+
     if (emailResult.error || autoReplyResult.error) {
       console.error(
         "メール送信エラー:",
@@ -121,6 +124,7 @@ export const sendContactAction = async (
         success: false,
         message:
           "メール送信に失敗しました。しばらく時間をおいて再度お試しください。",
+        values: data,
       };
     }
 
@@ -142,12 +146,14 @@ export const sendContactAction = async (
         success: false,
         message: "入力内容に不備があります。",
         errors,
+        values: data,
       };
     }
 
     return {
       success: false,
       message: "エラーが発生しました。しばらく時間をおいて再度お試しください。",
+      values: data,
     };
   }
 };

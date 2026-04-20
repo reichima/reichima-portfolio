@@ -59,16 +59,12 @@ export default function ContactSection() {
     { scope: contactRef },
   );
 
-  // 送信結果の処理
   useEffect(() => {
-    if (state.message) {
-      if (state.success) {
-        toast.success(state.message);
-        // フォームをリセット
-        formRef.current?.reset();
-      } else {
-        toast.error(state.message);
-      }
+    if (!state.message) return;
+    if (state.success) {
+      toast.success(state.message);
+    } else {
+      toast.error(state.message);
     }
   }, [state]);
 
@@ -126,6 +122,7 @@ export default function ContactSection() {
                     <input
                       type="text"
                       name="name"
+                      defaultValue={state.values?.name ?? ""}
                       className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                         state.errors?.name
                           ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
@@ -147,6 +144,7 @@ export default function ContactSection() {
                     <input
                       type="email"
                       name="email"
+                      defaultValue={state.values?.email ?? ""}
                       className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                         state.errors?.email
                           ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
@@ -169,6 +167,7 @@ export default function ContactSection() {
                   <input
                     type="text"
                     name="subject"
+                    defaultValue={state.values?.subject ?? ""}
                     className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                       state.errors?.subject
                         ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
@@ -190,6 +189,7 @@ export default function ContactSection() {
                   <textarea
                     rows={6}
                     name="message"
+                    defaultValue={state.values?.message ?? ""}
                     className={`w-full rounded-lg border px-4 py-3 text-white placeholder-white/50 backdrop-blur-md focus:ring-2 focus:outline-none ${
                       state.errors?.message
                         ? "border-red-400 bg-red-500/10 focus:border-red-400 focus:ring-red-400/20"
